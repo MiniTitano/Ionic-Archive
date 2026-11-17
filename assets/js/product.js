@@ -57,6 +57,7 @@
   <div class="mfx__stage">
     <div class="mfx__disc" aria-hidden="true"></div>
     <div class="mfx__fig" id="mfxFig" data-fig3d="${f0.model}" data-bg="${f0.accent}" data-accent="${f0.rim}" data-spin="0.8" tabindex="0" aria-label="3D minifigure, drag to spin"></div>
+    <div class="mfx__bag" aria-hidden="true">${A.box()}</div>
     <span class="mfx__free" aria-hidden="true">Free</span>
     <span class="mfx__drag mono" aria-hidden="true">↔ drag</span>
   </div>
@@ -148,15 +149,15 @@
 
 <nav class="rnav" id="rnav" aria-label="Record sections"><div class="wrap rnav__in">
   <span class="rnav__id mono">${p.id}</span>
-  <ol>${SECS.map(([k, l], i) => `<li><a href="#${k}" data-k="${k}"><span class="mono">§${i + 1}</span>${l}</a></li>`).join('')}</ol>
+  <ol>${SECS.map(([k, l], i) => `<li><a href="#${k}" data-k="${k}"><span class="mono">${pad(i + 1)}</span>${l}</a></li>`).join('')}</ol>
   <span class="rnav__bar" aria-hidden="true"><i id="rnavBar"></i></span>
 </div></nav>
 
 <div class="wrap">
-  <section class="psec rv" id="rec-s1" aria-labelledby="s1-h"><div class="psec__h"><span class="mono">§ 1</span><h2 id="s1-h">The story of the model</h2></div>
-    <div><p class="story">${p.story}</p><p class="story-sub">${p.storySub}</p>${era}</div></section>
+  <section class="psec rv" id="rec-s1" aria-labelledby="s1-h"><div class="psec__h"><span class="mono">01</span><h2 id="s1-h">The story of the model</h2></div>
+    <div class="storyg"><div><p class="story">${p.story}</p><p class="story-sub">${p.storySub}</p></div>${era}</div></section>
 
-  <section class="psec rv" id="rec-s2" aria-labelledby="s2-h"><div class="psec__h"><span class="mono">§ 2</span><h2 id="s2-h">Condition</h2><p class="fine" style="margin-top:8px">Graded under raking light with a 10× loupe. ${real ? 'Now it\'s your turn.' : ''}</p></div>
+  <section class="psec rv" id="rec-s2" aria-labelledby="s2-h"><div class="psec__h"><span class="mono">02</span><h2 id="s2-h">Condition</h2><p class="fine" style="margin-top:8px">Graded under raking light with a 10× loupe. ${real ? 'Now it\'s your turn.' : ''}</p></div>
     <div>
       <div class="scale" role="list">${Object.values(D.grades).map(([k, n, d]) => `<div role="listitem" class="${k === p.grade ? 'on' : ''}"${k === p.grade ? ' aria-current="true"' : ''}>${k === p.grade ? '<span class="scale__this mono">This unit</span>' : ''}<b>${k}</b><span><strong style="font-weight:500">${n}.</strong> ${d}</span></div>`).join('')}</div>
       <div class="cond${real ? '' : ' cond--nophoto'}">
@@ -171,7 +172,7 @@
       </div>
     </div></section>
 
-  <section class="psec rv" id="rec-s3" aria-labelledby="s3-h"><div class="psec__h"><span class="mono">§ 3</span><h2 id="s3-h">Tested</h2><p class="fine" style="margin-top:8px">${tests.length} checks. Watch the bench run them.</p></div>
+  <section class="psec rv" id="rec-s3" aria-labelledby="s3-h"><div class="psec__h"><span class="mono">03</span><h2 id="s3-h">Tested</h2><p class="fine" style="margin-top:8px">${tests.length} checks. Watch the bench run them.</p></div>
     <div>
       <div class="bench2" id="bench" data-state="ready">
         <div class="bench2__head mono"><span><i class="bench2__led"></i>Bench IA-02 · Diagnostic · ${p.id}</span><span id="benchCount">00/${pad(tests.length)}</span></div>
@@ -182,20 +183,20 @@
       <p class="tested-by">Tested on ${date} · bench IA-02 · printed report included in the box</p>
     </div></section>
 
-  <section class="psec rv" id="rec-s4" aria-labelledby="s4-h"><div class="psec__h"><span class="mono">§ 4</span><h2 id="s4-h">In the box</h2><p class="fine" style="margin-top:8px">Everything that ships with this unit.</p></div>
+  <section class="psec rv" id="rec-s4" aria-labelledby="s4-h"><div class="psec__h"><span class="mono">04</span><h2 id="s4-h">In the box</h2><p class="fine" style="margin-top:8px">Everything that ships with this unit.</p></div>
     <ol class="unbox">${p.box.map((b, i) => `<li style="--i:${i}"><span class="mono">${pad(i + 1)}</span>${b}</li>`).join('')}
       <li style="--i:${p.box.length}" class="unbox__doc"><span class="mono">+</span>Printed test report and archive record</li>
       ${sold ? '' : `<li style="--i:${p.box.length + 1}" class="unbox__mf"><button type="button" id="boxBag"><span class="unbox__bag" aria-hidden="true">${A.box()}</span><span class="unbox__t"><span class="mono">+1 · free</span><b>Mystery Dropout</b><em>Sealed foil bag · tap to shake</em></span></button></li>`}
     </ol></section>
 
-  <section class="psec rv" id="rec-s5" aria-labelledby="s5-h"><div class="psec__h"><span class="mono">§ 5</span><h2 id="s5-h">Specifications</h2><p class="fine" style="margin-top:8px">Tap <b class="gl-dot">?</b> for what a spec means in practice.</p></div>
+  <section class="psec rv" id="rec-s5" aria-labelledby="s5-h"><div class="psec__h"><span class="mono">05</span><h2 id="s5-h">Specifications</h2><p class="fine" style="margin-top:8px">Tap <b class="gl-dot">?</b> for what a spec means in practice.</p></div>
     <div class="manual"><div class="manual__head"><span>Specifications</span><span>${p.id}</span></div>
     <div class="manual__list">${p.specs.map(([k, v], i) => { const t = gloss(k, v); return `<div class="manual__item">
       <div class="manual__row"><span class="manual__k">${k}${t ? `<button class="gl" type="button" aria-expanded="false" aria-controls="specgl-${i}" aria-label="What does ${k} mean?">?</button>` : ''}</span><i aria-hidden="true"></i><span class="manual__v">${v}</span></div>
       ${t ? `<p class="manual__gl" id="specgl-${i}" hidden>${t}</p>` : ''}</div>`; }).join('')}</div>
     <p class="manual__foot">Manufacturer data. Design and specifications may vary between production batches.</p></div></section>
 
-  ${p.samples.length ? `<section class="psec rv" id="rec-s6" aria-labelledby="s6-h"><div class="psec__h"><span class="mono">§ 6</span><h2 id="s6-h">Shot on this unit</h2><p class="fine" style="margin-top:8px">Original files, no filters.</p></div>
+  ${p.samples.length ? `<section class="psec rv" id="rec-s6" aria-labelledby="s6-h"><div class="psec__h"><span class="mono">06</span><h2 id="s6-h">Shot on this unit</h2><p class="fine" style="margin-top:8px">Original files, no filters.</p></div>
     <div class="samples">${p.samples.map((k, i) => `<figure class="shotf">${A.scene(k, p.type === 'camcorders' ? { video: true, tc: `0:0${i}:1${i}:0${i + 2}`, label: `Frame shot on the ${p.name}` } : { stamp: `'${String(p.year).slice(2)} 0${i + 3} 1${i}`, label: `Photo taken with the ${p.name}` })}<figcaption><span>${p.id} · ${pad(i + 1)}</span><span>${p.type === 'camcorders' ? 'Clip · SP' : 'Original JPEG'}</span></figcaption></figure>`).join('')}</div></section>` : ''}
 
   <section class="sec--tight" aria-labelledby="rel-h" style="border-top:1px solid var(--ink)">
@@ -262,17 +263,19 @@
       if (busy) return; busy = true; pulls++;
       hold = Date.now() + 12000;
       mfxEl.classList.remove('is-pulled'); mfxEl.classList.add('is-shaking');
-      lbl.textContent = 'Shaking…';
+      lbl.textContent = 'Shaking the bag…'; nm.textContent = '???'; ch.innerHTML = '';
+      mfxEl.classList.remove('is-glow', 'is-secret'); fine.textContent = 'A sealed foil bag, same as the one in your parcel. What\'s inside?';
       setTimeout(() => {
         const { f, glow } = pull(), sec = f.tier === 'secret';
         mfxEl.classList.remove('is-shaking'); void mfxEl.offsetWidth; mfxEl.classList.add('is-pulled');
-        lbl.textContent = 'You pulled';
+        lbl.textContent = 'Out of the bag';
         show(f, { glow, sil: sec });
         fine.textContent = sec ? 'The secret one. Hold the figure to peek, then imagine it in your parcel.'
           : glow ? `Glow chase! About 1 bag in ${glow1in} lights up in the dark.`
             : pulls > 2 ? 'Keep shaking: the real bag only gets opened once.' : 'Just for fun: the one in your parcel is a real surprise.';
+        $('#mfxShake').lastChild.textContent = ' Shake another bag';
         busy = false;
-      }, U.RM ? 0 : 900);
+      }, U.RM ? 0 : 1300);
     };
     $('#mfxShake').addEventListener('click', shake);
     const bag = $('#boxBag');
@@ -295,7 +298,7 @@
     rbar.style.transform = `scaleX(${Math.min(1, Math.max(0, (y - top) / (end - top))).toFixed(3)})`;
     let cur = -1; secs.forEach((s, i) => { if (s.getBoundingClientRect().top + scrollY <= y) cur = i; });
     links.forEach((a, i) => a.classList.toggle('on', i === cur));
-    if (cur !== rcur && links[cur]) { const ol = links[cur].closest('ol'); ol.scrollTo({ left: links[cur].parentElement.offsetLeft - 8, behavior: U.RM ? 'auto' : 'smooth' }); }
+    if (cur !== rcur && links[cur]) { const ol = links[cur].closest('ol'); ol.scrollTo({ left: links[cur].parentElement.offsetLeft - ol.offsetLeft - 4, behavior: U.RM ? 'auto' : 'smooth' }); }
     rcur = cur;
   };
   let rcur = -1;

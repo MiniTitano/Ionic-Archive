@@ -1388,8 +1388,17 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
 .mfx__all{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ion-2)}
 .mfx__all:hover{color:#fff}
 .mfx__fine{font-size:9.5px;letter-spacing:.06em;color:var(--night-muted);line-height:1.4}
-.mfx.is-shaking .mfx__fig{animation:mfxShake .12s linear infinite}
-.mfx.is-shaking .mfx__disc{animation:mfxShake .12s linear infinite reverse}
+/* shake: the foil blind bag drops onto the turntable, shakes, then tears away to reveal the figure */
+.mfx__bag{position:absolute;left:50%;top:50%;z-index:2;height:84%;aspect-ratio:3/4;transform:translate(-50%,-50%) scale(.5) rotate(-8deg);opacity:0;pointer-events:none;filter:drop-shadow(0 18px 24px rgba(0,0,0,.55))}
+.mfx__bag svg{width:100%;height:100%;display:block}
+.mfx__fig{transition:opacity .2s}
+.mfx.is-shaking .mfx__fig{opacity:0}
+.mfx.is-shaking .mfx__bag{opacity:1;animation:bagIn .3s var(--ease) forwards,bagShake .16s linear .3s infinite}
+.mfx.is-pulled .mfx__bag{animation:bagTear .55s var(--ease) forwards}
+.mfx.is-shaking .mfx__now b{animation:blink .4s steps(1) infinite}
+@keyframes bagIn{from{opacity:0;transform:translate(-50%,-90%) scale(.6) rotate(-14deg)}to{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}}
+@keyframes bagShake{0%{transform:translate(-50%,-50%) rotate(0)}25%{transform:translate(calc(-50% - 7px),-50%) rotate(-7deg)}50%{transform:translate(-50%,calc(-50% - 4px)) rotate(2deg)}75%{transform:translate(calc(-50% + 7px),-50%) rotate(7deg)}100%{transform:translate(-50%,-50%) rotate(0)}}
+@keyframes bagTear{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-130%) scale(1.25) rotate(14deg)}}
 .mfx.is-pulled .mfx__stage::after{content:"";position:absolute;inset:0;z-index:2;background:#fff;pointer-events:none;animation:mfxFlash .5s ease-out forwards}
 .mfx.is-pulled .mfx__now b{animation:mfxPop .5s var(--ease)}
 .mfx.is-glow{box-shadow:0 0 0 1px #9CFF5E,0 0 40px -6px #9CFF5E}
@@ -1513,4 +1522,103 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
   .mfx__stage{min-height:250px;border-right:0;border-bottom:1px dashed var(--night-line)}
   .mfx__disc{width:min(62%,220px)}
   .mfx__body{padding:16px}
+}
+/* product page: story text and era card side by side */
+.storyg{display:grid;gap:34px}
+.storyg .era{margin-top:0}
+@media (min-width:1100px){.storyg{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(40px,4vw,80px);align-items:start}.storyg .era{max-width:none}}
+
+/* product page on large screens: everything bigger, less empty paper */
+@media (min-width:1300px){
+  .pdp{grid-template-columns:minmax(0,1.2fr) minmax(480px,1fr);gap:clamp(48px,4vw,88px)}
+  .pdp__code .mono{font-size:15px}
+  .pdp__name{font-size:clamp(46px,3.3vw,66px);margin:26px 0}
+  .meta-table{font-size:17px}
+  .meta-table dt{font-size:12px;padding-top:14px}
+  .meta-table dt,.meta-table dd{padding-top:13px;padding-bottom:13px}
+  .grade-pill{height:26px;min-width:32px;font-size:13px}
+  .price{font-size:48px;margin-top:32px}
+  .pdp__info .fine{font-size:14px}
+  .mkt .btn{min-height:60px;font-size:17px}
+  .mkt__note{font-size:13.5px!important}
+  .mfx{grid-template-columns:minmax(200px,42%) 1fr}
+  .mfx__stage{min-height:340px}
+  .mfx__body{padding:24px 26px 22px 26px;gap:12px}
+  .mfx__k{font-size:11.5px}
+  .mfx__h{font-size:clamp(26px,1.8vw,32px)}
+  .mfx__p{font-size:15.5px}
+  .mfx__now b{font-size:17px}
+  .mfx__could{font-size:11px}
+  .mfx__odds{height:9px}
+  .mfx__legend{font-size:10.5px;gap:4px 14px}
+  .mfx__shake{font-size:13px;padding:12px 18px}
+  .mfx__all{font-size:12px}
+  .mfx__fine{font-size:11px}
+  .mfx__free{font-size:13px;padding:6px 11px}
+  .ship li{font-size:15.5px;padding:14px 0;grid-template-columns:26px 1fr}
+  .ship svg{width:22px;height:22px}
+  .buyhow{font-size:16px}
+  .thumbs{gap:10px}
+
+  .rnav__in{min-height:62px;gap:32px}
+  .rnav__id{font-size:13px}
+  .rnav a{font-size:17px;padding:10px 18px;gap:8px}
+  .rnav a .mono{font-size:12px}
+
+  .psec{grid-template-columns:clamp(280px,20vw,360px) 1fr;gap:32px clamp(56px,5vw,100px);padding:clamp(72px,6vw,110px) 0}
+  .psec__h .mono{font-size:13px;margin-bottom:12px}
+  .psec__h h2{font-size:clamp(34px,2.5vw,46px);letter-spacing:-.03em}
+  .psec__h .fine{font-size:16px;max-width:26ch}
+  .story{font-size:clamp(30px,2.3vw,42px);max-width:none}
+  .story-sub{font-size:19px;max-width:none;line-height:1.55;margin-top:28px}
+  .era{padding:26px 28px 22px}
+  .era__top .mono{font-size:12px}
+  .era__top b{font-size:56px}
+  .era__track{height:120px;gap:6px}
+  .era__y i{height:calc(10px + var(--n) * 12px)}
+  .era__y em{font-size:12px}
+  .era__same{font-size:15px;margin-top:38px}
+  .era__same .mono{font-size:11.5px}
+  .era__same a{padding:8px 14px}
+
+  .scale>div{padding:22px 22px 24px}
+  .scale b{font-size:30px;margin-bottom:10px}
+  .scale span{font-size:15px}
+  .scale__this{font-size:11px!important;padding:4px 8px;top:-12px}
+  .cond{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(40px,4vw,72px);margin-top:36px}
+  .loupe{max-width:560px}
+  .loupe__lens{width:210px;height:210px;margin:-105px 0 0 -105px}
+  .loupe figcaption{font-size:11.5px;padding:14px 16px}
+  .cond__notes .label{font-size:12.5px}
+  .notes li{font-size:19px;padding:18px 0;grid-template-columns:44px 1fr}
+  .notes li .mono{font-size:13px}
+
+  .bench2{padding:34px 38px}
+  .bench2__head{font-size:12.5px;padding-bottom:16px}
+  .bench2__head span:last-child{font-size:15px}
+  .bench2__list{gap:0 56px}
+  .bench2__list li{font-size:18px;padding:15px 0;grid-template-columns:32px auto 1fr auto}
+  .bench2__list .n{font-size:12px}
+  .bench2__list .r{font-size:13px}
+  .bench2__bar{height:4px;margin-top:22px}
+  .bench2__foot{font-size:12.5px;margin-top:16px}
+  .bench2__foot button{padding:10px 16px}
+  .tested-by{font-size:12.5px}
+
+  .unbox{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .unbox li{min-height:150px;padding:20px 20px 22px;font-size:18px}
+  .unbox li .mono{font-size:12px}
+  .unbox__mf button{grid-template-columns:130px 1fr;gap:20px;padding:14px 22px 14px 14px}
+  .unbox__t b{font-size:26px}
+  .unbox__t em{font-size:14.5px}
+
+  .manual{padding:44px 48px;font-size:15.5px}
+  .manual__head{font-size:12.5px;padding-bottom:14px}
+  .manual__list{column-count:2;column-gap:64px}
+  .manual__item{break-inside:avoid}
+  .manual__row{padding:12px 0}
+  .gl{width:22px;height:22px;font-size:12px}
+  .manual__gl{font-size:15.5px;padding:14px 16px}
+  .manual__foot{font-size:12px;margin-top:20px}
+  .samples{gap:16px}
 }
