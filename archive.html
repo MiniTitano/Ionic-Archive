@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Archive — MiniDV camcorders and digital compacts 1999–2012 · Ionic Archive</title>
+<meta name="description" content="The full Ionic Archive catalogue: MiniDV and Digital8 camcorders and digital compacts from 1999 to 2012, tested and honestly described. One of a kind.">
+<meta name="theme-color" content="#F4F2ED">
+<link rel="canonical" href="https://ionicarchive.com/archive">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script><script defer src="assets/js/archive.js"></script>
+</head>
+<body data-page="archive">
+<div class="lcd" aria-hidden="true"><i class="lcd__t"></i><i class="lcd__b"></i><i class="lcd__line"></i></div>
+<main id="main">
+  <div class="wrap">
+
+    <!-- catalogue header -->
+    <header class="ahead">
+      <div class="ahead__title">
+        <p class="label kicker">Catalogue · 1999 — 2012 · Updated daily</p>
+        <h1 class="h1">Archive</h1>
+        <p class="lead">Every camera we've tested, graded and catalogued. When a piece leaves, its record stays here.</p>
+      </div>
+      <dl class="ahead__stats" id="stats"></dl>
+    </header>
+
+    <!-- year timeline -->
+    <section class="tline" aria-label="Pieces by year of production">
+      <div class="tline__head">
+        <span class="label">Timeline · tap a year</span>
+        <span class="tline__legend label"><i class="lg lg--ok"></i>Available <i class="lg lg--res"></i>Reserved <i class="lg lg--sold"></i>In the vault</span>
+      </div>
+      <div class="tline__track" id="tline" role="group" aria-label="Filter by year"></div>
+    </section>
+
+    <!-- type tabs -->
+    <div class="ttabs" id="ttabs" role="tablist" aria-label="Type"></div>
+
+    <!-- toolbar -->
+    <div class="toolbar atool">
+      <button class="ftoggle" type="button" aria-controls="filters" aria-expanded="false" id="ftoggle">Filters <span id="fcount"></span></button>
+      <label class="asearch"><span class="sr">Search the archive</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        <input type="search" id="q" placeholder="Search model, brand or code (e.g. IA-0042)" autocomplete="off">
+      </label>
+      <span class="count" id="count" aria-live="polite"></span>
+      <div class="chips" id="chips"></div>
+      <div class="atool__right">
+        <div class="vtog" role="group" aria-label="View">
+          <button type="button" data-view="grid" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>Grid</button>
+          <button type="button" data-view="index" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="2" width="14" height="2"/><rect x="1" y="7" width="14" height="2"/><rect x="1" y="12" width="14" height="2"/></svg>Index</button>
+        </div>
+        <label class="sort"><span class="label">Sort</span>
+          <select class="select" id="sort">
+            <option value="recent">Newest arrivals</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="year-asc">Year: oldest first</option>
+            <option value="year-desc">Year: newest first</option>
+            <option value="grade">Condition: best first</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="catalog">
+      <aside class="filters" id="filters" aria-label="Filters">
+        <div class="filters__head"><span class="label">Filters</span><button class="x" type="button" id="fclose">Close ✕</button></div>
+        <form id="fform"></form>
+        <div class="filters__foot"><button class="btn btn--ink btn--block" type="button" id="fapply">Show results</button></div>
+      </aside>
+      <section aria-label="Results">
+        <div id="results"></div>
+        <div id="vault"></div>
+      </section>
+    </div>
+  </div>
+  <div style="height:clamp(64px,8vw,120px)"></div>
+</main>
+</body>
+</html>

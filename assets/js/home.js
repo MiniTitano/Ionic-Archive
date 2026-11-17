@@ -1,0 +1,207 @@
+(function () {
+  'use strict';
+  const D = window.IA, A = window.Art, U = window.IAUI;
+  const { $ } = U;
+
+  /* ---------- hero reel: self-running montage, two separate sets ----------
+     DESKTOP: horizontal photos for landscape screens.
+     MOBILE:  vertical photos for portrait screens (phones), so nothing gets cropped or upscaled.
+     Each entry: [file base in assets/img/hero/, alt text, width, height, focus point] */
+  const DESKTOP = {
+    list: [
+      // [..., desktop focus, focus if shown on a narrow screen while no vertical set exists]
+      ['hero-01', 'A 3CCD DVCAM camcorder raised to shoot in front of a red graffiti wall', 2000, 1333, '56% 40%', '74% 40%'],
+      ['hero-02', 'A camcorder\'s flip-out screen framing a sunset over wind turbines', 2000, 1333, '62% 55%', '66% 55%'],
+      ['hero-03', 'Portrait with a camcorder resting on the shoulder', 2000, 1333, '52% 42%', '47% 42%'],
+      ['hero-04', 'Filming through a Handycam viewfinder under radio masts', 2000, 1333, '45% 45%', '47% 45%'],
+      ['hero-05', 'A camcorder carried at hip height against a red wall', 2000, 1333, '40% 55%', '44% 55%'],
+      ['hero-06', 'Checking a camcorder in a shop, seated on the floor', 2000, 1333, '40% 45%', '38% 45%'],
+      ['hero-07', 'A camcorder raised beside an old poster on a red wall', 2000, 1333, '48% 42%', '47% 42%'],
+      ['hero-08', 'Reviewing a clip on the flip-out screen, seated in a chair', 2000, 1333, '50% 40%', '44% 40%']
+    ],
+    // [slide, hold ms, cut]: long holds broken by quick double cuts, like a music-video montage
+    edit: [[0, 2600, 'drop'], [1, 2300, 'drop'], [4, 380, 'hard'], [7, 380, 'hard'], [2, 2600, 'drop'], [3, 2300, 'drop'], [5, 380, 'hard'], [6, 1900, 'hard']]
+  };
+  const MOBILE = {
+    list: [
+      // positions 1-2 and 5-6 hold longer; 3-4 are the quick double cut
+      ['hero-m-01', 'A 3CCD DVCAM camcorder held up against a red graffiti wall', 1200, 1800, '50% 45%'],
+      ['hero-m-02', 'At night, a DVCAM camcorder carried alongside a paint-splattered bike', 1200, 1800, '50% 40%'],
+      ['hero-m-03', 'Filming from a scaffold with a compact camcorder, shot from below', 1200, 1800, '55% 40%'],
+      ['hero-m-04', 'A camcorder raised overhead in a mid-stride pose', 1200, 1800, '50% 35%'],
+      ['hero-m-05', 'Two friends on a scooter with a Handycam and a swivel Coolpix', 1200, 1800, '55% 50%'],
+      ['hero-m-06', 'Lying on the grass with a Handycam, a Coolpix in a pink bag', 1200, 1800, '45% 45%']
+    ]
+  };
+  // camcorder-style data code burned into the corner, one per frame
+  const STAMPS = ["NOV 17 '03  23:41", "AUG 02 '04  20:52", "MAR 09 '02  01:13", "JUL 21 '05  17:06", "OCT 30 '03  00:27", "FEB 14 '04  15:48", "DEC 31 '02  23:59", "JAN 06 '06  12:30", "MAY 18 '04  19:22", "SEP 05 '03  02:44"];
+
+  // same rhythm for any number of frames: two long holds, two quick cuts, repeat
+  function autoEdit(n) {
+    const e = [];
+    for (let i = 0; i < n; i++) e.push(i % 4 < 2 ? [i, i % 4 ? 2300 : 2600, 'drop'] : [i, 380, 'hard']);
+    if (e.length && e[e.length - 1][2] === 'hard') e[e.length - 1][1] = 1900;
+    return e;
+  }
+
+  const reel = $('#reel'), wrap = $('#reelSlides');
+  let slides = [], set = DESKTOP, EDIT = [], LOOP = 1, REW = [];
+  let cur = 0;
+
+  function mount(next) {
+    set = next;
+    EDIT = set.edit || autoEdit(set.list.length);
+    LOOP = EDIT.reduce((t, e) => t + e[1], 0);
+    const order = EDIT.map((e) => e[0]);
+    REW = order.slice().reverse().concat(order.slice().reverse().filter((_, k) => k % 2)).slice(0, 12);
+    wrap.innerHTML = set.list.map(([f, alt, w, h, pos, posM], i) => {
+      const big = w > h ? 2000 : 1200, small = w > h ? 1000 : 720;
+      return `<figure class="reel__slide${i === 0 ? ' is-on' : ''}" aria-label="${i + 1} of ${set.list.length}"${i ? ' aria-hidden="true"' : ''}>
+<img src="assets/img/hero/${f}.jpg" srcset="assets/img/hero/${f}-${small}.jpg ${small}w, assets/img/hero/${f}.jpg ${big}w" sizes="100vw" width="${w}" height="${h}" alt="${alt}" style="--pos:${pos || '50% 50%'};--pos-m:${posM || pos || '50% 50%'}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></figure>`;
+    }).join('');
+    slides = [...wrap.children];
+    reel.classList.toggle('is-portrait', set === MOBILE);
+    cur = 0; step = 0; tapeMs = 0; rewinding = false; reel.classList.remove('is-rew');
+    stamp.textContent = STAMPS[0];
+    if (playing) run();
+  }
+
+  const glitch = $('#reelGlitch'), flash = $('#reelFlash'), stamp = $('#reelStamp');
+  // tape-dropout cut: slices of the incoming frame jump sideways with an RGB split, then lock in
+  function dropout(img) {
+    if (U.RM || !img.complete) return;
+    const cs = getComputedStyle(img), src = img.currentSrc || img.src;
+    const bg = `background-image:url('${src}');background-position:${cs.objectPosition}`;
+    let html = '';
+    const n = 7 + Math.floor(Math.random() * 4);
+    for (let k = 0; k < n; k++) {
+      const top = Math.random() * 92, h = 2 + Math.random() * 11;
+      const x = (Math.random() < .5 ? -1 : 1) * (3 + Math.random() * 14);
+      const kind = k % 3 === 1 ? 'r' : k % 3 === 2 ? 'b' : '';
+      html += `<i class="${kind}" style="${bg};clip-path:inset(${top}% 0 ${Math.max(0, 100 - top - h)}% 0);--x:${x}%;--t:${(.22 + Math.random() * .2).toFixed(2)}s"></i>`;
+    }
+    glitch.innerHTML = html;
+    flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go');
+    clearTimeout(dropout.t); dropout.t = setTimeout(() => { glitch.innerHTML = ''; }, 600);
+  }
+
+  // put a frame on screen; kind = 'drop' (tape dropout), 'hard' (straight cut) or 'rew' (rewind flicker)
+  function show(i, kind) {
+    if (i !== cur) {
+      slides.forEach((s) => s.classList.remove('was-on'));
+      slides[cur].classList.add('was-on');
+      slides[cur].classList.remove('is-on'); slides[cur].setAttribute('aria-hidden', 'true');
+      cur = i;
+    }
+    const s = slides[cur];
+    s.classList.remove('is-on', 'cut-hard'); void s.offsetWidth;
+    s.classList.add('is-on'); s.removeAttribute('aria-hidden');
+    if (kind !== 'drop') s.classList.add('cut-hard');
+    stamp.textContent = STAMPS[cur % STAMPS.length];
+    if (kind === 'drop') dropout(s.querySelector('img'));
+    else if (kind === 'hard') { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); }
+    // warm up the frames that come next
+    slides.forEach((x, k) => { const im = x.querySelector('img'); if (im.loading === 'lazy' && Math.abs(k - cur) <= 3) im.loading = 'eager'; });
+  }
+
+  /* playback: at the end of the reel the "tape" rewinds itself and plays again */
+  const state = $('#reelState'), tcEl = $('#reelTc'), tape = $('#reelTape'), btn = $('#reelPlay');
+  let step = 0, timer = null, playing = !U.RM, rewinding = false, tapeMs = 0, hidden = false;
+
+  const fmt = (ms) => { const f = Math.floor(ms / 40); return `0:${String(Math.floor(f / 1500) % 60).padStart(2, '0')}:${String(Math.floor(f / 25) % 60).padStart(2, '0')}:${String(f % 25).padStart(2, '0')}`; };
+  const setState = (t) => { state.innerHTML = `<i></i>${t}`; reel.dataset.state = t.toLowerCase().replace(/\W+/g, ''); };
+
+  function run() {
+    clearTimeout(timer);
+    if (!playing || hidden) return;
+    const [i, hold, kind] = EDIT[step];
+    show(i, kind);
+    timer = setTimeout(() => {
+      step++;
+      if (step >= EDIT.length) { step = 0; rewind(); } else run();
+    }, hold);
+  }
+  function rewind() {
+    rewinding = true; setState('◀◀ REW'); reel.classList.add('is-rew');
+    const seq = REW;
+    let k = 0;
+    const tick = () => {
+      if (!playing || hidden) { rewinding = false; reel.classList.remove('is-rew'); return; }
+      if (k < seq.length) { show(seq[k++], 'rew'); timer = setTimeout(tick, 70); return; }
+      rewinding = false; reel.classList.remove('is-rew'); tapeMs = 0; setState('▶ PLAY'); run();
+    };
+    tick();
+  }
+  // tape counter + progress
+  setInterval(() => {
+    if (playing && !hidden) tapeMs = rewinding ? Math.max(0, tapeMs - LOOP / 9) : Math.min(LOOP, tapeMs + 100);
+    tcEl.textContent = fmt(tapeMs);
+    tape.style.transform = `scaleX(${(tapeMs / LOOP).toFixed(4)})`;
+  }, 100);
+
+  function setPlaying(p) {
+    playing = p;
+    btn.textContent = p ? '❚❚ PAUSE' : '▶ PLAY';
+    btn.setAttribute('aria-label', p ? 'Pause the hero slideshow' : 'Play the hero slideshow');
+    setState(p ? '▶ PLAY' : '❚❚ PAUSE');
+    if (p) run(); else { clearTimeout(timer); reel.classList.remove('is-rew'); rewinding = false; }
+  }
+  btn.addEventListener('click', () => setPlaying(!playing));
+  document.addEventListener('visibilitychange', () => { hidden = document.hidden; if (!hidden && playing) run(); else clearTimeout(timer); });
+  // pick the set for the screen shape, and swap if the phone is rotated / the window resized
+  const portrait = window.matchMedia('(orientation: portrait) and (max-width: 1024px)');
+  const pick = () => (portrait.matches && MOBILE.list.length ? MOBILE : DESKTOP);
+  if (U.RM) { playing = false; setState('■ STILL'); btn.textContent = '▶ PLAY'; btn.setAttribute('aria-label', 'Play the hero slideshow'); }
+  else { btn.textContent = '❚❚ PAUSE'; setState('▶ PLAY'); }
+  mount(pick());
+  const onShape = () => { const s = pick(); if (s !== set) { clearTimeout(timer); mount(s); } };
+  if (portrait.addEventListener) portrait.addEventListener('change', onShape); else portrait.addListener(onShape);
+
+  /* the deal: three pillars */
+  const fanPicks = ['IA-0041', 'IA-0044', 'IA-0036'].map(U.byId).filter(Boolean);
+  $('#pillarSel').innerHTML = fanPicks.map((p, i) =>
+    `<div class="fan__card" style="--i:${i}"><div class="fan__media">${U.view(p, 'a')}</div><span class="mono">${p.id}</span></div>`).join('');
+  const F = D.figures;
+  $('#pillarFig').innerHTML = `<div class="figstage__blob"></div>
+<div class="figstage__box">${A.box()}</div>
+<div class="figstage__fig figstage__fig--a" data-fig3d="${F[1].model}" data-bg="#2F6BFF" data-accent="${F[1].rim}" data-start="-0.9" data-spin="0.6" title="Drag to spin"></div>
+<div class="figstage__fig figstage__fig--q" data-fig3d="${F[5].model}" data-mode="sil" data-accent="#FFE14D" data-start="0.4" data-spin="-0.5"><span aria-hidden="true">?</span></div>`;
+
+  /* new arrivals */
+  const fresh = D.products.filter((p) => p.status !== 'sold' && p.type !== 'accessories').sort((a, b) => b.added.localeCompare(a.added)).slice(0, 4);
+  $('#arrivals').innerHTML = fresh.map((p) => `<div class="rv">${U.card(p)}</div>`).join('');
+
+  /* categories */
+  const cnt = (t) => D.products.filter((p) => p.type === t && p.status === 'available').length;
+  const rep = (t) => D.products.find((p) => p.type === t);
+  const CATS = [
+    ['camcorders', 'a', 'MiniDV camcorders', 'Tape, CCD, timecode. The soft image of a 2002 summer holiday.'],
+    ['compacts', 'b', 'Digital compacts', 'Direct flash, dense colour, the date in the corner.'],
+    ['accessories', 'c', 'Accessories & tapes', 'Sealed cassettes, tested batteries, FireWire cables.']
+  ];
+  $('#cats').innerHTML = CATS.map(([t, c, name, txt], i) => `<a class="cat cat--${c} rv" href="archive.html?type=${t}">
+<div class="cat__top label"><span>0${i + 1} / ${t.toUpperCase()}</span><span>${cnt(t)} available</span></div>
+<div class="cat__art" aria-hidden="true">${A.product(rep(t), t === 'compacts' ? 'a' : 'b')}</div>
+<div><h3>${name} <span class="arr">→</span></h3><p>${txt}</p></div></a>`).join('');
+
+  /* shot on */
+  $('#shots').innerHTML = D.shots.map((s) => `<figure class="shotf ${s.cls} rv">${A.scene(s.k, { stamp: s.stamp, video: s.video, tc: s.tc, label: `Image shot on the ${s.cam}` })}
+${s.video ? '<span class="play">▶ CLIP</span>' : ''}
+<figcaption><a href="product.html?id=${s.id}">${s.id} · ${s.cam}</a><span>${s.meta}</span></figcaption></figure>`).join('');
+
+  /* minifigure teaser */
+  const f = D.figures;
+  $('#teaserArt').innerHTML = `<div class="teaser__box">${A.box()}</div>` +
+    [f[0], f[3], f[4]].map((x, i) => `<div class="fig-mini" data-fig3d="${x.model}" data-bg="#141619" data-accent="${x.rim}" data-start="${-0.6 + i * 0.5}" title="${x.name}"></div>`).join('') +
+    `<div class="fig-mini" data-fig3d="${f[5].model}" data-mode="sil" data-accent="#2F6BFF" aria-label="Secret figure"><span class="q" aria-hidden="true">?</span></div>`;
+  if (window.Fig3D) window.Fig3D.scan();
+
+  /* trust */
+  $('#trust').innerHTML = [
+    ['test', 'Tested piece by piece', 'Over twenty checks on every camera: recording, playback, screen, battery, ports. The report is on the record.'],
+    ['grade', 'Condition, described honestly', 'An A+ / A / B / C scale and a photo of every mark. What you see is what arrives.'],
+    ['pack', 'Protective packaging', 'Double box, custom-cut foam, tracked shipping in 24–48 h. Bought safely on eBay or Vinted.']
+  ].map(([i, h, p]) => `<div class="rv">${A.icon(i)}<h3>${h}</h3><p>${p}</p></div>`).join('');
+
+  U.observe();
+})();

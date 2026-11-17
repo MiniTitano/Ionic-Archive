@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Journal — Guides to MiniDV, digicams and tape · Ionic Archive</title>
+<meta name="description" content="Practical guides: choosing your first MiniDV, digitising tapes, caring for batteries, CCD vs CMOS, and settings for the digicam look.">
+<link rel="canonical" href="https://ionicarchive.com/journal">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var A = [
+    ['Guide', '8 min', 'How to choose your first MiniDV', 'Format, sensor, ports, batteries: the five questions to ask before buying a tape camcorder.', 0],
+    ['Technique', '12 min', 'Digitising MiniDV tapes without losing quality', 'FireWire, adapters, software: the workflow we use in the workshop, step by step.', 3],
+    ['Care', '5 min', 'Twenty-year-old lithium batteries: how to treat them', 'Storage, cycles, warning signs, and when to rebuild them.', 4],
+    ['Technique', '7 min', 'CCD vs CMOS: why 2004 digicams look the way they do', 'Rolling shutter, dynamic range, colour: what really changes in the image.', 1],
+    ['Look', '6 min', 'Settings for the digicam look', 'Forced flash, white balance, ISO and the date stamp: our recipe.', 5],
+    ['Care', '4 min', 'Storing tapes: temperature, humidity, magnets', 'How to keep family cassettes safe from dropouts and mould.', 2]
+  ];
+  document.getElementById('articles').innerHTML = A.map(function (a) {
+    return '<article class="article rv"><div class="media">' + Art.scene(a[4], { label: '' }) + '<span class="soon">Coming soon</span></div><p class="label">' + a[0] + ' · ' + a[1] + '</p><h3>' + a[2] + '</h3><p>' + a[3] + '</p></article>';
+  }).join('');
+  IAUI.observe();
+});
+</script>
+</head>
+<body data-page="journal">
+<div class="lcd" aria-hidden="true"><i class="lcd__t"></i><i class="lcd__b"></i><i class="lcd__line"></i></div>
+<main id="main">
+  <div class="wrap">
+    <header class="phead"><div class="phead__row"><div><p class="label kicker">Journal · Guides</p><h1 class="h1">Journal</h1></div><p class="index">Practical guides<br>Technique and care<br>Looks and settings</p></div></header>
+    <div class="articles" id="articles"></div>
+  </div>
+  <div style="height:clamp(64px,8vw,120px)"></div>
+</main>
+</body>
+</html>

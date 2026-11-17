@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dropouts — Series 01 collectible minifigures · Ionic Archive</title>
+<meta name="description" content="Dropouts, Series 01: six 3D-printed blind-box minifigures, each with a camcorder in hand. Never sold: they come only with an Ionic Archive order.">
+<meta name="theme-color" content="#0B0C0E">
+<link rel="canonical" href="https://ionicarchive.com/dropouts">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script><script defer src="assets/js/figures.js"></script><script defer src="assets/js/fig3d.js"></script>
+</head>
+<body data-page="dropouts" class="night-hdr" style="background:var(--night)">
+<div class="lcd" aria-hidden="true"><i class="lcd__t"></i><i class="lcd__b"></i><i class="lcd__line"></i></div>
+<main id="main" class="night">
+
+<section class="mf-hero scan" aria-labelledby="mf-h">
+  <div class="wrap mf-hero__grid">
+    <div>
+      <p class="label kicker">Series 01 · Blind box · 6 figures</p>
+      <h1 id="mf-h">Drop<br><span class="skip-line" aria-hidden="true" data-t="outs">outs</span><span class="sr">outs</span><em>.</em></h1>
+      <p class="lead" style="margin-top:28px">Six kids who skipped class to film everything. Named after the glitch when a DV tape skips a beat. 3D printed one by one in our studio, camcorder in hand. You won't know who's coming until you open the box.</p>
+      <div class="mf-stats"><div><b>6</b><span>Figures</span></div><div><b>5</b><span>Rarity tiers</span></div><div><b>1</b><span>Secret</span></div><div><b>0</b><span>For sale</span></div></div>
+    </div>
+    <div class="mfstage" id="heroFig"></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="rv-h" style="padding-top:clamp(40px,6vw,80px)">
+  <div class="wrap reveal">
+    <div>
+      <p class="label kicker">01 · Open a box</p>
+      <h2 class="h2" id="rv-h">Tap. Shake. Reveal.</h2>
+      <p class="lead" style="margin-top:18px">Get a taste of the unboxing. It's just for fun: your real figure ships with your order.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px">
+        <button class="btn btn--ion" type="button" id="openBtn">Open the box <span class="arr">→</span></button>
+        <a class="btn btn--line" href="archive.html">Find your camera</a>
+      </div>
+      <p class="fine" style="margin-top:16px">Just for fun. It doesn't entitle you to a figure or change the odds of your order.</p>
+      <ul class="reveal__log" id="log" aria-label="Recently opened boxes"></ul>
+    </div>
+    <div class="stage" id="stage">
+      <div class="vf" aria-hidden="true"><i class="vf__c tl"></i><i class="vf__c tr"></i><i class="vf__c bl"></i><i class="vf__c br"></i><span class="vf__rec">● REC</span><span class="vf__mode">BOX 01</span><span class="vf__bat"></span><span class="vf__tc" data-tc>00:00:00:00</span></div>
+      <div class="stage__flash"></div>
+      <button class="stage__box" type="button" id="boxBtn" aria-label="Open the blind box"></button>
+      <p class="stage__hint">Tap to tear it open</p>
+      <div class="stage__result" id="result" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="tier-h" style="padding-top:0">
+  <div class="wrap">
+    <header class="sec-head"><div class="sec-head__top label"><span>02 · Rarity</span><span>Indicative odds per box</span></div><h2 class="h2" id="tier-h">Five tiers of rarity.</h2></header>
+    <div class="tiers" id="tiers"></div>
+    <div class="glowchase">
+      <span class="glowchase__dot" aria-hidden="true"></span>
+      <div><p class="label">Chase variant · on top of every tier</p>
+        <h3>Glow chase: <span id="glowOdds">1 in 20</span> bags.</h3>
+        <p>Any Dropout, from BEANIE to the secret one, can come out printed in glow-in-the-dark filament. Same figure, but it lights up after lights out. Turn the lights off below to see them.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="series-h" style="padding-top:0">
+  <div class="wrap">
+    <header class="sec-head"><div class="sec-head__top label"><span>03 · The series</span><span>Series 01 · 2026</span></div>
+      <div><h2 class="h2" id="series-h">Six Dropouts.</h2><p class="lead">Every Dropout is 3D printed in a random colour, so no two collections look the same. Drag any figure to spin it. The secret one stays in the dark: hold it to take a peek.</p></div>
+      <button class="lightsw" type="button" id="lightsBtn" aria-pressed="false"><span class="lightsw__knob" aria-hidden="true"></span><span class="mono" id="lightsTxt">Lights off</span></button></header>
+    <div class="figs" id="figs"></div>
+  </div>
+</section>
+
+<section class="statement scan" aria-labelledby="st-h" style="border-top:1px solid var(--night-line);border-bottom:1px solid var(--night-line)">
+  <div class="wrap">
+    <p class="label" style="margin-bottom:24px">04 · House rule</p>
+    <h2 id="st-h">Never sold.<br><span>Only received.</span></h2>
+    <p>Every Ionic Archive order includes one figure from the current series. There is no other way to get one: no shop, no drop, no auction.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="col-h">
+  <div class="wrap collection">
+    <div>
+      <p class="label kicker">05 · My collection</p>
+      <h2 class="h2" id="col-h">Tick off the ones you have.</h2>
+      <p class="lead" style="margin-top:18px">Keep track of the figures you've received. When the series is complete, the archive notices.</p>
+      <div class="progress"><span class="progress__num mono" id="pNum">0/12</span><div class="progress__bar"><i id="pBar" style="width:0"></i></div></div>
+      <p class="fine" style="margin-top:16px">Your collection is saved on this device only. Tick off the figures you've pulled.</p>
+    </div>
+    <div class="checklist" id="checklist" role="group" aria-label="Series 01 checklist"></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="ugc-h" style="padding-top:0">
+  <div class="wrap">
+    <header class="sec-head"><div class="sec-head__top label"><span>06 · #ionicarchive</span><span>From the community</span></div>
+      <div><h2 class="h2" id="ugc-h">Show us yours.</h2><p class="lead">Shoot your figure with the camera it arrived with and tag <span class="mono" style="color:var(--ion-2)">#ionicarchive</span>.</p></div>
+      <a class="link" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a></header>
+    <div class="ugc" id="ugc"></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
