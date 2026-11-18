@@ -2038,3 +2038,5 @@ body:has(.buybar.on) .mp{bottom:84px}
 .mbleed__card .mono i{width:7px;height:7px;border-radius:50%;background:var(--rec);box-shadow:0 0 8px var(--rec)}
 .mbleed__card p{font-size:clamp(17px,1.35vw,22px);line-height:1.4;text-shadow:none}
 @media (max-width:640px){.mbleed__card{max-width:none}}
+/* the footer is always on light paper: never inherit a dark page's light text */
+.ftr{color:var(--ink)}
