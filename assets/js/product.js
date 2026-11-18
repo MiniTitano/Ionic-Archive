@@ -246,7 +246,7 @@
       mfxEl.style.setProperty('--acc', f.accent);
       if (window.Fig3D) window.Fig3D.set(fig, f.model, o.sil ? 'sil' : 'white', { bg: f.accent, accent: f.rim, glow: o.glow });
       fig.toggleAttribute('data-peek', !!o.sil);
-      nm.textContent = o.sil ? '???' : f.name;
+      nm.textContent = f.name; nm.classList.toggle('ionic-glow', !!o.sil);
       ch.innerHTML = chip(f.tier) + (o.glow ? '<span class="chip chip--glow">Glow chase</span>' : '');
       mfxEl.classList.toggle('is-glow', !!o.glow);
       mfxEl.classList.toggle('is-secret', !!o.sil);
@@ -268,7 +268,7 @@
       if (busy) return; busy = true; pulls++;
       hold = Date.now() + 12000;
       mfxEl.classList.remove('is-pulled'); mfxEl.classList.add('is-shaking');
-      lbl.textContent = 'Shaking the bag…'; nm.textContent = '???'; ch.innerHTML = '';
+      lbl.textContent = 'Shaking the bag…'; nm.textContent = '???'; nm.classList.remove('ionic-glow'); ch.innerHTML = '';
       mfxEl.classList.remove('is-glow', 'is-secret'); fine.textContent = 'A sealed foil bag, same as the one in your parcel. What\'s inside?';
       setTimeout(() => {
         const { f, glow } = pull(), sec = f.tier === 'secret';

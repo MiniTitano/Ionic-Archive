@@ -292,17 +292,17 @@
   // Every figure is printed in a random colour, so the 3D viewer cycles through filament colours.
   // accent: card / turntable colour. rim: coloured back-light.
   const figures = [
-    { num: '01', model: 'fig-01', name: 'BEANIE', role: 'Beanie on, shirt off', tier: 'common', accent: '#FFD83D', rim: '#FF5FA8',
+    { num: '01', model: 'fig-01', name: 'CODY', role: 'Beanie on, shirt off', tier: 'common', accent: '#FFD83D', rim: '#FF5FA8',
       lore: 'Beanie on, shirt off, camcorder already rolling. Shoots first, gets dressed later.' },
-    { num: '02', model: 'fig-02', name: 'CAP', role: 'Cap and tank top', tier: 'common', accent: '#2F6BFF', rim: '#9FE7FF',
+    { num: '02', model: 'fig-02', name: 'KYLE', role: 'Cap and tank top', tier: 'common', accent: '#2F6BFF', rim: '#9FE7FF',
       lore: 'Cap low, tank top, camera at the hip. Never misses a line at the skatepark.' },
-    { num: '03', model: 'fig-05', name: 'HOODIE', role: 'Hood up, REC on', tier: 'mythic', accent: '#FF6FB5', rim: '#FFFFFF',
+    { num: '03', model: 'fig-05', name: 'TRAVIS', role: 'Hood up, REC on', tier: 'mythic', accent: '#FF6FB5', rim: '#FFFFFF',
       lore: 'Hood up, hands steady. Shows up at every gig and never ends up in the shot.' },
-    { num: '04', model: 'fig-03', name: 'BIKINI', role: 'Swimsuit season', tier: 'rare', accent: '#22B5E3', rim: '#FF8AD0',
+    { num: '04', model: 'fig-03', name: 'BRITTANY', role: 'Swimsuit season', tier: 'rare', accent: '#22B5E3', rim: '#FF8AD0',
       lore: 'Swimsuit on, camcorder never far from the water. Every summer of 2004, on tape.' },
-    { num: '05', model: 'fig-04', name: 'KNIT', role: 'Beanie girl', tier: 'uncommon', accent: '#1C1F33', rim: '#8A6BFF',
+    { num: '05', model: 'fig-04', name: 'MEGAN', role: 'Beanie girl', tier: 'uncommon', accent: '#1C1F33', rim: '#8A6BFF',
       lore: 'Knit beanie pulled low, camera always on. Films the people who are filming.' },
-    { num: '06', model: 'fig-06', name: 'IONIC 00', role: 'The original Dropout', tier: 'secret', accent: '#FF8A3C', rim: '#FF8A3C',
+    { num: '06', model: 'fig-06', name: 'IONIC', role: 'The original Dropout', tier: 'secret', accent: '#FF8A3C', rim: '#FF8A3C',
       lore: 'The first figure we ever printed. Puffer jacket, camcorder, the archive\'s name. Nobody knows which bag it\'s in.' }
   ];
 

@@ -2111,3 +2111,36 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
   radial-gradient(120% 70% at 0% 100%,rgba(11,12,14,.72) 0%,rgba(11,12,14,.45) 35%,rgba(11,12,14,0) 70%),
   linear-gradient(180deg,rgba(11,12,14,.35) 0%,rgba(11,12,14,0) 22%,rgba(11,12,14,0) 40%,rgba(11,12,14,.5) 66%,rgba(11,12,14,.88) 100%)}
 .hero--reel .h1{text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 18px rgba(0,0,0,.55),0 0 60px rgba(0,0,0,.45)}.reel__shade{z-index:2}
+
+/* manifesto: swipeable gallery, the photo in the middle is in focus */
+.mgal{padding:clamp(56px,7vw,110px) 0 clamp(40px,5vw,80px);border-top:1px solid var(--night-line);overflow:hidden}
+.mgal__head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:clamp(18px,3vw,36px)}
+.mgal__head h2{color:var(--night-muted);font-weight:400}
+.mgal__nav{display:flex;align-items:center;gap:8px}
+.mgal__count{font-size:12px;letter-spacing:.12em;color:var(--night-text);margin-right:10px}
+.mgal__btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--night-line);background:transparent;color:var(--night-text);font-size:17px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.mgal__btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+.mgal__btn:disabled{opacity:.3;pointer-events:none}
+.mgal__track{--h:clamp(340px,64vh,620px);position:relative;display:flex;align-items:center;gap:clamp(10px,1.6vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 50vw 52px;cursor:grab;outline:none;-webkit-user-select:none;user-select:none}
+.mgal__track::-webkit-scrollbar{display:none}
+.mgal__track.is-drag{cursor:grabbing;scroll-snap-type:none}
+.mgal__card{flex:0 0 auto;width:min(calc(var(--h) * var(--r)),84vw);aspect-ratio:var(--ar);margin:0;position:relative;scroll-snap-align:center;transform:scale(var(--s,1));opacity:var(--o,1);will-change:transform}
+.mgal__card img{width:100%;height:100%;object-fit:cover;border-radius:6px;box-shadow:0 30px 60px -28px rgba(0,0,0,.85);pointer-events:none}
+.mgal__card figcaption{position:absolute;left:0;top:calc(100% + 14px);display:flex;gap:10px;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--night-text);opacity:var(--c,0);white-space:nowrap}
+.mgal__card figcaption b{font-weight:500;color:#FF8A3C}
+.mgal__track:focus-visible .mgal__card[aria-current="true"] img{outline:2px solid #fff;outline-offset:4px}
+@media (max-width:640px){.mgal__track{--h:62vh}.mgal__btn{width:40px;height:40px}}
+.mout__h{margin-bottom:clamp(28px,4vw,48px)}.mgal__count{white-space:nowrap}
+@media (max-width:640px){.mgal__card{width:min(calc(var(--h) * var(--r)),74vw)}.mgal__count{margin-right:4px}}
+
+/* Dropouts: one switch, "Glow in the dark"; the label itself glows when it's on */
+.lightsw .mono{transition:color .3s,text-shadow .3s}
+.lightsw .mono::before{content:"\263E";margin-right:8px;font-size:13px}
+.lightsw[aria-pressed="true"] .mono{color:#9CFF5E;text-shadow:0 0 10px rgba(156,255,94,.8)}
+/* "glow in the dark" in the series intro: faint green glow, full glow when the lights go off */
+.glowtxt{color:#9CFF5E;text-shadow:0 0 6px rgba(156,255,94,.35);animation:glowtxt 3.2s ease-in-out infinite;transition:text-shadow .4s}
+@keyframes glowtxt{0%,100%{text-shadow:0 0 6px rgba(156,255,94,.3)}50%{text-shadow:0 0 14px rgba(156,255,94,.7)}}
+.lights-off .glowtxt{animation:none;text-shadow:0 0 8px #9CFF5E,0 0 22px rgba(156,255,94,.8),0 0 40px rgba(156,255,94,.5)}
+@media (prefers-reduced-motion:reduce){.glowtxt{animation:none}}
+/* IONIC, the secret Dropout: its name glows orange like the figure's outline */
+.ionic-glow{color:#FFB27A!important;text-shadow:0 0 1px #FF8A3C,0 0 10px rgba(255,138,60,.85),0 0 26px rgba(255,138,60,.5);font-weight:inherit}

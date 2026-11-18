@@ -80,8 +80,45 @@
     <img src="${p.sm}" alt="" draggable="false" loading="${i < 5 ? 'eager' : 'lazy'}">
     <figcaption>${p.stamp ? `<i class="jr-dstamp">${p.stamp}</i>` : ''}<span>${p.cam ? p.cam.replace('Sony Cyber-shot ', '') : p.place}</span></figcaption></figure>`).join('');
   const prints = [...pile.children];
+  // wide screens: the table fills the whole section, so spread the prints over all of it,
+  // including the space under the title, and only keep them off the title and buttons
+  function scatterWide(W, H) {
+    const pr = pile.getBoundingClientRect();
+    // measure the text and buttons themselves, not their full-width blocks
+    const rng = document.createRange();
+    const head = ['.jr-kick', '.jr-h'].map((s) => document.querySelector(s)).filter(Boolean).map((e) => { rng.selectNodeContents(e); return rng.getBoundingClientRect(); })
+      .concat([...document.querySelectorAll('.jr-actions > *')].map((e) => e.getBoundingClientRect()));
+    const T = { l: Math.min(...head.map((r) => r.left)) - pr.left - 16, t: Math.min(...head.map((r) => r.top)) - pr.top - 16,
+      r: Math.max(...head.map((r) => r.right)) - pr.left + 16, b: Math.max(...head.map((r) => r.bottom)) - pr.top + 16 };
+    const w = Math.min(320, W * 0.2), h = w * 0.95, n = prints.length;
+    const cols = Math.max(3, Math.round(Math.sqrt(n * W / H) * 1.25)), rows = Math.max(2, Math.ceil(n * 1.6 / cols));
+    const cw = (W - w) / (cols - 1), ch = (H - h - 40) / (rows - 1);
+    const hits = (x, y) => x < T.r && x + w > T.l && y < T.b && y + h > T.t;
+    let cells = [];
+    for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++) cells.push([c * cw, 40 + r * ch]);
+    cells = cells.filter(([x, y]) => !hits(x, y)).sort(() => Math.random() - 0.5);
+    return prints.map((el, i) => {
+      let [x, y] = cells[i % cells.length], tries = 0, nx, ny;
+      do { nx = x + (Math.random() - 0.5) * cw * 0.6; ny = y + (Math.random() - 0.5) * ch * 0.6; tries++; }
+      while (hits(nx, ny) && tries < 12);
+      if (hits(nx, ny)) { nx = x; ny = y; }
+      return [Math.max(-w * 0.05, Math.min(W - w * 0.95, nx)), Math.max(30, Math.min(H - h, ny)), w];
+    });
+  }
   function throwPrints(animate) {
     const W = pile.clientWidth, H = pile.clientHeight, small = W < 700, wide = innerWidth >= 1100;
+    if (wide) {
+      scatterWide(W, H).forEach(([x, y, w], i) => {
+        const el = prints[i], rot = (Math.random() - 0.5) * 34;
+        el.style.width = `${w}px`;
+        el.dataset.x = x; el.dataset.y = y; el.dataset.r = rot;
+        el.style.transition = animate && !RM ? `transform .9s cubic-bezier(.2,.8,.2,1) ${i * 45}ms` : 'none';
+        el.style.transform = `translate(${x}px,${y}px) rotate(${rot}deg)`;
+        el.style.zIndex = i + 1;
+      });
+      z = prints.length + 1;
+      return;
+    }
     const CX = wide ? W * 0.7 : W / 2, CY = wide ? H * 0.52 : H / 2;
     prints.forEach((el, i) => {
       const w = small ? W * 0.52 : Math.min(340, W * 0.22);

@@ -33,18 +33,16 @@
     // one shared card colour for the whole series
     return `<article class="fig3 tier-${f.tier}${S ? ' is-secret' : ''} is-darkbg rv" style="--acc:#111214">
 <div class="fig3__top"><span class="fig3__num mono">${f.num} / ${pad(N)}</span>${chip(f.tier)}</div>
-<div class="fig3__view" data-fig3d="${f.model}" ${look(f)}${S ? ' data-mode="sil"' : ''} data-start="${(Math.random() - 0.5).toFixed(2)}" tabindex="0" aria-label="${S ? 'Secret figure' : f.name + ', 3D, drag to spin'}"></div>
-<div class="fig3__body"><h3>${S ? 'Secret' : f.name}</h3><p class="fig3__role mono">${S ? 'Classified' : f.role}</p><span class="fig3__fin mono"><b class="fin-c">Colour: random</b><b class="fin-g">Glow chase · 1 in ${Math.round(100 / D.glowOdds)}</b></span><p class="fig3__lore">${S ? 'Nobody has found this one in a box yet. You\'ll know it when you see it.' : f.lore}</p></div>
+<div class="fig3__view" data-fig3d="${f.model}" ${look(f)}${S ? ' data-mode="sil"' : ''} data-start="${(Math.random() - 0.5).toFixed(2)}" tabindex="0" aria-label="${S ? 'IONIC, the secret figure' : f.name + ', 3D, drag to spin'}"></div>
+<div class="fig3__body"><h3${S ? ' class="ionic-glow"' : ''}>${f.name}</h3><p class="fig3__role mono">${S ? 'Classified' : f.role}</p><span class="fig3__fin mono"><b class="fin-c">Colour: random</b><b class="fin-g">Glow chase · 1 in ${Math.round(100 / D.glowOdds)}</b></span><p class="fig3__lore">${S ? 'Nobody has found this one in a box yet. You\'ll know it when you see it.' : f.lore}</p></div>
 </article>`;
   }).join('');
 
   /* lights off: see every figure's glow-in-the-dark chase edition */
-  $('#glowOdds').textContent = `1 in ${Math.round(100 / D.glowOdds)}`;
   const lb = $('#lightsBtn');
   lb.addEventListener('click', () => {
     const on = lb.getAttribute('aria-pressed') !== 'true';
     lb.setAttribute('aria-pressed', String(on));
-    $('#lightsTxt').textContent = on ? 'Lights on' : 'Lights off';
     document.body.classList.toggle('lights-off', on);
     window.Fig3D.lights(on);
   });
@@ -94,7 +92,7 @@
   const KEY = 'ia-collection-s01';
   let have = new Set(U.store.get(KEY, []));
   const cl = $('#checklist');
-  cl.innerHTML = F.map((f) => `<label><input class="chk" type="checkbox" value="${f.num}"${have.has(f.num) ? ' checked' : ''}><span class="mono">${f.num}</span><span class="nm">${secret(f) ? 'Secret · ???' : `${f.name} — ${f.role}`}</span>${chip(f.tier)}</label>`).join('');
+  cl.innerHTML = F.map((f) => `<label><input class="chk" type="checkbox" value="${f.num}"${have.has(f.num) ? ' checked' : ''}><span class="mono">${f.num}</span><span class="nm">${secret(f) ? `<b class="ionic-glow">${f.name}</b> — Classified` : `${f.name} — ${f.role}`}</span>${chip(f.tier)}</label>`).join('');
   function prog() {
     const n = have.size;
     $('#pNum').textContent = `${n}/${N}`;

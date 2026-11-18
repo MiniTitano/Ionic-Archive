@@ -9,9 +9,9 @@
 <link rel="canonical" href="https://ionicarchive.com/manifesto">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261118">
+<link rel="stylesheet" href="assets/css/style.css?v=20261118j">
 <script>document.documentElement.classList.add('js')</script>
-<script defer src="assets/js/data.js?v=20261118"></script><script defer src="assets/js/art.js?v=20261118"></script><script defer src="assets/js/main.js?v=20261118"></script><script defer src="assets/js/manifesto.js?v=20261118"></script>
+<script defer src="assets/js/data.js?v=20261118j"></script><script defer src="assets/js/art.js?v=20261118j"></script><script defer src="assets/js/main.js?v=20261118j"></script><script defer src="assets/js/manifesto.js?v=20261118j"></script>
 </head>
 <body data-page="manifesto" class="night-hdr" style="background:var(--night)">
 <div class="lcd" aria-hidden="true"><i class="lcd__t"></i><i class="lcd__b"></i><i class="lcd__line"></i></div>
@@ -43,7 +43,7 @@
   <section class="mch rv" data-ch="01 · The phone is perfect">
     <div class="wrap mch__grid">
       <header class="mch__side"><span class="mch__tc mono">0:00:12:04</span><h2>The phone is perfect. That's the problem.</h2>
-        <figure class="mside mside--l"><img src="assets/img/manifesto/selfie-street-720.jpg" srcset="assets/img/manifesto/selfie-street-720.jpg 720w, assets/img/manifesto/selfie-street-1200.jpg 1200w" sizes="(max-width:860px) 70vw, 30vw" alt="Two friends filming themselves with a camcorder held at arm's length" loading="lazy"><figcaption class="mono">SELFIE MODE: FLIP THE SCREEN</figcaption></figure></header>
+        <figure class="mside mside--l"><img src="assets/img/manifesto/selfie-street-720.jpg" srcset="assets/img/manifesto/selfie-street-720.jpg 720w, assets/img/manifesto/selfie-street-1200.jpg 1200w" sizes="(max-width:860px) 70vw, 30vw" alt="Two friends filming themselves with a camcorder held at arm's length" loading="lazy"><figcaption class="mono">Sony Handycam Digital8</figcaption></figure></header>
       <div class="mch__body">
         <p class="mbig">A phone merges a dozen frames and fixes everything before you see it.</p>
         <p>These cameras take one frame and leave it alone. Highlights glow, shadows go muddy, reds run hot.</p>
@@ -58,58 +58,28 @@
     </div>
   </section>
 
-  <!-- 02: full-bleed flash photo -->
-  <section class="mbleed" data-ch="02 · Why the flash looks like that" aria-label="Photo: direct flash at night">
-    <img src="assets/img/manifesto/flash-wall-2000.jpg" srcset="assets/img/manifesto/flash-wall-1000.jpg 1000w, assets/img/manifesto/flash-wall-2000.jpg 2000w" sizes="100vw" alt="A Sony DVCAM camcorder held up by the shoulder against a red wall, lit by direct flash" loading="lazy">
-    <div class="mbleed__cap wrap"><div class="mbleed__card"><span class="mono"><i></i>0:01:12:00 · FLASH ON</span><p>Direct flash, two centimetres from the lens. Whatever's closest lights up, the rest goes black.</p></div></div>
-  </section>
-
-  <!-- 03 -->
-  <section class="mch rv" data-ch="03 · Tape remembers differently">
-    <div class="wrap mt3">
-      <header class="mt3__head"><span class="mch__tc mono">0:02:40:18</span><h2>Tape remembers differently.</h2></header>
-      <div class="mt3__txt">
-        <p class="mbig">MiniDV: 25 frames a second on a strip of metal tape 6.35 mm wide.</p>
-        <p>When it fails it skips a block: grey squares, a frozen half-frame. That glitch is called a dropout. So are our minifigures.</p>
-      </div>
-      <div class="mt3__pics">
-        <figure class="mside mt3__pol"><img src="assets/img/manifesto/dvcam-lens-720.jpg" srcset="assets/img/manifesto/dvcam-lens-720.jpg 720w, assets/img/manifesto/dvcam-lens-1200.jpg 1200w" sizes="(max-width:860px) 80vw, 28vw" alt="A DVCAM camcorder pointed straight at the viewer" loading="lazy"><figcaption class="mono">DVCAM · 3CCD · LOOKING BACK</figcaption></figure>
-        <figure class="mdrop mt3__drop" aria-label="Photo with a tape dropout">
-          <img src="assets/img/hero/hero-03-1000.jpg" srcset="assets/img/hero/hero-03-1000.jpg 1000w, assets/img/hero/hero-03.jpg 2000w" sizes="(max-width:860px) 100vw, 66vw" alt="Portrait with a camcorder on the shoulder, interrupted by a tape dropout" loading="lazy">
-          <span class="mdrop__s mdrop__s--1" style="background-image:url('assets/img/hero/hero-03-1000.jpg')"></span>
-          <span class="mdrop__s mdrop__s--2" style="background-image:url('assets/img/hero/hero-03-1000.jpg')"></span>
-          <span class="mdrop__s mdrop__s--3" style="background-image:url('assets/img/hero/hero-03-1000.jpg')"></span>
-          <figcaption class="mono">SP · 0:02:41:03 · DROPOUT · 0:02:41:05</figcaption>
-        </figure>
-      </div>
+  <!-- 02: the archive in use, swipe through -->
+  <section class="mgal" data-ch="02 · Out in the world" aria-labelledby="gal-h">
+    <div class="wrap mgal__head">
+      <h2 class="label" id="gal-h">The archive, out in the world</h2>
+      <div class="mgal__nav"><span class="mono mgal__count" id="galCount" aria-live="polite">01 / 09</span><button type="button" class="mgal__btn" id="galPrev" aria-label="Previous photo">←</button><button type="button" class="mgal__btn" id="galNext" aria-label="Next photo">→</button></div>
+    </div>
+    <div class="mgal__track" id="galTrack" tabindex="0" role="group" aria-label="Photos, swipe or use the arrow keys">
+      <figure class="mgal__card" style="--ar:720/1079;--r:0.6673"><img src="assets/img/manifesto/xm2-garden-720.jpg" width="720" height="1079" alt="Holding a Canon XM2 on the shoulder in a garden" loading="lazy" draggable="false"><figcaption class="mono">Canon XM2</figcaption></figure>
+      <figure class="mgal__card" style="--ar:1000/666;--r:1.5015"><img src="assets/img/manifesto/flash-wall-1000.jpg" width="1000" height="666" alt="A Sony DVCAM camcorder held up against a red wall, lit by direct flash" loading="lazy" draggable="false"><figcaption class="mono">Sony DVCAM</figcaption></figure>
+      <figure class="mgal__card" style="--ar:720/1080;--r:0.6667"><img src="assets/img/hero/hero-m-04-720.jpg" width="720" height="1080" alt="A camcorder raised overhead in a mid-stride pose" loading="lazy" draggable="false"><figcaption class="mono">Sony DVCAM</figcaption></figure>
+      <figure class="mgal__card" style="--ar:720/1079;--r:0.6673"><img src="assets/img/manifesto/dvcam-lens-720.jpg" width="720" height="1079" alt="A DVCAM camcorder pointed straight at the viewer" loading="lazy" draggable="false"><figcaption class="mono">Sony DVCAM</figcaption></figure>
+      <figure class="mgal__card" style="--ar:1000/666;--r:1.5015"><img src="assets/img/hero/hero-03-1000.jpg" width="1000" height="666" alt="Portrait with a camcorder resting on the shoulder" loading="lazy" draggable="false"><figcaption class="mono">Sony DVCAM</figcaption></figure>
+      <figure class="mgal__card" style="--ar:720/1080;--r:0.6667"><img src="assets/img/hero/hero-m-03-720.jpg" width="720" height="1080" alt="Filming from a scaffold with a compact camcorder" loading="lazy" draggable="false"><figcaption class="mono">Sony Cyber-shot DSC-M2</figcaption></figure>
+      <figure class="mgal__card" style="--ar:720/1079;--r:0.6673"><img src="assets/img/manifesto/xm2-rooftop-720.jpg" width="720" height="1079" alt="Holding a Canon XM2 camcorder, shot from below against the sky" loading="lazy" draggable="false"><figcaption class="mono">Canon XM2</figcaption></figure>
+      <figure class="mgal__card" style="--ar:720/1080;--r:0.6667"><img src="assets/img/hero/hero-m-06-720.jpg" width="720" height="1080" alt="Lying on the grass with a Handycam" loading="lazy" draggable="false"><figcaption class="mono">Sony Handycam Digital8</figcaption></figure>
+      <figure class="mgal__card" style="--ar:720/1080;--r:0.6667"><img src="assets/img/hero/hero-m-02-720.jpg" width="720" height="1080" alt="At night with a DVCAM and a bike" loading="lazy" draggable="false"><figcaption class="mono">Sony DVCAM</figcaption></figure>
     </div>
   </section>
-  <!-- 04 -->
-  <section class="mbench mbench--two rv" data-ch="04 · Two labels" aria-label="How every piece is labelled">
-    <div class="wrap">
-      <span class="mch__tc mono">0:03:55:00</span>
-      <ul class="vcards">
-        <li class="vcard vcard--ok"><span class="vcard__stamp mono">● Tested · works</span><p>It works. Graded A+ to C, test report in the box.</p></li>
-        <li class="vcard vcard--fix"><span class="vcard__stamp mono">▲ Tested · for repair</span><p>Something doesn't work. We say what, and you'll see it in the photos.</p></li>
-      </ul>
-    </div>
-  </section>  <!-- contact sheet -->
-  <section class="msheet" data-ch="05 · Contact sheet" aria-label="Contact sheet: pieces from the archive in use">
-    <div class="wrap msheet__head"><span class="mch__tc mono">0:05:02:00</span><p class="label">Contact sheet · the archive, out in the world</p></div>
-    <div class="msheet__strip">
-      <figure><img src="assets/img/manifesto/xm2-garden-720.jpg" alt="Holding a Canon XM2 on the shoulder in a garden" loading="lazy"><figcaption class="mono"><b>14</b>CANON XM2 · 3CCD</figcaption></figure>
-      <figure><img src="assets/img/hero/hero-m-04-720.jpg" alt="A camcorder raised overhead in a mid-stride pose" loading="lazy"><figcaption class="mono"><b>15</b>DVCAM · INDOORS</figcaption></figure>
-      <figure><img src="assets/img/hero/hero-m-03-720.jpg" alt="Filming from a scaffold with a compact camcorder" loading="lazy"><figcaption class="mono"><b>16</b>SCAFFOLD · SP</figcaption></figure>
-      <figure><img src="assets/img/hero/hero-m-06-720.jpg" alt="Lying on the grass with a Handycam" loading="lazy"><figcaption class="mono"><b>17</b>HANDYCAM · PARK</figcaption></figure>
-      <figure><img src="assets/img/hero/hero-m-02-720.jpg" alt="At night with a DVCAM and a bike" loading="lazy"><figcaption class="mono"><b>18</b>DVCAM · NIGHT</figcaption></figure>
-    </div>
-  </section>
-
   <!-- outro -->
-  <section class="mout" data-ch="06 · Press REC">
+  <section class="mout" data-ch="03 · Buy now">
     <div class="wrap">
-      <p class="mout__h"><i class="mout__rec"></i>Press REC.</p>
-      <p class="mout__p">The footage won't be sharp. It'll be yours.</p>
+      <p class="mout__h"><i class="mout__rec"></i>Buy now.</p>
       <div class="mout__ctas"><a class="btn btn--paper" href="archive.html">Find your camera <span class="arr">→</span></a><a class="btn btn--sticker" href="dropouts.html"><span class="nav__q" aria-hidden="true">?</span>Meet the Dropouts</a></div>
     </div>
   </section>

@@ -74,3 +74,61 @@
     b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
   }));
 })();
+
+/* swipeable gallery: snap to the middle, the centred photo is in focus */
+(function () {
+  'use strict';
+  const tr = document.getElementById('galTrack');
+  if (!tr) return;
+  const cards = [...tr.querySelectorAll('.mgal__card')];
+  const count = document.getElementById('galCount'), prev = document.getElementById('galPrev'), next = document.getElementById('galNext');
+  const pad = (n) => String(n).padStart(2, '0');
+  let cur = 0, raf = 0;
+  const centre = (el) => el.offsetLeft + el.offsetWidth / 2;
+  function update() {
+    raf = 0;
+    const c = tr.scrollLeft + tr.clientWidth / 2;
+    let best = 0, bd = Infinity;
+    cards.forEach((el, i) => {
+      const off = centre(el) - c, d = off / (el.offsetWidth + 24), a = Math.min(Math.abs(d), 1.4);
+      el.style.setProperty('--s', (1 - a * 0.14).toFixed(3));
+      el.style.setProperty('--o', (1 - a * 0.5).toFixed(3));
+      el.style.setProperty('--c', Math.max(0, 1 - Math.abs(d) * 3).toFixed(2));
+      if (Math.abs(off) < bd) { bd = Math.abs(off); best = i; }
+    });
+    if (best !== cur || !count.dataset.ok) {
+      cur = best; count.dataset.ok = 1;
+      count.textContent = `${pad(cur + 1)} / ${pad(cards.length)}`;
+      cards.forEach((el, i) => el.setAttribute('aria-current', String(i === cur)));
+      prev.disabled = cur === 0; next.disabled = cur === cards.length - 1;
+    }
+  }
+  const req = () => { if (!raf) raf = requestAnimationFrame(update); };
+  function go(i, smooth = true) {
+    i = Math.max(0, Math.min(cards.length - 1, i));
+    tr.scrollTo({ left: centre(cards[i]) - tr.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+  }
+  tr.addEventListener('scroll', req, { passive: true });
+  addEventListener('resize', () => { go(cur, false); req(); });
+  prev.addEventListener('click', () => go(cur - 1));
+  next.addEventListener('click', () => go(cur + 1));
+  tr.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); } });
+  // mouse: drag to scroll, click a side photo to bring it to the middle
+  let drag = null;
+  tr.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse' || e.button !== 0) return; drag = { x: e.clientX, l: tr.scrollLeft, moved: false }; });
+  addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    if (!drag.moved && Math.abs(dx) > 4) { drag.moved = true; tr.classList.add('is-drag'); }
+    if (drag.moved) tr.scrollLeft = drag.l - dx;
+  });
+  addEventListener('pointerup', (e) => {
+    if (!drag) return;
+    const was = drag.moved; drag = null; tr.classList.remove('is-drag');
+    if (was) { update(); go(cur); return; }
+    const card = e.target.closest && e.target.closest('.mgal__card');
+    if (card) go(cards.indexOf(card));
+  });
+  go(0, false); update();
+  addEventListener('load', () => { go(cur, false); update(); });
+})();

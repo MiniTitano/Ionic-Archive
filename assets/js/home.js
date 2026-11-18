@@ -10,33 +10,19 @@
   const DESKTOP = {
     list: [
       // [..., desktop focus, focus if shown on a narrow screen while no vertical set exists]
-      ['hero-01', 'A 3CCD DVCAM camcorder raised to shoot in front of a red graffiti wall', 2000, 1333, '56% 40%', '74% 40%'],
-      ['hero-02', 'A camcorder\'s flip-out screen framing a sunset over wind turbines', 2000, 1333, '62% 55%', '66% 55%'],
-      ['hero-03', 'Portrait with a camcorder resting on the shoulder', 2000, 1333, '52% 42%', '47% 42%'],
-      ['hero-04', 'Filming through a Handycam viewfinder under radio masts', 2000, 1333, '45% 45%', '47% 45%'],
-      ['hero-05', 'A camcorder carried at hip height against a red wall', 2000, 1333, '40% 55%', '44% 55%'],
-      ['hero-06', 'Checking a camcorder in a shop, seated on the floor', 2000, 1333, '40% 45%', '38% 45%'],
-      ['hero-07', 'A camcorder raised beside an old poster on a red wall', 2000, 1333, '48% 42%', '47% 42%'],
-      ['hero-08', 'Reviewing a clip on the flip-out screen, seated in a chair', 2000, 1333, '50% 40%', '44% 40%'],
-      ['hero-09', 'Framing a shot with a red Ferrari Olympus compact by a fountain in Place des Vosges', 2000, 1333, '62% 45%', '68% 45%'],
-      ['hero-10', 'A Sony 3CCD camcorder held out at arm\'s length against a red graffiti wall', 2000, 1333, '50% 40%', '66% 40%'],
-      ['hero-11', 'Two hands holding a red Ferrari Olympus compact in front of Place des Vosges', 2000, 1333, '58% 45%', '58% 45%'],
-      ['hero-12', 'Lying on the grass, filming a friend with a Sony Handycam', 2000, 1333, '55% 55%', '68% 50%'],
-      ['hero-13', 'Sitting in a stone doorway, filming with a Canon camcorder', 2000, 1333, '45% 50%', '42% 50%'],
-      ['hero-14', 'Two friends on the grass, one filming with a Sony Digital8 Handycam', 2000, 1333, '50% 40%', '50% 40%']
+      ['hero-15', 'Filming through a Sony Handycam viewfinder under radio masts', 2000, 1333, '45% 50%', '46% 50%'],
+      ['hero-16', 'A Sony camcorder\'s flip-out screen framing a sunset over wind turbines', 2000, 1333, '60% 55%', '64% 55%'],
+      ['hero-17', 'A Sony 3CCD camcorder held out at arm\'s length against a red graffiti wall', 2000, 1333, '50% 40%', '66% 40%'],
+      ['hero-18', 'Lying on the grass, filming a friend with a Sony Handycam', 2000, 1333, '55% 55%', '68% 50%'],
+      ['hero-19', 'A Sony DVCAM camcorder carried at hip height against a red wall', 2000, 1333, '45% 55%', '40% 60%'],
+      ['hero-20', 'Checking a Sony DVCAM camcorder, seated in a chair', 2000, 1333, '50% 45%', '45% 45%'],
+      ['hero-21', 'Holding a Canon XM2 camcorder, shot from below between buildings', 2000, 1333, '50% 40%', '45% 40%'],
+      ['hero-22', 'Two friends on the grass, one filming with a Sony Digital8 Handycam', 2000, 1333, '50% 40%', '50% 40%'],
+      ['hero-23', 'Two hands holding a red Ferrari Olympus compact in front of Place des Vosges', 2000, 1333, '58% 45%', '58% 45%']
     ]
   };
-  const MOBILE = {
-    list: [
-      // positions 1-2 and 5-6 hold longer; 3-4 are the quick double cut
-      ['hero-m-01', 'A 3CCD DVCAM camcorder held up against a red graffiti wall', 1200, 1800, '50% 45%'],
-      ['hero-m-02', 'At night, a DVCAM camcorder carried alongside a paint-splattered bike', 1200, 1800, '50% 40%'],
-      ['hero-m-03', 'Filming from a scaffold with a compact camcorder, shot from below', 1200, 1800, '55% 40%'],
-      ['hero-m-04', 'A camcorder raised overhead in a mid-stride pose', 1200, 1800, '50% 35%'],
-      ['hero-m-05', 'Two friends on a scooter with a Handycam and a swivel Coolpix', 1200, 1800, '55% 50%'],
-      ['hero-m-06', 'Lying on the grass with a Handycam, a Coolpix in a pink bag', 1200, 1800, '45% 45%']
-    ]
-  };
+  // no separate vertical set: phones show the same photos, framed on their phone focus point
+  const MOBILE = { list: [] };
   // camcorder-style data code burned into the corner, one per frame
   const STAMPS = ["NOV 17 '03  23:41", "AUG 02 '04  20:52", "MAR 09 '02  01:13", "JUL 21 '05  17:06", "OCT 30 '03  00:27", "FEB 14 '04  15:48", "DEC 31 '02  23:59", "JAN 06 '06  12:30", "MAY 18 '04  19:22", "SEP 05 '03  02:44"];
 
