@@ -9,11 +9,11 @@
 <link rel="canonical" href="https://ionicarchive.com/">
 <meta property="og:type" content="website"><meta property="og:title" content="Ionic Archive — Post-film. Pre-HD."><meta property="og:description" content="Camcorders and digital cameras from 1999–2012, tested piece by piece. A mystery minifigure in every order."><meta property="og:image" content="https://ionicarchive.com/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=VT323&family=Permanent+Marker&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Ionic Archive","url":"https://ionicarchive.com","sameAs":["https://www.instagram.com/ionicarchive","https://www.tiktok.com/@ionicarchive"]}</script>
-<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script><script defer src="assets/js/home.js"></script><script defer src="assets/js/fig3d.js"></script>
+<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script><script defer src="assets/js/home.js"></script><script defer src="assets/js/tv.js"></script><script defer src="assets/js/fig3d.js"></script>
 </head>
 <body data-page="home">
 <div class="lcd" aria-hidden="true"><i class="lcd__t"></i><i class="lcd__b"></i><i class="lcd__line"></i></div>
@@ -102,7 +102,7 @@
 <section class="sec" aria-labelledby="new-h">
   <div class="wrap">
     <header class="sec-head">
-      <div class="sec-head__top label"><span>§ 01 · New arrivals</span><span>Updated 15 Nov 2026</span></div>
+      <div class="sec-head__top label"><span>01 · New arrivals</span><span>Updated 15 Nov 2026</span></div>
       <div><h2 class="h2" id="new-h">New in<br>the archive</h2><p class="lead">One of a kind, quantity one. When a piece leaves, it stays here as a memory.</p></div>
       <a class="link" href="archive.html">The full archive →</a>
     </header>
@@ -114,22 +114,10 @@
 <section class="sec alt" aria-labelledby="cat-h">
   <div class="wrap">
     <header class="sec-head">
-      <div class="sec-head__top label"><span>§ 02 · Categories</span><span>1999 — 2012</span></div>
+      <div class="sec-head__top label"><span>02 · Categories</span><span>1999 — 2012</span></div>
       <h2 class="h2" id="cat-h">What are you shooting on?</h2>
     </header>
     <div class="cats" id="cats"></div>
-  </div>
-</section>
-
-<!-- SHOT ON -->
-<section class="sec night scan" aria-labelledby="shot-h">
-  <div class="wrap">
-    <header class="sec-head">
-      <div class="sec-head__top label"><span>§ 03 · Shot on Ionic Archive</span><span>No filters applied</span></div>
-      <div><h2 class="h2" id="shot-h">This is the look.</h2><p class="lead">Just CCD, tape and direct flash. Every image was shot on a piece from the archive: the code takes you to its record.</p></div>
-      <a class="link" href="https://www.instagram.com/" target="_blank" rel="noopener">More on Instagram ↗</a>
-    </header>
-    <div class="shots" id="shots"></div>
   </div>
 </section>
 
@@ -137,7 +125,7 @@
 <section class="sec night" aria-labelledby="fig-h" style="padding-top:0">
   <div class="wrap teaser">
     <div class="rv">
-      <p class="label kicker">§ 04 · Dropouts — Series 01</p>
+      <p class="label kicker">03 · Dropouts — Series 01</p>
       <h2 class="h2" id="fig-h">Someone is waiting in every box.</h2>
       <p class="lead" style="margin-top:18px">Six small keepers of the digital image, 3D printed one by one in a random colour. One arrives at random with every order. Only one is secret.</p>
       <ul><li><span>Common</span><span>50%</span></li><li><span>Uncommon</span><span>22%</span></li><li><span>Rare</span><span>15%</span></li><li><span>Mythic</span><span>9%</span></li><li><span>Secret</span><span>4%</span></li><li class="glowli"><span>+ Glow chase · any figure</span><span>1 in 20</span></li></ul>
@@ -147,11 +135,22 @@
   </div>
 </section>
 
+<!-- IONIC TV: found tapes -->
+<section class="sec night itvsec" aria-labelledby="tv-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <div class="sec-head__top label"><span>04 · Ionic TV</span><span><i class="itv__dot"></i>On air · found tapes</span></div>
+      <div><h2 class="h2" id="tv-h">Found tapes.</h2><p class="lead">Skate sessions, summer trips, an empty house in ’88. Pull a cassette off the shelf, flip the channel, turn the sound up.</p></div>
+    </header>
+    <div id="ionictv" tabindex="-1"></div>
+  </div>
+</section>
+
 <!-- TRUST -->
 <section class="sec" aria-labelledby="trust-h">
   <div class="wrap">
     <header class="sec-head" style="border:0;padding:0">
-      <div class="sec-head__top label"><span>§ 05 · How we work</span><span>4.9 / 5 · 212 reviews</span></div>
+      <div class="sec-head__top label"><span>05 · How we work</span><span>4.9 / 5 · 212 reviews</span></div>
       <h2 class="h2" id="trust-h">An archive, not a flea market.</h2>
     </header>
     <div class="trust" id="trust"></div>
@@ -168,7 +167,7 @@
 <section class="sec night scan" aria-labelledby="nl-h">
   <div class="wrap nl">
     <div>
-      <p class="label kicker">§ 06 · Archive alerts</p>
+      <p class="label kicker">06 · Archive alerts</p>
       <h2 class="h2" id="nl-h">Every piece is unique.<br>They go fast.</h2>
     </div>
     <div>

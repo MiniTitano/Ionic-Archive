@@ -3,39 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Journal — Guides to MiniDV, digicams and tape · Ionic Archive</title>
-<meta name="description" content="Practical guides: choosing your first MiniDV, digitising tapes, caring for batteries, CCD vs CMOS, and settings for the digicam look.">
+<title>Journal — Shot on the archive · Ionic Archive</title>
+<meta name="description" content="Photographs taken on the cameras in the archive: night cities, mountain roads, empty houses, small creatures. Plus the photographs we take of the cameras themselves.">
 <link rel="canonical" href="https://ionicarchive.com/journal">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Permanent+Marker&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.add('js')</script>
-<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var A = [
-    ['Guide', '8 min', 'How to choose your first MiniDV', 'Format, sensor, ports, batteries: the five questions to ask before buying a tape camcorder.', 0],
-    ['Technique', '12 min', 'Digitising MiniDV tapes without losing quality', 'FireWire, adapters, software: the workflow we use in the workshop, step by step.', 3],
-    ['Care', '5 min', 'Twenty-year-old lithium batteries: how to treat them', 'Storage, cycles, warning signs, and when to rebuild them.', 4],
-    ['Technique', '7 min', 'CCD vs CMOS: why 2004 digicams look the way they do', 'Rolling shutter, dynamic range, colour: what really changes in the image.', 1],
-    ['Look', '6 min', 'Settings for the digicam look', 'Forced flash, white balance, ISO and the date stamp: our recipe.', 5],
-    ['Care', '4 min', 'Storing tapes: temperature, humidity, magnets', 'How to keep family cassettes safe from dropouts and mould.', 2]
-  ];
-  document.getElementById('articles').innerHTML = A.map(function (a) {
-    return '<article class="article rv"><div class="media">' + Art.scene(a[4], { label: '' }) + '<span class="soon">Coming soon</span></div><p class="label">' + a[0] + ' · ' + a[1] + '</p><h3>' + a[2] + '</h3><p>' + a[3] + '</p></article>';
-  }).join('');
-  IAUI.observe();
-});
-</script>
+<script defer src="assets/js/data.js"></script><script defer src="assets/js/art.js"></script><script defer src="assets/js/main.js"></script><script defer src="assets/js/journal.js"></script><script defer src="assets/js/projects.js"></script>
 </head>
-<body data-page="journal">
+<body data-page="journal" class="night-hdr jr-page" style="background:var(--night)">
 <div class="lcd" aria-hidden="true"><i class="lcd__t"></i><i class="lcd__b"></i><i class="lcd__line"></i></div>
-<main id="main">
-  <div class="wrap">
-    <header class="phead"><div class="phead__row"><div><p class="label kicker">Journal · Guides</p><h1 class="h1">Journal</h1></div><p class="index">Practical guides<br>Technique and care<br>Looks and settings</p></div></header>
-    <div class="articles" id="articles"></div>
-  </div>
-  <div style="height:clamp(64px,8vw,120px)"></div>
+<main id="main" class="jr">
+
+  <!-- 01 · the table: loose prints you can push around -->
+  <section class="jr-table" aria-labelledby="jr-h">
+    <div class="wrap jr-table__head">
+      <p class="label jr-kick"><span class="jr-rec"></span>Journal · Roll 01 · <span id="jrCount"></span> frames</p>
+      <h1 class="jr-h" id="jr-h">Shot <em>on</em><br>the archive<span class="jr-stamp" aria-hidden="true">'04 01 10</span></h1>
+      <p class="jr-lead">Prints from the cameras on our shelves: night cities, mountain roads, empty houses, a hedgehog. Drag them around. Tap one to look closer.</p>
+      <div class="jr-actions"><button type="button" class="jr-btn jr-btn--y" id="jrShuffle">⟲ Throw them again</button><button type="button" class="jr-btn" id="jrPull">✦ Pull a random print</button></div>
+    </div>
+    <div class="jr-pile" id="jrPile" aria-label="Loose prints, drag to move, tap to open"></div>
+  </section>
+
+  <!-- 02 · the roll: horizontal film strip driven by scroll -->
+  <section class="jr-roll" id="jrRoll" aria-labelledby="roll-h">
+    <div class="jr-roll__sticky">
+      <div class="wrap jr-roll__head">
+        <div><p class="label">02 · The roll</p><h2 class="jr-h2" id="roll-h">Frame by frame.</h2></div>
+        <div class="jr-chips" id="jrChips" role="group" aria-label="Filter the roll"></div>
+      </div>
+      <div class="jr-strip" id="jrStrip"><div class="jr-strip__track" id="jrTrack"></div></div>
+      <div class="wrap jr-roll__foot mono"><span id="jrFrame">FRAME 01</span><span class="jr-roll__bar"><i id="jrBar"></i></span><button type="button" data-roll="-1" aria-label="Previous frames">←</button><button type="button" data-roll="1" aria-label="Next frames">→</button><span class="jr-roll__tip">Swipe or drag for the rest</span></div>
+    </div>
+  </section>
+
+  <!-- 03 · projects: workbench videos -->
+  <section class="pj" id="projects" aria-labelledby="pj-h">
+    <div class="wrap">
+      <header class="pj-head">
+        <div><p class="label">03 · Projects</p><h2 class="jr-h2" id="pj-h">On the bench.</h2></div>
+        <p class="pj-lead">Longer jobs, filmed start to finish. Pick a part, jump to a step.</p>
+      </header>
+      <div class="pj-file" id="pjFile"></div>
+    </div>
+  </section>
 </main>
+
+<!-- lightbox -->
+<div class="jr-lb" id="jrLb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button type="button" class="jr-lb__x" data-lb="close" aria-label="Close">✕</button>
+  <button type="button" class="jr-lb__nav jr-lb__prev" data-lb="prev" aria-label="Previous">←</button>
+  <figure class="jr-lb__fig"><img id="jrLbImg" alt=""><figcaption id="jrLbCap"></figcaption></figure>
+  <button type="button" class="jr-lb__nav jr-lb__next" data-lb="next" aria-label="Next">→</button>
+</div>
 </body>
 </html>

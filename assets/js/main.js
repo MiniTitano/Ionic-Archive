@@ -13,7 +13,7 @@
   };
   const eur = (v) => new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
   const STATUS = { available: ['Available', 'ok'], reserved: ['Reserved', 'res'], sold: ['Sold', 'sold'] };
-  const TYPE = { camcorders: 'Camcorders', compacts: 'Digital compacts', accessories: 'Decks & accessories' };
+  const TYPE = { camcorders: 'Camcorders', compacts: 'Digital compacts', accessories: 'Tapes & accessories' };
   const byId = (id) => D.products.find((p) => p.id === id);
 
   const statusTag = (p) => { const [l, c] = STATUS[p.status]; return `<span class="tag tag--${c}">${l}</span>`; };
@@ -47,6 +47,15 @@ ${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
 </a></article>`;
   }
 
+  /* ---------- logo: an iris that stops down on hover, IONIC / ARCHIVE in two voices ---------- */
+  const IRIS = (() => {
+    const c = 13, R = 11.2, r = 5.4, pts = [];
+    for (let i = 0; i < 6; i++) { const a = (Math.PI / 3) * i - Math.PI / 2; pts.push([c + r * Math.cos(a), c + r * Math.sin(a)]); }
+    // each blade edge runs from a hexagon corner out to the rim, tangent-ish, like a real aperture
+    const blades = pts.map(([x, y], i) => { const a = (Math.PI / 3) * i - Math.PI / 2 + 1.25; return `<path d="M${x.toFixed(2)} ${y.toFixed(2)} L${(c + R * Math.cos(a)).toFixed(2)} ${(c + R * Math.sin(a)).toFixed(2)}"/>`; }).join('');
+    return `<svg viewBox="0 0 26 26" aria-hidden="true" focusable="false"><circle class="logo__rim" cx="13" cy="13" r="12.2"/><g class="logo__iris"><circle class="logo__disc" cx="13" cy="13" r="${R}"/><polygon class="logo__core" points="${pts.map((p) => p.map((n) => n.toFixed(2)).join(',')).join(' ')}"/><g class="logo__blades">${blades}</g></g></svg>`;
+  })();
+  const LOGO = (label) => `<a class="logo" href="index.html" aria-label="${label}"><span class="logo__mark">${IRIS}</span><span class="logo__type"><b>IONIC</b><i class="logo__sep" aria-hidden="true"></i><span class="logo__arc">ARCHIVE</span></span></a>`;
   /* ---------- header + footer ---------- */
   const page = document.body.dataset.page;
   const NAV = [['archive.html', 'Archive', 'archive'], ['dropouts.html', 'Dropouts', 'dropouts'], ['manifesto.html', 'Manifesto', 'manifesto'], ['journal.html', 'Journal', 'journal'], ['support.html', 'Support', 'support']];
@@ -55,7 +64,7 @@ ${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
   document.body.insertAdjacentHTML('afterbegin', `<a class="skip" href="#main">Skip to content</a>
 <div class="strip"><div class="wrap strip__in"><span><i class="dot-rec"></i>Archive online</span><span class="hide-sm">${total} pieces catalogued · ${avail} available · Buy safely on eBay &amp; Vinted</span><span data-tc>00:00:00:00</span></div></div>
 <header class="hdr"><div class="wrap hdr__in">
-<a class="logo" href="index.html" aria-label="Ionic Archive, home"><span class="logo__mark" aria-hidden="true"></span><span class="logo__type">IONIC<span>ARCHIVE</span></span></a>
+${LOGO('Ionic Archive, home')}
 <nav class="nav" id="nav" aria-label="Main"><ul>${NAV.map(([h, l, k]) => k === 'dropouts'
     ? `<li class="nav__drop-li"><a class="nav__drop" href="${h}"${k === page ? ' aria-current="page"' : ''}><span class="nav__q" aria-hidden="true">?</span>${l}<span class="nav__tag" aria-hidden="true">Free figure</span></a></li>`
     : `<li><a href="${h}"${k === page ? ' aria-current="page"' : ''}>${l}</a></li>`).join('')}</ul></nav>
@@ -67,10 +76,10 @@ ${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
   const main = $('#main');
   main.insertAdjacentHTML('afterend', `<footer class="ftr"><div class="wrap">
 <div class="ftr__grid">
-<div class="ftr__brand"><a class="logo" href="index.html"><span class="logo__mark" aria-hidden="true"></span><span class="logo__type">IONIC<span>ARCHIVE</span></span></a>
+<div class="ftr__brand">${LOGO('Ionic Archive')}
 <p>A curated archive of camcorders and digital cameras, 1999–2012. Every piece tested and catalogued here, sold through eBay and Vinted, and shipped with a mystery minifigure.</p>
 <p class="ftr__shops">${D.shops ? `<a href="${D.shops.ebay}" target="_blank" rel="noopener">eBay shop ↗</a><a href="${D.shops.vinted}" target="_blank" rel="noopener">Vinted wardrobe ↗</a>` : ''}</p></div>
-<div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">Camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
+<div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">Camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html?type=accessories">Tapes &amp; accessories</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
 <div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/" rel="noopener" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/" rel="noopener" target="_blank">TikTok</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="support.html#buying">How buying works</a></li><li><a href="support.html#shipping">Shipping</a></li><li><a href="support.html#returns">Returns &amp; warranty</a></li><li><a href="support.html#contact">Contact</a></li></ul></div>
 </div>
@@ -78,6 +87,18 @@ ${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
 </div></footer>
 <div class="toast" role="status" aria-live="polite" data-toast></div>`);
 
+  /* logo hover: ARCHIVE searches like a tape deck, then locks */
+  if (!RM) $$('.logo').forEach((lg) => {
+    const arc = $('.logo__arc', lg), word = 'ARCHIVE', G = '▮▯░▒01:#/';
+    let tm = null;
+    lg.addEventListener('mouseenter', () => {
+      clearInterval(tm); let f = 0;
+      tm = setInterval(() => {
+        f++; arc.textContent = word.split('').map((ch, i) => (i < f / 2 ? ch : G[Math.floor(Math.random() * G.length)])).join('');
+        if (f >= word.length * 2) { clearInterval(tm); arc.textContent = word; }
+      }, 32);
+    });
+  });
   /* ---------- toast ---------- */
   let tt;
   function toast(msg) {
@@ -168,6 +189,9 @@ ${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
     setTimeout(() => { location.href = u.href; }, 300);
   });
   window.addEventListener('pageshow', (e) => { if (e.persisted && lcd) lcd.classList.remove('lcd--out'); });
+
+  /* ---------- site soundtrack ---------- */
+  const radio = document.createElement('script'); radio.src = 'assets/js/player.js'; radio.defer = true; document.body.appendChild(radio);
 
   window.IAUI = { $, $$, RM, store, eur, card, photo, view, statusTag, vf, modeOf, toast, buyLinks, byId, TYPE, STATUS, observe };
   document.addEventListener('DOMContentLoaded', observe);

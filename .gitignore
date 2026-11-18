@@ -1,7 +1,9 @@
-# Local preview settings (not part of the site)
+﻿# Local preview settings (not part of the site)
 .claude/
 
 # Archives and OS files
 *.zip
 Thumbs.db
 .DS_Store
+# over GitHub's 100 MB limit: replace with a smaller export before committing
+assets/video/projects/teardown.mp4

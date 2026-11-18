@@ -17,7 +17,7 @@
     { key: 'res', label: 'Sensor / resolution', get: resB, opts: ['< 2 MP (video)', '2–4 MP', '4–6 MP', '6 MP and up'] },
     { key: 'grade', label: 'Condition', get: (p) => p.grade, opts: ['A+', 'A', 'B', 'C'], name: (v) => `${v} · ${D.grades[v][1]}` }
   ];
-  const TYPES = [['', 'All'], ['camcorders', 'Camcorders'], ['compacts', 'Digital compacts'], ['accessories', 'Decks & accessories']].filter(([t]) => !t || P.some((p) => p.type === t));
+  const TYPES = [['', 'All'], ['camcorders', 'Camcorders'], ['compacts', 'Digital compacts'], ['accessories', 'Tapes & accessories']].filter(([t]) => !t || P.some((p) => p.type === t));
   const GRADE_RANK = { 'A+': 0, A: 1, B: 2, C: 3 };
   const maxPrice = Math.ceil(Math.max(...P.map((p) => p.price)) / 50) * 50;
 

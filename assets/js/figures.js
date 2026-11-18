@@ -110,13 +110,6 @@
   });
   prog();
 
-  /* UGC (placeholder) */
-  const UG = [[0, 'IA-0048'], [1, 'IA-0044'], [5, 'IA-0046'], [2, 'IA-0052'], [4, 'IA-0045'], [3, 'IA-0049']];
-  $('#ugc').innerHTML = UG.map(([k, cid], i) => {
-    const p = U.byId(cid);
-    return `<figure><div class="bg">${A.scene(k, { label: 'Community photo' })}</div><div class="cam">${U.view(p, 'a')}</div><figcaption>#ionicarchive · ${pad(i + 1)}</figcaption></figure>`;
-  }).join('');
-
   if (window.Fig3D) window.Fig3D.scan();
   U.observe();
 })();

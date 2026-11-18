@@ -175,21 +175,18 @@
 
   /* categories */
   const cnt = (t) => D.products.filter((p) => p.type === t && p.status === 'available').length;
-  const rep = (t) => D.products.find((p) => p.type === t);
+  // risograph-poster cards: a real archive photo printed in one ink on coloured paper, slightly off-register
   const CATS = [
-    ['camcorders', 'a', 'Camcorders', 'Tape, disc, card. The soft image of a 2000s summer holiday.'],
-    ['compacts', 'b', 'Digital compacts', 'Direct flash, dense colour, the date in the corner.'],
-    ['accessories', 'c', 'Decks & accessories', 'Video Walkmans, decks and the kit that plays your tapes.']
-  ].filter(([t]) => cnt(t) > 0);
-  $('#cats').innerHTML = CATS.map(([t, c, name, txt], i) => `<a class="cat cat--${c} rv" href="archive.html?type=${t}">
-<div class="cat__top label"><span>0${i + 1} / ${t.toUpperCase()}</span><span>${cnt(t)} available</span></div>
-<div class="cat__art" aria-hidden="true">${A.product(rep(t), t === 'compacts' ? 'a' : 'b')}</div>
-<div><h3>${name} <span class="arr">→</span></h3><p>${txt}</p></div></a>`).join('');
-
-  /* shot on */
-  $('#shots').innerHTML = D.shots.map((s) => `<figure class="shotf ${s.cls} rv">${A.scene(s.k, { stamp: s.stamp, video: s.video, tc: s.tc, label: `Image shot on the ${s.cam}` })}
-${s.video ? '<span class="play">▶ CLIP</span>' : ''}
-<figcaption><a href="product.html?id=${s.id}">${s.id} · ${s.cam}</a><span>${s.meta}</span></figcaption></figure>`).join('');
+    ['camcorders', 'pink', 'Camcorders', 'Tape, disc, card. The soft image of a 2000s summer holiday.', 'assets/img/ia-0056/front.jpg', 'MiniDV · Digital8 · Hi8'],
+    ['accessories', 'yellow', 'Tapes & accessories', 'Decks, Video Walkmans, tapes and the kit that keeps them running.', 'assets/img/ia-0057/closed.jpg', 'Decks · tapes · chargers'],
+    ['compacts', 'blue', 'Digital compacts', 'Direct flash, dense colour, the date in the corner.', 'assets/img/ia-0044/side-open.jpg', 'CCD · 1999—2008']
+  ];
+  $('#cats').innerHTML = CATS.map(([t, c, name, txt, img, tag], i) => `<a class="cat cat--${c} rv" href="archive.html?type=${t}">
+<div class="cat__top label"><span>0${i + 1} / ${t.toUpperCase()}</span><span>${cnt(t) ? `${cnt(t)} available` : 'In the vault'}</span></div>
+<div class="cat__riso" aria-hidden="true"><img class="r1" src="${img}" alt="" loading="lazy"><img class="r2" src="${img}" alt="" loading="lazy"><i class="dots"></i></div>
+<span class="cat__big" aria-hidden="true">0${i + 1}</span>
+<span class="cat__tag mono" aria-hidden="true">${tag}</span>
+<div class="cat__txt"><h3>${name}&nbsp;<span class="arr">→</span></h3><p>${txt}</p></div></a>`).join('');
 
   /* minifigure teaser */
   const f = D.figures;
