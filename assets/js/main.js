@@ -83,7 +83,7 @@ ${LOGO('Ionic Archive, home')}
 <div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/ionic.archive" rel="noopener" target="_blank">Instagram</a></li><li><a href="mailto:ionicarchive@gmail.com">Email</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="support.html#buying">How buying works</a></li><li><a href="support.html#shipping">Shipping</a></li><li><a href="support.html#returns">Returns &amp; warranty</a></li><li><a href="support.html#contact">Contact</a></li></ul></div>
 </div>
-<div class="ftr__base label"><span>© 2026 Ionic Archive · VAT no. [to add]</span><span><a href="support.html#privacy">Privacy</a> · <a href="#" data-cookie-open>Cookie settings</a> · <a href="support.html#terms">Terms</a></span></div>
+<div class="ftr__base label"><span>© 2026 Ionic Archive · VAT no. [to add]</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a></span></div>
 </div></footer>
 <div class="toast" role="status" aria-live="polite" data-toast></div>`);
 
@@ -128,33 +128,8 @@ ${LOGO('Ionic Archive, home')}
       .filter((x) => x[2]).map(([k, name, url]) => ({ k, name, url }));
   }
 
-  /* ---------- cookies / GDPR ---------- */
-  function cookieBanner(force) {
-    if (!force && store.get('ia-consent', null)) return;
-    const old = $('.cookie'); if (old) old.remove();
-    document.body.insertAdjacentHTML('beforeend', `<div class="cookie" role="dialog" aria-label="Cookie settings">
-<span class="label">Cookies · Settings</span>
-<p>We use essential cookies to keep the archive running. With your consent we also use analytics and marketing cookies (Instagram, TikTok, newsletter). <a href="support.html#privacy">Privacy policy</a>.</p>
-<div class="cookie__opts" hidden>
-<label><input class="chk" type="checkbox" checked disabled><span>Essential <small>Always on: security and your preferences.</small></span></label>
-<label><input class="chk" type="checkbox" data-c="analytics"><span>Analytics <small>Anonymous visit statistics.</small></span></label>
-<label><input class="chk" type="checkbox" data-c="marketing"><span>Marketing <small>Meta and TikTok pixels, embedded social content.</small></span></label>
-</div>
-<div class="cookie__btns"><button class="btn btn--line" data-c-act="deny">Reject</button><button class="btn btn--line" data-c-act="custom">Customise</button><button class="btn btn--ink" data-c-act="all">Accept</button></div></div>`);
-    const el = $('.cookie');
-    el.addEventListener('click', (e) => {
-      const b = e.target.closest('[data-c-act]'); if (!b) return;
-      const act = b.dataset.cAct;
-      if (act === 'custom') {
-        const o = $('.cookie__opts', el);
-        if (o.hidden) { o.hidden = false; b.textContent = 'Save choices'; return; }
-        store.set('ia-consent', { analytics: $('[data-c="analytics"]', el).checked, marketing: $('[data-c="marketing"]', el).checked, t: Date.now() });
-      } else store.set('ia-consent', { analytics: act === 'all', marketing: act === 'all', t: Date.now() });
-      el.remove(); toast('Preferences saved.');
-    });
-  }
-  cookieBanner(false);
-  document.addEventListener('click', (e) => { if (e.target.closest('[data-cookie-open]')) { e.preventDefault(); cookieBanner(true); } });
+  /* no cookies or trackers on this site, so no consent banner (see legal.html#privacy) */
+  try { localStorage.removeItem('ia-consent'); } catch (e) { /* storage unavailable */ }
 
   /* ---------- newsletter ---------- */
   $$('form[data-newsletter]').forEach((f) => f.addEventListener('submit', (e) => {

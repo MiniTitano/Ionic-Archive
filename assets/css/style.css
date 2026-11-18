@@ -2084,3 +2084,25 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
 .mbench--two .vcard{padding:clamp(24px,3vw,44px)}
 .mbench--two .vcard p{font-size:clamp(20px,2vw,32px);line-height:1.2;letter-spacing:-.02em;color:var(--ink)}
 @media (max-width:640px){.mbench--two .vcards{grid-template-columns:1fr}}
+
+/* legal page */
+.legal__toc{display:flex;gap:20px;margin-bottom:12px}
+.legal__toc a{border-bottom:1px solid currentColor}
+.legal>div{max-width:76ch}
+.legal h3{font-size:17px;font-weight:600;letter-spacing:-.01em;margin:28px 0 8px}
+.legal h3:first-of-type{margin-top:0}
+.legal p,.legal li{color:var(--ink-2);font-size:15.5px;line-height:1.6;margin-bottom:10px}
+.legal ul{padding-left:18px}
+.legal a{text-decoration:underline;text-underline-offset:2px}
+.legal__t{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 14px;display:block;overflow-x:auto}
+.legal__t th,.legal__t td{text-align:left;vertical-align:top;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);color:var(--ink-2);min-width:130px}
+.legal__t th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--muted)}
+@media (max-width:760px){.faq.legal{grid-template-columns:1fr}}
+/* mobile menu: the header's backdrop-filter makes it the containing block of the fixed menu,
+   so place the menu right under the header (wherever it is) and size it to the screen */
+@media (max-width:920px){
+  .nav{top:100%;bottom:auto;height:calc(100vh - var(--hdr));height:calc(100dvh - var(--hdr));padding-bottom:calc(24px + var(--strip))}
+  .nav a{color:var(--ink)}
+  .night-hdr .nav a{color:var(--night-text)}
+  .night-hdr .nav a[aria-current="page"]{color:#fff}
+}

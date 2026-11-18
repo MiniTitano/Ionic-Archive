@@ -17,10 +17,14 @@
       ['hero-05', 'A camcorder carried at hip height against a red wall', 2000, 1333, '40% 55%', '44% 55%'],
       ['hero-06', 'Checking a camcorder in a shop, seated on the floor', 2000, 1333, '40% 45%', '38% 45%'],
       ['hero-07', 'A camcorder raised beside an old poster on a red wall', 2000, 1333, '48% 42%', '47% 42%'],
-      ['hero-08', 'Reviewing a clip on the flip-out screen, seated in a chair', 2000, 1333, '50% 40%', '44% 40%']
-    ],
-    // [slide, hold ms, cut]: long holds broken by quick double cuts, like a music-video montage
-    edit: [0, 1, 2, 3, 4, 5, 6, 7].map((i) => [i, 3200, 'fade'])
+      ['hero-08', 'Reviewing a clip on the flip-out screen, seated in a chair', 2000, 1333, '50% 40%', '44% 40%'],
+      ['hero-09', 'Framing a shot with a red Ferrari Olympus compact by a fountain in Place des Vosges', 2000, 1333, '62% 45%', '68% 45%'],
+      ['hero-10', 'A Sony 3CCD camcorder held out at arm\'s length against a red graffiti wall', 2000, 1333, '50% 40%', '66% 40%'],
+      ['hero-11', 'Two hands holding a red Ferrari Olympus compact in front of Place des Vosges', 2000, 1333, '58% 45%', '58% 45%'],
+      ['hero-12', 'Lying on the grass, filming a friend with a Sony Handycam', 2000, 1333, '55% 55%', '68% 50%'],
+      ['hero-13', 'Sitting in a stone doorway, filming with a Canon camcorder', 2000, 1333, '45% 50%', '42% 50%'],
+      ['hero-14', 'Two friends on the grass, one filming with a Sony Digital8 Handycam', 2000, 1333, '50% 40%', '50% 40%']
+    ]
   };
   const MOBILE = {
     list: [
@@ -46,6 +50,10 @@
   const reel = $('#reel'), wrap = $('#reelSlides');
   let slides = [], set = DESKTOP, EDIT = [], LOOP = 1, REW = [];
   let cur = 0;
+
+  // a new random order on every visit
+  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  DESKTOP.list = shuffle(DESKTOP.list); MOBILE.list = shuffle(MOBILE.list);
 
   function mount(next) {
     set = next;
