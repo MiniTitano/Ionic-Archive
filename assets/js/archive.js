@@ -4,26 +4,27 @@
   const { $, $$ } = U;
   const P = D.products;
   const pad = (n) => String(n).padStart(2, '0');
-  const Y0 = 1999, Y1 = 2012;
+  const Y0 = Math.min(1999, ...P.map((p) => p.year)), Y1 = Math.max(2012, ...P.map((p) => p.year)); // the timeline stretches to the newest piece
+  const LAST = `2009–${Y1}`, FIRST = `1999–2002`.replace('1999', String(Y0));
 
   /* ---------- filters (type lives in the tabs, exact year in the timeline) ---------- */
-  const yearB = (y) => (y <= 2002 ? '1999–2002' : y <= 2005 ? '2003–2005' : y <= 2008 ? '2006–2008' : '2009–2012');
+  const yearB = (y) => (y <= 2002 ? FIRST : y <= 2005 ? '2003–2005' : y <= 2008 ? '2006–2008' : LAST);
   const resB = (p) => (p.type === 'accessories' ? null : p.mp < 2 ? '< 2 MP (video)' : p.mp < 4 ? '2–4 MP' : p.mp < 6 ? '4–6 MP' : '6 MP and up');
   const GROUPS = [
     { key: 'brand', label: 'Brand', get: (p) => p.brand },
-    { key: 'year', label: 'Era', get: (p) => yearB(p.year), opts: ['1999–2002', '2003–2005', '2006–2008', '2009–2012'] },
+    { key: 'year', label: 'Era', get: (p) => yearB(p.year), opts: [FIRST, '2003–2005', '2006–2008', LAST] },
     { key: 'format', label: 'Format / media', get: (p) => p.format },
     { key: 'res', label: 'Sensor / resolution', get: resB, opts: ['< 2 MP (video)', '2–4 MP', '4–6 MP', '6 MP and up'] },
     { key: 'grade', label: 'Condition', get: (p) => p.grade, opts: ['A+', 'A', 'B', 'C'], name: (v) => `${v} · ${D.grades[v][1]}` }
   ];
-  const TYPES = [['', 'All'], ['camcorders', 'Camcorders'], ['compacts', 'Digital compacts'], ['accessories', 'Accessories & tapes']];
+  const TYPES = [['', 'All'], ['camcorders', 'Camcorders'], ['compacts', 'Digital compacts'], ['accessories', 'Decks & accessories']].filter(([t]) => !t || P.some((p) => p.type === t));
   const GRADE_RANK = { 'A+': 0, A: 1, B: 2, C: 3 };
   const maxPrice = Math.ceil(Math.max(...P.map((p) => p.price)) / 50) * 50;
 
   const qs = new URLSearchParams(location.search);
   const state = {
     sel: {}, type: qs.get('type') || '', yr: +qs.get('yr') || 0, q: qs.get('q') || '',
-    price: maxPrice, sold: true, sort: 'recent', view: U.store.get('ia-view', 'grid')
+    price: maxPrice, sold: true, sort: 'price-desc', view: U.store.get('ia-view', 'grid')
   };
   GROUPS.forEach((g) => { state.sel[g.key] = new Set(qs.getAll(g.key)); });
 
@@ -82,7 +83,7 @@
 <span class="irow__sen mono">${shortSensor(p)}</span>
 <span class="irow__gr"><b class="gpill">${p.grade}</b></span>
 <span class="irow__st">${U.statusTag(p)}</span>
-<span class="irow__pr">${sold ? '—' : U.eur(p.price)}</span>
+<span class="irow__pr">${sold ? `<s class="mono" style="text-decoration:none;color:var(--rec)">Sold ${U.eur(p.price)}</s>` : U.eur(p.price)}</span>
 <span class="irow__go" aria-hidden="true">→</span></a>`;
   }
   const head = `<div class="irow irow--head" aria-hidden="true"><span></span><span>Code</span><span>Model</span><span>Year</span><span class="irow__fmt">Format</span><span class="irow__sen">Sensor</span><span>Grade</span><span>Status</span><span class="irow__pr">Price</span><span class="irow__go"></span></div>`;
@@ -147,7 +148,7 @@
     if (state.yr) q.set('yr', state.yr);
     if (state.q) q.set('q', state.q);
     GROUPS.forEach((g) => state.sel[g.key].forEach((v) => q.append(g.key, v)));
-    if (state.sort !== 'recent') q.set('sort', state.sort);
+    if (state.sort !== 'price-desc') q.set('sort', state.sort);
     history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
   }
 

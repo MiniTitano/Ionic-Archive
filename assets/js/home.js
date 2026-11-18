@@ -158,9 +158,11 @@
   if (portrait.addEventListener) portrait.addEventListener('change', onShape); else portrait.addListener(onShape);
 
   /* the deal: three pillars */
-  const fanPicks = ['IA-0041', 'IA-0044', 'IA-0036'].map(U.byId).filter(Boolean);
+  // three pieces on sale right now, picked at random on every visit (real photos first)
+  // the three most expensive pieces on sale right now, priciest first
+  const fanPicks = D.products.filter((p) => p.status === 'available').sort((a, b) => b.price - a.price).slice(0, 3);
   $('#pillarSel').innerHTML = fanPicks.map((p, i) =>
-    `<div class="fan__card" style="--i:${i}"><div class="fan__media">${U.view(p, 'a')}</div><span class="mono">${p.id}</span></div>`).join('');
+    `<a class="fan__card" style="--i:${i}" href="product.html?id=${p.id}" aria-label="${p.name}, ${U.eur(p.price)}"><div class="fan__media">${U.view(p, 'a')}</div><span class="mono">${p.id} · ${U.eur(p.price)}</span></a>`).join('');
   const F = D.figures;
   $('#pillarFig').innerHTML = `<div class="figstage__blob"></div>
 <div class="figstage__box">${A.box()}</div>
@@ -175,10 +177,10 @@
   const cnt = (t) => D.products.filter((p) => p.type === t && p.status === 'available').length;
   const rep = (t) => D.products.find((p) => p.type === t);
   const CATS = [
-    ['camcorders', 'a', 'MiniDV camcorders', 'Tape, CCD, timecode. The soft image of a 2002 summer holiday.'],
+    ['camcorders', 'a', 'Camcorders', 'Tape, disc, card. The soft image of a 2000s summer holiday.'],
     ['compacts', 'b', 'Digital compacts', 'Direct flash, dense colour, the date in the corner.'],
-    ['accessories', 'c', 'Accessories & tapes', 'Sealed cassettes, tested batteries, FireWire cables.']
-  ];
+    ['accessories', 'c', 'Decks & accessories', 'Video Walkmans, decks and the kit that plays your tapes.']
+  ].filter(([t]) => cnt(t) > 0);
   $('#cats').innerHTML = CATS.map(([t, c, name, txt], i) => `<a class="cat cat--${c} rv" href="archive.html?type=${t}">
 <div class="cat__top label"><span>0${i + 1} / ${t.toUpperCase()}</span><span>${cnt(t)} available</span></div>
 <div class="cat__art" aria-hidden="true">${A.product(rep(t), t === 'compacts' ? 'a' : 'b')}</div>

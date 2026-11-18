@@ -12,8 +12,8 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
   };
   const eur = (v) => new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
-  const STATUS = { available: ['Available', 'ok'], reserved: ['Reserved', 'res'], sold: ['Archived', 'sold'] };
-  const TYPE = { camcorders: 'Camcorders', compacts: 'Digital compacts', accessories: 'Accessories & tapes' };
+  const STATUS = { available: ['Available', 'ok'], reserved: ['Reserved', 'res'], sold: ['Sold', 'sold'] };
+  const TYPE = { camcorders: 'Camcorders', compacts: 'Digital compacts', accessories: 'Decks & accessories' };
   const byId = (id) => D.products.find((p) => p.id === id);
 
   const statusTag = (p) => { const [l, c] = STATUS[p.status]; return `<span class="tag tag--${c}">${l}</span>`; };
@@ -32,18 +32,18 @@
     const sold = p.status === 'sold';
     const ph = p.photos ? ' shot--photo' : '';
     return `<article class="card${sold ? ' is-sold' : ''}">
-<a class="card__link" href="product.html?id=${p.id}" aria-label="${p.name}, ${p.year}, ${STATUS[p.status][0]}${sold ? '' : ', ' + eur(p.price)}">
+<a class="card__link" href="product.html?id=${p.id}" aria-label="${p.name}, ${p.year}, ${sold ? 'sold for ' + eur(p.price) : STATUS[p.status][0] + ', ' + eur(p.price)}">
 <div class="card__media">
 <div class="shot shot--a${ph}">${view(p, 'a')}</div>
 <div class="shot shot--b${ph}" aria-hidden="true">${view(p, 'b')}</div>
 ${vf(modeOf(p))}
 <div class="card__badges" aria-hidden="true"><span class="bg">${p.grade}</span><span>${p.year}</span></div>
-${sold ? '<span class="stamp">Archived</span>' : ''}
+${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
 </div>
 <div class="card__meta"><span class="code">${p.id}</span>${statusTag(p)}</div>
 <h3 class="card__name">${p.name}</h3>
 <p class="card__sub">${p.year} · ${p.format} · Grade ${p.grade}</p>
-<p class="card__price">${sold ? 'Out of catalogue' : eur(p.price)}</p>
+<p class="card__price">${sold ? `Sold for ${eur(p.price)}` : eur(p.price)}</p>
 </a></article>`;
   }
 
@@ -70,7 +70,7 @@ ${sold ? '<span class="stamp">Archived</span>' : ''}
 <div class="ftr__brand"><a class="logo" href="index.html"><span class="logo__mark" aria-hidden="true"></span><span class="logo__type">IONIC<span>ARCHIVE</span></span></a>
 <p>A curated archive of camcorders and digital cameras, 1999–2012. Every piece tested and catalogued here, sold through eBay and Vinted, and shipped with a mystery minifigure.</p>
 <p class="ftr__shops">${D.shops ? `<a href="${D.shops.ebay}" target="_blank" rel="noopener">eBay shop ↗</a><a href="${D.shops.vinted}" target="_blank" rel="noopener">Vinted wardrobe ↗</a>` : ''}</p></div>
-<div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">MiniDV camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html?type=accessories">Accessories &amp; tapes</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
+<div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">Camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
 <div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/" rel="noopener" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/" rel="noopener" target="_blank">TikTok</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="support.html#buying">How buying works</a></li><li><a href="support.html#shipping">Shipping</a></li><li><a href="support.html#returns">Returns &amp; warranty</a></li><li><a href="support.html#contact">Contact</a></li></ul></div>
 </div>

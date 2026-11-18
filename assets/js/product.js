@@ -2,8 +2,8 @@
   'use strict';
   const D = window.IA, A = window.Art, U = window.IAUI;
   const { $, $$ } = U;
-  const id = (new URLSearchParams(location.search).get('id') || 'IA-0042').toUpperCase();
-  const p = U.byId(id) || U.byId('IA-0042');
+  const id = (new URLSearchParams(location.search).get('id') || 'IA-0044').toUpperCase();
+  const p = U.byId(id) || D.products[0];
   const sold = p.status === 'sold', reserved = p.status === 'reserved';
   const pad = (n) => String(n).padStart(2, '0');
 
@@ -38,7 +38,7 @@
   const shops = U.buyLinks(p);
   const ext = (s, cls, label) => `<a class="btn ${cls} btn--mkt btn--mkt-${s.k}" href="${s.url}" target="_blank" rel="noopener" data-mkt="${s.k}">${label || `Buy on ${s.name}`} <span class="arr" aria-hidden="true">↗</span><span class="sr"> (opens ${s.name} in a new tab)</span></a>`;
   function cta() {
-    if (sold) return `<button class="btn btn--block" disabled>Archived · sold</button><a class="btn btn--line btn--block" href="index.html#nl-h">Alert me to similar pieces</a>`;
+    if (sold) return `<button class="btn btn--block" disabled>Sold for ${U.eur(p.price)}</button><a class="btn btn--line btn--block" href="index.html#nl-h">Alert me to similar pieces</a>`;
     if (reserved) return `<button class="btn btn--block" disabled>Reserved · sale in progress</button><button class="btn btn--line btn--block" type="button" data-notify>Alert me if it comes back</button>`;
     return `<div class="mkt">${shops.map((s, i) => ext(s, i ? 'btn--line' : 'btn--ion')).join('')}</div>
 <p class="fine mkt__note">One of a kind · quantity 1. You'll check out on eBay or Vinted, with their buyer protection. Look for <b class="mono">${p.id}</b> in the listing title.</p>`;
@@ -79,11 +79,16 @@
     [/ccd/i, 'The sensor type of the era. CCDs read light in one sweep, which gives the punchy colour and slightly "wet" highlights people now chase. Phones use CMOS.'],
     [/minidv/i, 'Digital video on a tiny cassette, 1995–2010s. 25 Mbit/s, 720×576, interlaced: the soft, smeary motion of every 2000s home video.'],
     [/digital8/i, 'Sony\'s bridge format: DV-quality digital video recorded on cheap Hi8 tapes. It can usually play back old analogue 8 mm tapes too.'],
-    [/1394|firewire|in \/ out/i, 'The DV port (FireWire / i.LINK). Plug it into a computer with a FireWire card and capture the tape losslessly, frame for frame.'],
+    [/hdmi/i, 'Plug straight into any modern TV with an HDMI cable and play the clips at full resolution, no computer needed.'],
+    [/avchd|full hd/i, 'Full HD 1920×1080 in AVCHD, the format of the first consumer HD camcorders. Crisp, a little over-sharpened, unmistakably early-2010s.'],
+    [/1394|firewire|dv · av/i,'The DV port (FireWire / i.LINK). Plug it into a computer with a FireWire card and capture the tape losslessly, frame for frame.'],
     [/compactflash/i, 'The chunky memory card of early digicams. Still easy to find; a 1–2 GB card is more than this camera will ever fill.'],
     [/memory stick/i, 'Sony\'s own card format. Use small cards (up to 128 MB on older models, Pro/Duo for later ones): very large cards may not be read.'],
     [/xd-picture/i, 'Olympus and Fujifilm\'s tiny card. Use Type M or H up to 2 GB; check the camera\'s manual for the largest it supports.'],
-    [/^sd$|\bsd\b/i, 'Secure Digital: the card format that won. Use a standard SD card up to 2 GB (not SDHC) on cameras from this period.'],
+    [/floppy/i, 'A standard 1.44 MB 3.5" floppy: about 15–40 photos per disk. Blank disks are still sold, and any USB floppy drive reads them on a modern computer.'],
+    [/dvd-r/i, 'Records to 8 cm mini DVDs. Finalise the disc in the camera and it plays in most DVD players, or copy the files to a computer with a DVD drive.'],
+    [/sdhc|sdxc/i,'Takes ordinary modern SD cards. A 16–32 GB SDHC card holds hours of Full HD footage.'],
+    [/^sd$|\bsd\b/i,'Secure Digital: the card format that won. Use a standard SD card up to 2 GB (not SDHC) on cameras from this period.'],
     [/equiv|focal/i, 'The zoom range translated into 35 mm film terms, so you can compare it: ~35 mm is wide, ~105 mm is a portrait crop.'],
     [/aperture|f\//i, 'How wide the lens opens. Lower number = more light and softer background. Wide-open shots are where the flash look comes from.'],
     [/optical zoom|zoom/i, 'Real glass moving inside the lens, not cropping. Image quality holds at the long end, unlike digital zoom.'],
@@ -95,8 +100,8 @@
   ];
   const gloss = (k, v) => { for (const [re, t] of GLOSS) if (re.test(k) || re.test(v)) return t; return ''; };
 
-  /* era: where this piece sits between 1999 and 2012 */
-  const Y0 = 1999, Y1 = 2012, now = new Date().getFullYear();
+  /* era: where this piece sits on the archive's timeline (1999 to the newest piece) */
+  const Y0 = Math.min(1999, ...D.products.map((x) => x.year)), Y1 = Math.max(2012, ...D.products.map((x) => x.year)), now = new Date().getFullYear();
   const sameYear = D.products.filter((x) => x.year === p.year && x.id !== p.id);
   const era = `<div class="era">
     <div class="era__top"><span class="mono">Made in</span><b>${p.year}</b><span class="mono era__ago">${now - p.year} years ago</span></div>
@@ -117,6 +122,7 @@
     <div class="pdp__stage${sold ? ' is-sold' : ''}${real ? ' is-photo' : ''}" id="stage" tabindex="0" role="img" aria-label="${p.name}: ${VIEWS[0].l}. Press Enter to zoom.">
       <div class="art" id="stageArt">${VIEWS[0].html(true)}</div>
       ${U.vf(U.modeOf(p))}
+      ${sold ? `<span class="sold-badge" aria-hidden="true">Sold · ${U.eur(p.price)}</span>` : ''}
       <span class="zoom-hint" aria-hidden="true">Tap to zoom</span>
     </div>
     <div class="thumbs" role="tablist" aria-label="Views">${VIEWS.map((v, i) => `<button class="thumb" role="tab" type="button" aria-selected="${i === 0}" data-v="${i}" aria-label="${v.l}">${v.html()}<span>${v.l}</span></button>`).join('')}</div>
@@ -133,8 +139,8 @@
       ${p.sensor !== '—' ? `<dt>Sensor</dt><dd>${p.sensor}</dd>` : ''}
       <dt>Condition</dt><dd><span class="grade-pill">${g[0]}</span>${g[1]}</dd>
     </dl>
-    <p class="price">${sold ? '<span class="mono" style="font-size:16px;letter-spacing:.1em;color:var(--muted)">OUT OF CATALOGUE</span>' : U.eur(p.price)}</p>
-    ${sold ? '' : '<p class="fine">Listed price · shipping and the final total are shown on eBay or Vinted</p>'}
+    <p class="price${sold ? ' sold-price' : ''}">${sold ? `<span class="lbl">Sold for</span><s>${U.eur(p.price)}</s>` : U.eur(p.price)}</p>
+    ${sold ? `<p class="fine">This piece found a new home. Its record, photos and tests stay here for reference.</p>` : '<p class="fine">Listed price · shipping and the final total are shown on eBay or Vinted</p>'}
     <div class="buy" id="buy">${cta()}</div>
     ${sold ? '' : mfx}
     <ul class="ship">
@@ -204,7 +210,7 @@
     <div class="grid grid--4" id="related"></div>
   </section>
 </div>
-<div class="buybar" id="buybar" aria-hidden="true"><div><div class="p">${sold ? 'Archived' : U.eur(p.price)}</div><div class="c">${p.id} · + 1 MINIFIGURE</div></div>${sold || reserved ? '' : `<div class="buybar__mkt">${shops.map((s, i) => ext(s, i ? 'btn--line' : 'btn--ion', s.name).replace('<a ', '<a tabindex="-1" ')).join('')}</div>`}</div>`;
+<div class="buybar" id="buybar" aria-hidden="true"><div><div class="p">${sold ? `Sold · ${U.eur(p.price)}` : U.eur(p.price)}</div><div class="c">${p.id} · + 1 MINIFIGURE</div></div>${sold || reserved ? '' : `<div class="buybar__mkt">${shops.map((s, i) => ext(s, i ? 'btn--line' : 'btn--ion', s.name).replace('<a ', '<a tabindex="-1" ')).join('')}</div>`}</div>`;
 
   /* related */
   const rel = D.products.filter((x) => x.id !== p.id && x.status !== 'sold').sort((a, b) => (b.type === p.type) - (a.type === p.type)).slice(0, 4);
