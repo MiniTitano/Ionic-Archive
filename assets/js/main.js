@@ -80,7 +80,7 @@ ${LOGO('Ionic Archive, home')}
 <p>A curated archive of camcorders and digital cameras, 1999–2012. Every piece tested and catalogued here, sold through eBay and Vinted, and shipped with a mystery minifigure.</p>
 <p class="ftr__shops">${D.shops ? `<a href="${D.shops.ebay}" target="_blank" rel="noopener">eBay shop ↗</a><a href="${D.shops.vinted}" target="_blank" rel="noopener">Vinted wardrobe ↗</a>` : ''}</p></div>
 <div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">Camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html?type=accessories">Tapes &amp; accessories</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
-<div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/" rel="noopener" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/" rel="noopener" target="_blank">TikTok</a></li></ul></div>
+<div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/ionic.archive" rel="noopener" target="_blank">Instagram</a></li><li><a href="mailto:ionicarchive@gmail.com">Email</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="support.html#buying">How buying works</a></li><li><a href="support.html#shipping">Shipping</a></li><li><a href="support.html#returns">Returns &amp; warranty</a></li><li><a href="support.html#contact">Contact</a></li></ul></div>
 </div>
 <div class="ftr__base label"><span>© 2026 Ionic Archive · VAT no. [to add]</span><span><a href="support.html#privacy">Privacy</a> · <a href="#" data-cookie-open>Cookie settings</a> · <a href="support.html#terms">Terms</a></span></div>
@@ -162,7 +162,7 @@ ${LOGO('Ionic Archive, home')}
     const email = $('input[type=email]', f), ok = $('input[type=checkbox]', f);
     if (!email.value || !email.checkValidity()) { email.focus(); toast('Please enter a valid email address.'); return; }
     if (ok && !ok.checked) { ok.focus(); toast('We need your consent to send you alerts.'); return; }
-    f.outerHTML = `<p class="nl-ok" role="status">● You're on the list. Check your inbox to confirm: the next arrival reaches you first.</p>`;
+    f.outerHTML = `<p class="nl-ok" role="status">● Thanks, you're on the list for new arrivals.</p>`;
   }));
 
   /* ---------- reveal on scroll ---------- */
@@ -189,9 +189,6 @@ ${LOGO('Ionic Archive, home')}
     setTimeout(() => { location.href = u.href; }, 300);
   });
   window.addEventListener('pageshow', (e) => { if (e.persisted && lcd) lcd.classList.remove('lcd--out'); });
-
-  /* ---------- site soundtrack ---------- */
-  const radio = document.createElement('script'); radio.src = 'assets/js/player.js'; radio.defer = true; document.body.appendChild(radio);
 
   window.IAUI = { $, $$, RM, store, eur, card, photo, view, statusTag, vf, modeOf, toast, buyLinks, byId, TYPE, STATUS, observe };
   document.addEventListener('DOMContentLoaded', observe);

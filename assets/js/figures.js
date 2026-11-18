@@ -7,7 +7,7 @@
   const chip = (id) => `<span class="chip chip--${id}">${tierOf(id).label}</span>`;
   const secret = (f) => f.tier === 'secret';
   const pad = (n) => String(n).padStart(2, '0');
-  const look = (f) => `data-bg="${f.accent}" data-accent="${f.rim}"`;
+  const look = (f) => `data-bg="#111214" data-accent="${f.rim}"`;
   const opts = (f) => ({ bg: f.accent, accent: f.rim });
 
   /* hero: a big turntable that cycles through the figures on its own */
@@ -27,17 +27,14 @@
     window.Fig3D.set(heroView, f.model, 'white', opts(f)); paint(f);
   }, 6000);
 
-  /* rarity */
-  $('#tiers').innerHTML = D.tiers.map((t) => `<div class="tier">${chip(t.id)}<b>${t.odds}%</b><p>${t.desc}</p><div class="bar"><i style="width:${t.odds}%"></i></div></div>`).join('');
-
   /* the series: every figure in 3D on its own colour */
   $('#figs').innerHTML = F.map((f) => {
     const S = secret(f);
-    const dk = (() => { const c = parseInt(f.accent.slice(1), 16); return (0.299 * (c >> 16) + 0.587 * ((c >> 8) & 255) + 0.114 * (c & 255)) < 90; })();
-    return `<article class="fig3 tier-${f.tier}${S ? ' is-secret' : ''}${dk ? ' is-darkbg' : ''} rv" style="--acc:${f.accent}">
+    // one shared card colour for the whole series
+    return `<article class="fig3 tier-${f.tier}${S ? ' is-secret' : ''} is-darkbg rv" style="--acc:#111214">
 <div class="fig3__top"><span class="fig3__num mono">${f.num} / ${pad(N)}</span>${chip(f.tier)}</div>
-<div class="fig3__view" data-fig3d="${f.model}" ${look(f)}${S ? ' data-mode="sil" data-peek' : ''} data-start="${(Math.random() - 0.5).toFixed(2)}" tabindex="0" aria-label="${S ? 'Secret figure, hold to peek' : f.name + ', 3D, drag to spin'}">${S ? '<span class="fig3__q" aria-hidden="true">?</span>' : ''}</div>
-<div class="fig3__body"><h3>${S ? '???' : f.name}</h3><p class="fig3__role mono">${S ? 'Classified · hold to peek' : f.role}</p><span class="fig3__fin mono"><b class="fin-c">Colour: random</b><b class="fin-g">Glow chase · 1 in ${Math.round(100 / D.glowOdds)}</b></span><p class="fig3__lore">${S ? 'Nobody has found this one in a box yet. Hold the figure to sneak a look.' : f.lore}</p></div>
+<div class="fig3__view" data-fig3d="${f.model}" ${look(f)}${S ? ' data-mode="sil"' : ''} data-start="${(Math.random() - 0.5).toFixed(2)}" tabindex="0" aria-label="${S ? 'Secret figure' : f.name + ', 3D, drag to spin'}"></div>
+<div class="fig3__body"><h3>${S ? 'Secret' : f.name}</h3><p class="fig3__role mono">${S ? 'Classified' : f.role}</p><span class="fig3__fin mono"><b class="fin-c">Colour: random</b><b class="fin-g">Glow chase · 1 in ${Math.round(100 / D.glowOdds)}</b></span><p class="fig3__lore">${S ? 'Nobody has found this one in a box yet. You\'ll know it when you see it.' : f.lore}</p></div>
 </article>`;
   }).join('');
 

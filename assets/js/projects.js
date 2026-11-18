@@ -15,13 +15,13 @@
   const PROJECT = {
     no: '01', title: 'Strip & repaint', subject: 'Sony handheld camcorder',
     parts: [
-      { k: 'A', name: 'Teardown', state: 'live', src: 'assets/video/projects/teardown.mp4', poster: `${I}poster.jpg`,
+      { k: 'A', name: 'Teardown', state: 'live', src: 'assets/video/projects/teardown-720.mp4', poster: `${I}poster.jpg`,
         steps: [
-          [0, 'Shell screws out', 'Twenty-odd screws, every one bagged and labelled.', `${I}ch1.jpg`],
-          [28, 'Handle and viewfinder off', 'The top handle and eyepiece come away as one block.', `${I}ch2.jpg`],
-          [62, 'Into the tape deck', 'Side panels off, transport and boards exposed.', `${I}ch3.jpg`],
-          [95, 'Masking the insides', 'Paper and tape over everything that must stay bare.', `${I}ch4.jpg`],
-          [125, 'Panels prepped for paint', 'Each loose panel masked and ready for primer.', `${I}ch5.jpg`]
+          [0, 'Screws out', '', `${I}ch1.jpg`],
+          [28, 'Handle and viewfinder off', '', `${I}ch2.jpg`],
+          [62, 'Side panels off', '', `${I}ch3.jpg`],
+          [95, 'Masking the insides', '', `${I}ch4.jpg`],
+          [125, 'Panels ready for paint', '', `${I}ch5.jpg`]
         ] },
       { k: 'B', name: 'Paint', state: 'soon', poster: `${I}ch5.jpg` }
     ]
@@ -54,7 +54,7 @@
   </div>
   <ol class="pj-steps" id="pjSteps">${A.steps.map((s, i) => `<li><button type="button" data-s="${i}" aria-current="${i === 0}">
     <span class="pj-steps__img"><img src="${s[3]}" alt="" loading="lazy"><i class="pj-steps__bar"></i></span>
-    <span class="pj-steps__no mono">${pad(i + 1)} · ${fmt(s[0])}</span><b>${s[1]}</b><em>${s[2]}</em></button></li>`).join('')}</ol>
+    <span class="pj-steps__no mono">${pad(i + 1)} · ${fmt(s[0])}</span><b>${s[1]}</b>${s[2] ? `<em>${s[2]}</em>` : '' }</button></li>`).join('')}</ol>
 </div>
 
 <div class="pj-stage pj-soon" id="pjB" hidden>
@@ -63,11 +63,10 @@
     <i class="pj-soon__tint"></i><span class="pj-soon__tape mono">PART B · PAINT · ON TAPE SOON</span>
   </div>
   <div class="pj-soon__side">
-    <p class="label">Colour bench</p>
-    <h3 class="pj-soon__h">Which colour goes on?</h3>
-    <p class="pj-soon__p">The shell is masked and primed next. Try a colour on it while the paint part is being filmed.</p>
+    <p class="label">Part B</p>
+    <h3 class="pj-soon__h">Paint: coming next.</h3>
+    <p class="pj-soon__p">Try a colour on the shell.</p>
     <div class="pj-sw" role="radiogroup" aria-label="Preview colour">${SW.map(([c, n], i) => `<button type="button" role="radio" aria-checked="${i === 0}" data-c="${c}" style="--c:${c}" aria-label="${n}"><i></i><span class="mono">${n}</span></button>`).join('')}</div>
-    <p class="pj-soon__note mono">Preview only. The final colour is decided on the bench.</p>
   </div>
 </div>`;
 

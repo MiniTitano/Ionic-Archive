@@ -20,7 +20,7 @@
       ['hero-08', 'Reviewing a clip on the flip-out screen, seated in a chair', 2000, 1333, '50% 40%', '44% 40%']
     ],
     // [slide, hold ms, cut]: long holds broken by quick double cuts, like a music-video montage
-    edit: [[0, 2600, 'drop'], [1, 2300, 'drop'], [4, 380, 'hard'], [7, 380, 'hard'], [2, 2600, 'drop'], [3, 2300, 'drop'], [5, 380, 'hard'], [6, 1900, 'hard']]
+    edit: [0, 1, 2, 3, 4, 5, 6, 7].map((i) => [i, 3200, 'fade'])
   };
   const MOBILE = {
     list: [
@@ -39,8 +39,7 @@
   // same rhythm for any number of frames: two long holds, two quick cuts, repeat
   function autoEdit(n) {
     const e = [];
-    for (let i = 0; i < n; i++) e.push(i % 4 < 2 ? [i, i % 4 ? 2300 : 2600, 'drop'] : [i, 380, 'hard']);
-    if (e.length && e[e.length - 1][2] === 'hard') e[e.length - 1][1] = 1900;
+    for (let i = 0; i < n; i++) e.push([i, 3200, 'fade']);
     return e;
   }
 
@@ -87,6 +86,9 @@
 
   // put a frame on screen; kind = 'drop' (tape dropout), 'hard' (straight cut) or 'rew' (rewind flicker)
   function show(i, kind) {
+    // coming back to a tab re-runs the current step: keep the frame that's already up instead of re-fading it
+    if (i === cur && slides[cur].classList.contains('is-on') && kind !== 'rew' && show.started) return;
+    show.started = true;
     if (i !== cur) {
       slides.forEach((s) => s.classList.remove('was-on'));
       slides[cur].classList.add('was-on');
@@ -96,10 +98,9 @@
     const s = slides[cur];
     s.classList.remove('is-on', 'cut-hard'); void s.offsetWidth;
     s.classList.add('is-on'); s.removeAttribute('aria-hidden');
-    if (kind !== 'drop') s.classList.add('cut-hard');
+    if (kind === 'rew') s.classList.add('cut-hard');
     stamp.textContent = STAMPS[cur % STAMPS.length];
-    if (kind === 'drop') dropout(s.querySelector('img'));
-    else if (kind === 'hard') { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); }
+
     // warm up the frames that come next
     slides.forEach((x, k) => { const im = x.querySelector('img'); if (im.loading === 'lazy' && Math.abs(k - cur) <= 3) im.loading = 'eager'; });
   }
@@ -117,7 +118,7 @@
     const [i, hold, kind] = EDIT[step];
     show(i, kind);
     timer = setTimeout(() => {
-      step++;
+      timer = null; step++;
       if (step >= EDIT.length) { step = 0; rewind(); } else run();
     }, hold);
   }
@@ -147,7 +148,8 @@
     if (p) run(); else { clearTimeout(timer); reel.classList.remove('is-rew'); rewinding = false; }
   }
   btn.addEventListener('click', () => setPlaying(!playing));
-  document.addEventListener('visibilitychange', () => { hidden = document.hidden; if (!hidden && playing) run(); else clearTimeout(timer); });
+  // pause while the tab is hidden; on return pick up where it was instead of restarting the frame's hold
+  document.addEventListener('visibilitychange', () => { hidden = document.hidden; if (hidden) { clearTimeout(timer); timer = null; } else if (playing && !timer && !rewinding) run(); });
   // pick the set for the screen shape, and swap if the phone is rotated / the window resized
   const portrait = window.matchMedia('(orientation: portrait) and (max-width: 1024px)');
   const pick = () => (portrait.matches && MOBILE.list.length ? MOBILE : DESKTOP);
@@ -167,7 +169,7 @@
   $('#pillarFig').innerHTML = `<div class="figstage__blob"></div>
 <div class="figstage__box">${A.box()}</div>
 <div class="figstage__fig figstage__fig--a" data-fig3d="${F[1].model}" data-bg="#2F6BFF" data-accent="${F[1].rim}" data-start="-0.9" data-spin="0.6" title="Drag to spin"></div>
-<div class="figstage__fig figstage__fig--q" data-fig3d="${F[5].model}" data-mode="sil" data-accent="#FFE14D" data-start="0.4" data-spin="-0.5"><span aria-hidden="true">?</span></div>`;
+<div class="figstage__fig figstage__fig--q" data-fig3d="${F[5].model}" data-mode="sil" data-accent="#FFE14D" data-start="0.4" data-spin="-0.5"></div>`;
 
   /* new arrivals */
   const fresh = D.products.filter((p) => p.status !== 'sold' && p.type !== 'accessories').sort((a, b) => b.added.localeCompare(a.added)).slice(0, 4);
@@ -188,19 +190,7 @@
 <span class="cat__tag mono" aria-hidden="true">${tag}</span>
 <div class="cat__txt"><h3>${name}&nbsp;<span class="arr">→</span></h3><p>${txt}</p></div></a>`).join('');
 
-  /* minifigure teaser */
-  const f = D.figures;
-  $('#teaserArt').innerHTML = `<div class="teaser__box">${A.box()}</div>` +
-    [f[0], f[3], f[4]].map((x, i) => `<div class="fig-mini" data-fig3d="${x.model}" data-bg="#141619" data-accent="${x.rim}" data-start="${-0.6 + i * 0.5}" title="${x.name}"></div>`).join('') +
-    `<div class="fig-mini" data-fig3d="${f[5].model}" data-mode="sil" data-accent="#2F6BFF" aria-label="Secret figure"><span class="q" aria-hidden="true">?</span></div>`;
   if (window.Fig3D) window.Fig3D.scan();
-
-  /* trust */
-  $('#trust').innerHTML = [
-    ['test', 'Tested piece by piece', 'Over twenty checks on every camera: recording, playback, screen, battery, ports. The report is on the record.'],
-    ['grade', 'Condition, described honestly', 'An A+ / A / B / C scale and a photo of every mark. What you see is what arrives.'],
-    ['pack', 'Protective packaging', 'Double box, custom-cut foam, tracked shipping in 24–48 h. Bought safely on eBay or Vinted.']
-  ].map(([i, h, p]) => `<div class="rv">${A.icon(i)}<h3>${h}</h3><p>${p}</p></div>`).join('');
 
   U.observe();
 })();
