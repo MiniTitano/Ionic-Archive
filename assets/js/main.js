@@ -32,37 +32,24 @@
     const sold = p.status === 'sold';
     const ph = p.photos ? ' shot--photo' : '';
     return `<article class="card${sold ? ' is-sold' : ''}">
-<a class="card__link" href="product.html?id=${p.id}" aria-label="${p.name}, ${p.year}, ${sold ? 'sold for ' + eur(p.price) : STATUS[p.status][0] + ', ' + eur(p.price)}">
+<a class="card__link" href="product.html?id=${p.id}" aria-label="${p.name}, ${sold ? 'sold for ' + eur(p.price) : STATUS[p.status][0] + ', ' + eur(p.price)}">
 <div class="card__media">
 <div class="shot shot--a${ph}">${view(p, 'a')}</div>
 <div class="shot shot--b${ph}" aria-hidden="true">${view(p, 'b')}</div>
-${vf(modeOf(p))}
-<div class="card__badges" aria-hidden="true"><span class="bg">${p.grade}</span><span>${p.year}</span></div>
-${sold ? `<span class="stamp stamp--sold">Sold · ${eur(p.price)}</span>` : ''}
 </div>
-<div class="card__meta"><span class="code">${p.id}</span>${statusTag(p)}</div>
 <h3 class="card__name">${p.name}</h3>
-<p class="card__sub">${p.year} · ${p.format} · Grade ${p.grade}</p>
 <p class="card__price">${sold ? `Sold for ${eur(p.price)}` : eur(p.price)}</p>
 </a></article>`;
   }
 
-  /* ---------- logo: an iris that stops down on hover, IONIC / ARCHIVE in two voices ---------- */
-  const IRIS = (() => {
-    const c = 13, R = 11.2, r = 5.4, pts = [];
-    for (let i = 0; i < 6; i++) { const a = (Math.PI / 3) * i - Math.PI / 2; pts.push([c + r * Math.cos(a), c + r * Math.sin(a)]); }
-    // each blade edge runs from a hexagon corner out to the rim, tangent-ish, like a real aperture
-    const blades = pts.map(([x, y], i) => { const a = (Math.PI / 3) * i - Math.PI / 2 + 1.25; return `<path d="M${x.toFixed(2)} ${y.toFixed(2)} L${(c + R * Math.cos(a)).toFixed(2)} ${(c + R * Math.sin(a)).toFixed(2)}"/>`; }).join('');
-    return `<svg viewBox="0 0 26 26" aria-hidden="true" focusable="false"><circle class="logo__rim" cx="13" cy="13" r="12.2"/><g class="logo__iris"><circle class="logo__disc" cx="13" cy="13" r="${R}"/><polygon class="logo__core" points="${pts.map((p) => p.map((n) => n.toFixed(2)).join(',')).join(' ')}"/><g class="logo__blades">${blades}</g></g></svg>`;
-  })();
-  const LOGO = (label) => `<a class="logo" href="index.html" aria-label="${label}"><span class="logo__mark">${IRIS}</span><span class="logo__type"><b>IONIC</b><i class="logo__sep" aria-hidden="true"></i><span class="logo__arc">ARCHIVE</span></span></a>`;
+  const LOGO = (label) => `<a class="logo logo--img" href="index.html" aria-label="${label}"><img src="assets/img/brand/logo.png" width="640" height="218" alt="Ionic Archive"></a>`;
   /* ---------- header + footer ---------- */
   const page = document.body.dataset.page;
   const NAV = [['archive.html', 'Archive', 'archive'], ['dropouts.html', 'Dropouts', 'dropouts'], ['manifesto.html', 'Manifesto', 'manifesto'], ['journal.html', 'Journal', 'journal'], ['support.html', 'Support', 'support']];
   const total = D.products.length, avail = D.products.filter((p) => p.status === 'available').length;
 
   document.body.insertAdjacentHTML('afterbegin', `<a class="skip" href="#main">Skip to content</a>
-<div class="strip"><div class="wrap strip__in"><span><i class="dot-rec"></i>Archive online</span><span class="hide-sm">${total} pieces catalogued · ${avail} available · Buy safely on eBay &amp; Vinted</span><span data-tc>00:00:00:00</span></div></div>
+<div class="strip"><div class="wrap strip__in"><span>${total} pieces catalogued · ${avail} available · Buy safely on eBay &amp; Vinted</span></div></div>
 <header class="hdr"><div class="wrap hdr__in">
 ${LOGO('Ionic Archive, home')}
 <nav class="nav" id="nav" aria-label="Main"><ul>${NAV.map(([h, l, k]) => k === 'dropouts'
@@ -83,22 +70,10 @@ ${LOGO('Ionic Archive, home')}
 <div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/ionic.archive" rel="noopener" target="_blank">Instagram</a></li><li><a href="mailto:ionicarchive@gmail.com">Email</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="support.html#buying">How buying works</a></li><li><a href="support.html#shipping">Shipping</a></li><li><a href="support.html#returns">Returns &amp; warranty</a></li><li><a href="support.html#contact">Contact</a></li></ul></div>
 </div>
-<div class="ftr__base label"><span>© 2026 Ionic Archive · VAT no. [to add]</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a></span></div>
+<div class="ftr__base label"><span>© 2026 Ionic Archive</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a></span></div>
 </div></footer>
 <div class="toast" role="status" aria-live="polite" data-toast></div>`);
 
-  /* logo hover: ARCHIVE searches like a tape deck, then locks */
-  if (!RM) $$('.logo').forEach((lg) => {
-    const arc = $('.logo__arc', lg), word = 'ARCHIVE', G = '▮▯░▒01:#/';
-    let tm = null;
-    lg.addEventListener('mouseenter', () => {
-      clearInterval(tm); let f = 0;
-      tm = setInterval(() => {
-        f++; arc.textContent = word.split('').map((ch, i) => (i < f / 2 ? ch : G[Math.floor(Math.random() * G.length)])).join('');
-        if (f >= word.length * 2) { clearInterval(tm); arc.textContent = word; }
-      }, 32);
-    });
-  });
   /* ---------- toast ---------- */
   let tt;
   function toast(msg) {

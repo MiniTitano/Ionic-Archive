@@ -21,10 +21,17 @@
       ['hero-23', 'Two hands holding a red Ferrari Olympus compact in front of Place des Vosges', 2000, 1333, '58% 45%', '58% 45%']
     ]
   };
-  // no separate vertical set: phones show the same photos, framed on their phone focus point
-  const MOBILE = { list: [] };
-  // camcorder-style data code burned into the corner, one per frame
-  const STAMPS = ["NOV 17 '03  23:41", "AUG 02 '04  20:52", "MAR 09 '02  01:13", "JUL 21 '05  17:06", "OCT 30 '03  00:27", "FEB 14 '04  15:48", "DEC 31 '02  23:59", "JAN 06 '06  12:30", "MAY 18 '04  19:22", "SEP 05 '03  02:44"];
+  // phones in portrait get their own vertical photos
+  const MOBILE = {
+    list: [
+      ['hero-m-01', 'A 3CCD DVCAM camcorder held up against a red graffiti wall', 1200, 1800, '50% 45%'],
+      ['hero-m-02', 'At night, a DVCAM camcorder carried alongside a paint-splattered bike', 1200, 1800, '50% 40%'],
+      ['hero-m-03', 'Filming from a scaffold with a compact camera, shot from below', 1200, 1800, '55% 40%'],
+      ['hero-m-04', 'A camcorder raised overhead in a mid-stride pose', 1200, 1800, '50% 35%'],
+      ['hero-m-05', 'Two friends on a scooter with a Handycam and a swivel Coolpix', 1200, 1800, '55% 50%'],
+      ['hero-m-06', 'Lying on the grass with a Handycam, a Coolpix in a pink bag', 1200, 1800, '45% 45%']
+    ]
+  };
 
   // same rhythm for any number of frames: two long holds, two quick cuts, repeat
   function autoEdit(n) {
@@ -55,7 +62,7 @@
     slides = [...wrap.children];
     reel.classList.toggle('is-portrait', set === MOBILE);
     cur = 0; step = 0; tapeMs = 0; rewinding = false; reel.classList.remove('is-rew');
-    stamp.textContent = STAMPS[0];
+    if (stamp) stamp.textContent = '';
     if (playing) run();
   }
 
@@ -93,7 +100,7 @@
     s.classList.remove('is-on', 'cut-hard'); void s.offsetWidth;
     s.classList.add('is-on'); s.removeAttribute('aria-hidden');
     if (kind === 'rew') s.classList.add('cut-hard');
-    stamp.textContent = STAMPS[cur % STAMPS.length];
+
 
     // warm up the frames that come next
     slides.forEach((x, k) => { const im = x.querySelector('img'); if (im.loading === 'lazy' && Math.abs(k - cur) <= 3) im.loading = 'eager'; });

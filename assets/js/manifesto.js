@@ -129,6 +129,8 @@
     const card = e.target.closest && e.target.closest('.mgal__card');
     if (card) go(cards.indexOf(card));
   });
-  go(0, false); update();
-  addEventListener('load', () => { go(cur, false); update(); });
+  // open on the middle photo so both sides of the strip are filled
+  const mid = Math.floor(cards.length / 2);
+  go(mid, false); update();
+  addEventListener('load', () => { go(cur || mid, false); update(); });
 })();

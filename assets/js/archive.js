@@ -76,7 +76,6 @@
     const sold = p.status === 'sold';
     return `<a class="irow${sold ? ' is-sold' : ''}" href="product.html?id=${p.id}">
 <span class="irow__th">${U.view(p, 'a')}</span>
-<span class="irow__code mono">${p.id}</span>
 <span class="irow__name"><b>${p.name}</b><small>${U.TYPE[p.type]}</small></span>
 <span class="irow__yr mono">${p.year}</span>
 <span class="irow__fmt">${p.format}</span>
@@ -86,7 +85,7 @@
 <span class="irow__pr">${sold ? `<s class="mono" style="text-decoration:none;color:var(--rec)">Sold ${U.eur(p.price)}</s>` : U.eur(p.price)}</span>
 <span class="irow__go" aria-hidden="true">→</span></a>`;
   }
-  const head = `<div class="irow irow--head" aria-hidden="true"><span></span><span>Code</span><span>Model</span><span>Year</span><span class="irow__fmt">Format</span><span class="irow__sen">Sensor</span><span>Grade</span><span>Status</span><span class="irow__pr">Price</span><span class="irow__go"></span></div>`;
+  const head = `<div class="irow irow--head" aria-hidden="true"><span></span><span>Model</span><span>Year</span><span class="irow__fmt">Format</span><span class="irow__sen">Sensor</span><span>Grade</span><span>Status</span><span class="irow__pr">Price</span><span class="irow__go"></span></div>`;
   const block = (list) => state.view === 'index'
     ? `<div class="ledger">${head}${list.map(row).join('')}</div>`
     : `<div class="grid">${list.map(U.card).join('')}</div>`;

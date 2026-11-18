@@ -121,7 +121,6 @@
   <div class="pdp__gallery">
     <div class="pdp__stage${sold ? ' is-sold' : ''}${real ? ' is-photo' : ''}" id="stage" tabindex="0" role="img" aria-label="${p.name}: ${VIEWS[0].l}. Press Enter to zoom.">
       <div class="art" id="stageArt">${VIEWS[0].html(true)}</div>
-      ${U.vf(U.modeOf(p))}
       ${sold ? `<span class="sold-badge" aria-hidden="true">Sold · ${U.eur(p.price)}</span>` : ''}
       <span class="zoom-hint" aria-hidden="true">Tap to zoom</span>
     </div>

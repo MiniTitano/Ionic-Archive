@@ -2144,3 +2144,24 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
 @media (prefers-reduced-motion:reduce){.glowtxt{animation:none}}
 /* IONIC, the secret Dropout: its name glows orange like the figure's outline */
 .ionic-glow{color:#FFB27A!important;text-shadow:0 0 1px #FF8A3C,0 0 10px rgba(255,138,60,.85),0 0 26px rgba(255,138,60,.5);font-weight:inherit}
+/* archive index view without the code column */
+.irow{grid-template-columns:64px minmax(180px,2.2fr) 56px minmax(110px,1.2fr) 90px 60px 116px 84px 24px}
+@media (max-width:1100px){.irow{grid-template-columns:56px minmax(150px,1fr) 48px 50px 104px 72px}}
+@media (max-width:640px){.irow{grid-template-columns:52px minmax(0,1fr) auto}}
+/* product cards: no viewfinder overlay; hover still swaps to the second photo */
+.card .vf{display:none}
+/* new wordmark logo (black PNG; turned white on dark headers) */
+.logo--img{display:inline-flex;align-items:center;line-height:0}
+.logo--img img{display:block;height:34px;width:auto}
+.night-hdr .hdr .logo--img img{filter:invert(1)}
+.ftr .logo--img img{height:56px}
+@media (max-width:640px){.logo--img img{height:28px}}
+/* top strip: one centred line; hidden on small screens where it would wrap */
+.strip__in{justify-content:center}
+@media (max-width:920px){.strip{display:none}}
+
+/* hero: no pause button on phones */
+@media (max-width:760px){.reel__pause{display:none}}
+
+/* Manifesto ending: just the button */
+.mout{padding:clamp(56px,7vw,110px) 0}
