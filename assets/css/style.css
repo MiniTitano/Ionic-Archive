@@ -2106,3 +2106,8 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
   .night-hdr .nav a{color:var(--night-text)}
   .night-hdr .nav a[aria-current="page"]{color:#fff}
 }
+/* hero headline: a soft smoky shadow under "Shop our cameras" so it reads on any photo */
+.reel__shade{background:
+  radial-gradient(120% 70% at 0% 100%,rgba(11,12,14,.72) 0%,rgba(11,12,14,.45) 35%,rgba(11,12,14,0) 70%),
+  linear-gradient(180deg,rgba(11,12,14,.35) 0%,rgba(11,12,14,0) 22%,rgba(11,12,14,0) 40%,rgba(11,12,14,.5) 66%,rgba(11,12,14,.88) 100%)}
+.hero--reel .h1{text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 18px rgba(0,0,0,.55),0 0 60px rgba(0,0,0,.45)}.reel__shade{z-index:2}

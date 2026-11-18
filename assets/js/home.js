@@ -43,7 +43,7 @@
   // same rhythm for any number of frames: two long holds, two quick cuts, repeat
   function autoEdit(n) {
     const e = [];
-    for (let i = 0; i < n; i++) e.push([i, 3200, 'fade']);
+    for (let i = 0; i < n; i++) e.push([i, 2500, 'fade']);
     return e;
   }
 
