@@ -23,10 +23,12 @@
   /* Real product photo on its own white studio background */
   function photo(p, i, opts) {
     opts = opts || {};
-    const [f, label, w, h] = p.photos.list[i];
+    const L = (opts.card && p.photos.card) || p.photos.list;
+    const [f, label, w, h] = L[i] || p.photos.list[i];
     return `<img class="ph" src="${p.photos.dir}/${f}.jpg" width="${w}" height="${h}" alt="${opts.alt === '' ? '' : `${p.name}, ${label.toLowerCase()}`}" ${opts.eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
   }
-  const view = (p, v) => (p.photos ? photo(p, v === 'a' ? 0 : 1, { alt: v === 'a' ? undefined : '' }) : A.product(p, v));
+  // cards use the centred card crops when a piece has them (photos.card), otherwise its first two photos
+  const view = (p, v) => (p.photos ? photo(p, v === 'a' ? 0 : 1, { alt: v === 'a' ? undefined : '', card: true }) : A.product(p, v));
 
   function card(p) {
     const sold = p.status === 'sold';

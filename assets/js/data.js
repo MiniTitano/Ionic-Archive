@@ -21,8 +21,8 @@
     { id: 'IA-0057', name: 'Sony GV-D900E Video Walkman', brand: 'Sony', type: 'accessories', year: 1997, country: 'Japan', format: 'MiniDV · PAL', sensor: '—', mp: 0, price: 1000, status: 'sold', grade: 'B', added: '2026-11-18',
       links: { ebay: '', vinted: '' },
       art: { kind: 'tape' },
-      photos: { dir: 'assets/img/ia-0057', list: [
-        ['with-charger', 'With its AC-V700 charger', 1600, 1067], ['closed', 'Closed', 1200, 1600], ['screen-playback', 'Playing back a MiniDV tape', 1200, 1600],
+      photos: { dir: 'assets/img/ia-0057', card: [['closed-card', 'Closed', 1000, 1250], ['screen-playback-card', 'Playing back a MiniDV tape', 1000, 1250]], list: [
+        ['closed', 'Closed', 1200, 1600], ['screen-playback', 'Playing back a MiniDV tape', 1200, 1600], ['with-charger', 'With its AC-V700 charger', 1600, 1067],
         ['open', 'Open, screen on', 1600, 1065], ['controls', 'Transport controls', 1600, 1065], ['controls-detail', 'Controls close-up', 1600, 1065],
         ['cassette-bay', 'Cassette bay open', 1600, 1065], ['ports', 'S-Video, AV and LANC ports', 1600, 1065], ['rear', 'Rear, battery bay and DV in / out', 1600, 1065],
         ['side-battery', 'Battery door open', 1600, 1065], ['underside', 'Underside, model plate', 1600, 1065], ['with-charger-on', 'Powered from the charger', 1600, 1065],
@@ -38,10 +38,10 @@
         ['In / out', 'DV in / out · S-Video · AV · LANC · Laser Link'], ['Power', 'InfoLITHIUM L series · DC 7.2 V'], ['Charger', 'Sony AC-V700'], ['Made in', 'Japan']],
       samples: [] },
 
-    { id: 'IA-0056', name: 'Sony Handycam DCR-TRV140E', brand: 'Sony', type: 'camcorders', year: 2002, country: 'Japan', format: 'Digital8 · PAL', sensor: 'CCD', mp: 0.46, price: 149, status: 'available', grade: 'B', added: '2026-11-18',
+    { id: 'IA-0056', name: 'Sony Handycam DCR-TRV140E', brand: 'Sony', type: 'camcorders', year: 2002, country: 'Japan', format: 'Digital8 · PAL', sensor: 'CCD', mp: 0.46, price: 149, status: 'sold', grade: 'B', added: '2026-11-18',
       links: { ebay: '', vinted: '' }, // ← paste this camcorder's eBay / Vinted listing URLs
       art: { kind: 'camcorder', tone: 'silver', fmt: 'D8', zoom: 20, label: 'TRV140E' },
-      photos: { dir: 'assets/img/ia-0056', list: [
+      photos: { dir: 'assets/img/ia-0056', card: [['front-card', 'Front three-quarter', 1000, 1250], ['grip-side-card', 'Grip side and hand strap', 1000, 1250]], list: [
         ['front', 'Front three-quarter', 1200, 1600], ['side-badges', 'Digital8 and Super NightShot badges', 1200, 1600], ['lens', 'Sony video lens 20×, f = 3.6–72 mm 1:1.4', 1200, 1600],
         ['screen-open', 'LCD open, NightShot on', 1200, 1600], ['rear', 'Rear, viewfinder and battery bay', 1200, 1600], ['grip-side', 'Grip side and hand strap', 1200, 1600],
         ['tape-open', 'Tape door open', 1200, 1600], ['viewfinder', 'Through the viewfinder: 279 min, NightShot', 1200, 1600], ['kit', 'With bag, remote, batteries and adapter', 1200, 1600]
@@ -95,7 +95,7 @@
     { id: 'IA-0053', name: 'Sony Mavica MVC-FD81', brand: 'Sony', type: 'compacts', year: 2000, country: 'Japan', format: '3.5" floppy disk', sensor: 'Progressive CCD · 0.8 MP', mp: 0.8, price: 149, status: 'available', grade: 'B', added: '2026-11-18',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'grip', tone: 'silver', mp: '0.8', zoom: 3 },
-      photos: { dir: 'assets/img/ia-0053', list: [
+      photos: { dir: 'assets/img/ia-0053', card: [['front-card', 'Front, lens cap off', 1000, 1250], ['front-cap-card', 'Front, cap on, with strap', 1000, 1250]], list: [
         ['front', 'Front, lens cap off', 1200, 1600], ['front-cap', 'Front, cap on, with strap', 1200, 1600], ['back', 'Back, controls', 1200, 1600],
         ['lens-detail', 'Sony video lens 3× detail', 1200, 1600], ['box', 'With its original box and battery', 1200, 1600]
       ] },
@@ -112,7 +112,7 @@
     { id: 'IA-0052', name: 'Sony Handycam CCD-TRV218E', brand: 'Sony', type: 'camcorders', year: 2003, country: 'Japan', format: 'Hi8', sensor: 'CCD', mp: 0.46, price: 129, status: 'available', grade: 'C', added: '2026-11-18',
       links: { ebay: '', vinted: '' }, // ← paste this camcorder's eBay / Vinted listing URLs
       art: { kind: 'camcorder', tone: 'silver', fmt: 'Hi8', zoom: 20, label: 'TRV218E' },
-      photos: { dir: 'assets/img/ia-0052', list: [
+      photos: { dir: 'assets/img/ia-0052', card: [['side-card', 'Side, NightShot and Hi8 badges', 1000, 1250], ['front-card', 'Front, 20× Sony video lens', 1000, 1250]], list: [
         ['side', 'Side, NightShot and Hi8 badges', 1311, 1600], ['front', 'Front, 20× Sony video lens', 1200, 1600], ['grip-side', 'Grip side and power switch', 1200, 1600],
         ['rear', 'Rear, viewfinder and InfoLITHIUM battery', 1200, 1600], ['screen', 'LCD on, with its worn coating', 1200, 1600], ['screen-angle', 'LCD and tape controls', 1200, 1600],
         ['viewfinder', 'Through the viewfinder: Hi8 SP, clear', 1200, 1600], ['with-box', 'With its box, adapter, AV cable and strap', 1200, 1600]
@@ -130,9 +130,9 @@
     { id: 'IA-0051', name: 'Sony Cyber-shot DSC-W120', brand: 'Sony', type: 'compacts', year: 2008, country: 'Japan', format: 'Memory Stick Duo', sensor: 'CCD 1/2.5" · 7.2 MP', mp: 7.2, price: 119, status: 'sold', grade: 'B', added: '2026-11-18',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'slim', tone: 'graphite', mp: '7.2', zoom: 4 },
-      photos: { dir: 'assets/img/ia-0051', list: [
-        ['front', 'Front, lens closed', 1200, 1600], ['lens-out', 'Front, lens out', 1200, 1600], ['angle', 'Three-quarter view', 1200, 1600],
-        ['back', 'Back, screen on', 1200, 1600], ['kit', 'With battery and charger', 1200, 1600]
+      photos: { dir: 'assets/img/ia-0051', card: [['lens-out-card', 'Front, lens out', 1000, 1250], ['back-card', 'Back, screen on', 1000, 1250]], list: [
+        ['lens-out', 'Front, lens out', 1200, 1600], ['back', 'Back, screen on', 1200, 1600], ['front', 'Front, lens closed', 1200, 1600],
+        ['angle', 'Three-quarter view', 1200, 1600], ['kit', 'With battery and charger', 1200, 1600]
       ] },
       story: 'The 2008 party camera in black: a 4× Carl Zeiss zoom, Smile Shutter that fires when people grin, and a flash bright enough to flatten a whole room.',
       storySub: 'The W120 is peak late-2000s Cyber-shot: 7.2 megapixels from a CCD, Super SteadyShot, ISO up to 3200 for grainy night shots, and a real optical viewfinder next to the screen. Files are crisp in daylight and turn gloriously noisy indoors.',
@@ -147,7 +147,7 @@
     { id: 'IA-0050', name: 'Sony Cyber-shot DSC-M2', brand: 'Sony', type: 'compacts', year: 2005, country: 'Japan', format: 'Memory Stick PRO Duo', sensor: 'CCD · 5.1 MP', mp: 5.1, price: 300, status: 'available', grade: 'B', added: '2026-11-18',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'slim', tone: 'silver', mp: '5.1', zoom: 3 },
-      photos: { dir: 'assets/img/ia-0050', list: [
+      photos: { dir: 'assets/img/ia-0050', card: [['front-card', 'Front, closed', 1000, 1250], ['back-screen-on-card', 'Back, screen on, in the cradle', 1000, 1250]], list: [
         ['front', 'Front, closed', 1200, 1600], ['back-screen-on', 'Back, screen on, in the cradle', 1200, 1600], ['swivel-open', 'Screen swung open', 1200, 1600],
         ['lens-detail', 'Carl Zeiss Vario-Tessar detail', 1200, 1600], ['controls', 'Jog dial and PHOTO / MOVIE buttons', 1200, 1600], ['back-controls', 'Back, controls', 1200, 1600],
         ['side', 'Side, power and DC in', 1200, 1600], ['underside', 'Underside, serial label', 1200, 1600], ['in-cradle', 'In the cradle', 1200, 1600], ['cradle', 'Cradle', 1200, 1600]
@@ -165,9 +165,10 @@
     { id: 'IA-0049', name: 'Nikon Coolpix 2500', brand: 'Nikon', type: 'compacts', year: 2002, country: 'Japan', format: 'CompactFlash', sensor: 'CCD · 2 MP', mp: 2, price: 149, status: 'available', grade: 'A', added: '2026-11-18',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'compact', tone: 'blue', mp: '2.0', zoom: 3 },
-      photos: { dir: 'assets/img/ia-0049', list: [
-        ['front', 'Front, lens turned out', 1200, 1600], ['front-vertical', 'Front, upright', 1200, 1600], ['lens-detail', 'Zoom-Nikkor detail', 1200, 1600],
-        ['back-screen-on', 'Back, start-up screen', 1200, 1600], ['back-vertical', 'Back, upright', 1200, 1600], ['box', 'Box and accessories', 1200, 1600]
+      photos: { dir: 'assets/img/ia-0049', card: [['front-vertical-card', 'Front, lens open', 1000, 1250], ['back-vertical-card', 'Upright, lens turned away', 1000, 1250]], list: [
+        // same order as the Coolpix 3500: upright with lens open, upright with lens turned away, back screen on, lens detail, lens swivelled, box
+        ['front-vertical', 'Front, lens open', 1200, 1600], ['back-vertical', 'Upright, lens turned away', 1200, 1600], ['back-screen-on', 'Back, start-up screen', 1200, 1600],
+        ['lens-detail', 'Zoom-Nikkor detail', 1200, 1600], ['front', 'Lens swivelled', 1200, 1600], ['box', 'Box and accessories', 1200, 1600]
       ] },
       story: 'The swivel Coolpix that started it: lens and flash sit in a blue block that turns inside a silver frame. Point it forward, down at the table or back at yourself.',
       storySub: 'Nikon\'s 2002 pocket camera for people who had never owned a digital one: 2 megapixels, a 3× Zoom-Nikkor and twelve scene modes. Closed, the lens hides inside the body, so nothing sticks out. The files are small, soft and very 2002, with that cool Nikon colour.',
@@ -182,7 +183,7 @@
     { id: 'IA-0048', name: 'Panasonic HC-V110', brand: 'Panasonic', type: 'camcorders', year: 2013, country: 'Japan', format: 'SD · AVCHD', sensor: 'MOS 1/5.8"', mp: 1.5, price: 149, status: 'available', grade: 'A', added: '2026-11-17',
       links: { ebay: '', vinted: '' }, // ← paste this camcorder's eBay / Vinted listing URLs
       art: { kind: 'camcorder', tone: 'black', fmt: 'HD', zoom: 38, label: 'HC-V110' },
-      photos: { dir: 'assets/img/ia-0048', list: [
+      photos: { dir: 'assets/img/ia-0048', card: [['side-card', 'Side, lens and badges', 1000, 1250], ['lens-detail-card', 'Lens, f = 2.35–89.3 mm', 1000, 1250]], list: [
         ['side', 'Side, lens and badges', 1200, 1600], ['lens-detail', 'Lens, f = 2.35–89.3 mm', 1200, 1600], ['screen-open', 'Screen open, ports', 1200, 1600],
         ['grip-side', 'Grip side and strap', 1200, 1600], ['rear', 'Rear, battery and REC', 1200, 1600], ['box', 'Box and battery', 1200, 1600]
       ] },
@@ -199,7 +200,7 @@
     { id: 'IA-0047', name: 'Sony Cyber-shot DSC-M2', brand: 'Sony', type: 'compacts', year: 2005, country: 'Japan', format: 'Memory Stick PRO Duo', sensor: 'CCD · 5.1 MP', mp: 5.1, price: 600, status: 'sold', grade: 'A+', added: '2026-11-17',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'slim', tone: 'silver', mp: '5.1', zoom: 3 },
-      photos: { dir: 'assets/img/ia-0047', list: [
+      photos: { dir: 'assets/img/ia-0047', card: [['swivel-open-card', 'Screen swung open', 1000, 1250], ['back-screen-on-card', 'Back, screen on', 1000, 1250]], list: [
         ['swivel-open', 'Screen swung open', 1200, 1600], ['back-screen-on', 'Back, screen on', 1200, 1600], ['front-cradle', 'Front, in the cradle', 1200, 1600],
         ['lens-detail', 'Carl Zeiss Vario-Tessar detail', 1200, 1600], ['controls', 'Controls and jog dial', 1200, 1600], ['cradle-front', 'Cradle', 1200, 1600],
         ['cradle-back', 'Cradle ports', 1200, 1600], ['box', 'Box and everything inside', 1200, 1600]
@@ -217,7 +218,7 @@
     { id: 'IA-0046', name: 'Contax i4R', brand: 'Contax', type: 'compacts', year: 2004, country: 'Japan', format: 'SD', sensor: 'CCD 1/2.5" · 4 MP', mp: 4, price: 390, status: 'available', grade: 'B', added: '2026-11-17',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'slim', tone: 'silver', mp: '4.0', zoom: 1 },
-      photos: { dir: 'assets/img/ia-0046', list: [
+      photos: { dir: 'assets/img/ia-0046', card: [['front-open-card', 'Front, lens uncovered', 1000, 1250], ['screen-on-card', 'Back, screen on', 1000, 1250]], list: [
         ['front-open', 'Front, lens uncovered', 1200, 1600], ['screen-on', 'Back, screen on', 1200, 1600], ['front-closed', 'Front, flash block closed', 1200, 1600],
         ['back', 'Back, controls', 1200, 1600], ['lens-detail', 'Tessar T* detail', 1200, 1600], ['side', 'Side', 1200, 1600],
         ['underside', 'Underside', 1200, 1600], ['box', 'Box, cradle and accessories', 1242, 1600]
@@ -252,7 +253,7 @@
     { id: 'IA-0044', name: 'Nikon Coolpix 3500', brand: 'Nikon', type: 'compacts', year: 2003, country: 'Japan', format: 'CompactFlash', sensor: 'CCD 1/2.7" · 3.2 MP', mp: 3.2, price: 249, status: 'available', grade: 'A', added: '2026-11-17',
       links: { ebay: '', vinted: '' }, // ← paste this camera's eBay / Vinted listing URLs
       art: { kind: 'compact', style: 'compact', tone: 'silver', mp: '3.2', zoom: 3 },
-      photos: { dir: 'assets/img/ia-0044', list: [
+      photos: { dir: 'assets/img/ia-0044', card: [['front-card', 'Front, lens out', 1000, 1250], ['closed-card', 'Closed', 1000, 1250]], list: [
         ['front', 'Front, lens out', 1200, 1600], ['closed', 'Closed', 1200, 1600], ['back-open', 'Back, screen on', 1200, 1600],
         ['back-closed', 'Back, closed', 1200, 1600], ['lens-detail', 'Zoom-Nikkor detail', 1200, 1600],
         ['side-open', 'Lens swivelled', 1469, 1600], ['screen-on', 'Start-up screen', 1200, 1600],
