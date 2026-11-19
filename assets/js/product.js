@@ -190,7 +190,7 @@
   <section class="psec rv" id="rec-s4" aria-labelledby="s4-h"><div class="psec__h"><span class="mono">04</span><h2 id="s4-h">In the box</h2><p class="fine" style="margin-top:8px">Everything that ships with this unit.</p></div>
     <ol class="unbox">${p.box.map((b, i) => `<li style="--i:${i}"><span class="mono">${pad(i + 1)}</span>${b}</li>`).join('')}
       <li style="--i:${p.box.length}" class="unbox__doc"><span class="mono">+</span>Printed test report and archive record</li>
-      ${sold ? '' : `<li style="--i:${p.box.length + 1}" class="unbox__doc"><span class="mono">+1</span>Mystery Dropout minifigure</li>`}
+      ${sold ? '' : `<li style="--i:${p.box.length + 1}" class="unbox__doc unbox__fig"><span class="mono">+1</span>Mystery Dropout minifigure</li>`}
     </ol></section>
 
   <section class="psec rv" id="rec-s5" aria-labelledby="s5-h"><div class="psec__h"><span class="mono">05</span><h2 id="s5-h">Specifications</h2><p class="fine" style="margin-top:8px">Tap <b class="gl-dot">?</b> for what a spec means in practice.</p></div>

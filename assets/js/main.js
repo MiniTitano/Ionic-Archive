@@ -53,7 +53,7 @@
 <header class="hdr"><div class="wrap hdr__in">
 ${LOGO('Ionic Archive, home')}
 <nav class="nav" id="nav" aria-label="Main"><ul>${NAV.map(([h, l, k]) => k === 'dropouts'
-    ? `<li class="nav__drop-li"><a class="nav__drop" href="${h}"${k === page ? ' aria-current="page"' : ''}><span class="nav__q" aria-hidden="true">?</span>${l}<span class="nav__tag" aria-hidden="true">Free figure</span></a></li>`
+    ? `<li class="nav__drop-li"><a class="nav__drop" href="${h}"${k === page ? ' aria-current="page"' : ''}><img class="nav__fig" src="assets/img/brand/travis-glow.png" width="170" height="272" alt="" aria-hidden="true"><span class="nav__lbl">${l}</span></a></li>`
     : `<li><a href="${h}"${k === page ? ' aria-current="page"' : ''}>${l}</a></li>`).join('')}</ul></nav>
 <div class="hdr__tools">
 <a class="buyvia hide-sm" href="support.html#buying"><span class="label">Sold via</span> eBay · Vinted</a>
@@ -62,10 +62,10 @@ ${LOGO('Ionic Archive, home')}
 
   const main = $('#main');
   main.insertAdjacentHTML('afterend', `<footer class="ftr"><div class="wrap">
-<div class="ftr__grid">
 <div class="ftr__brand">${LOGO('Ionic Archive')}
-<p>A curated archive of camcorders and digital cameras, 1999–2012. Every piece tested and catalogued here, sold through eBay and Vinted, and shipped with a mystery minifigure.</p>
+<p>Camcorders and digital cameras, 1990–2012.</p>
 <p class="ftr__shops">${D.shops ? `<a href="${D.shops.ebay}" target="_blank" rel="noopener">eBay shop ↗</a><a href="${D.shops.vinted}" target="_blank" rel="noopener">Vinted wardrobe ↗</a>` : ''}</p></div>
+<div class="ftr__grid">
 <div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">Camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html?type=accessories">Tapes &amp; accessories</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
 <div><h4>Ionic Archive</h4><ul><li><a href="dropouts.html">Dropouts</a></li><li><a href="manifesto.html">Manifesto</a></li><li><a href="journal.html">Journal</a></li><li><a href="https://www.instagram.com/ionic.archive" rel="noopener" target="_blank">Instagram</a></li><li><a href="mailto:ionicarchive@gmail.com">Email</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="support.html#buying">How buying works</a></li><li><a href="support.html#shipping">Shipping</a></li><li><a href="support.html#returns">Returns &amp; warranty</a></li><li><a href="support.html#contact">Contact</a></li></ul></div>

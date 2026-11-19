@@ -2165,3 +2165,90 @@ img.ph{display:block;width:100%;height:100%;object-fit:cover}
 
 /* Manifesto ending: just the button */
 .mout{padding:clamp(56px,7vw,110px) 0}
+
+/* the mystery minifigure stands out: black box, white text */
+.unbox .unbox__fig{background:var(--ink);color:#fff;border:1px solid var(--ink);border-style:solid}
+.unbox .unbox__fig .mono{color:rgba(255,255,255,.7)}
+.mfline{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mfline:hover{border-color:var(--ink);background:#23262c}
+.mfline__k{background:#fff;color:var(--ink)}
+.mfline__t em{color:rgba(255,255,255,.7)}
+.mfline__go{color:#fff}
+/* footer: centred logo with one short line, link columns centred underneath */
+.ftr{padding:clamp(48px,6vw,80px) 0 24px}
+.ftr__brand{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:clamp(36px,5vw,56px)}
+.ftr__brand p{margin:0;max-width:none;font-size:14.5px;color:var(--ink-2)}
+.ftr .ftr__brand .logo--img img{height:44px}
+.ftr__shops{justify-content:center;margin-top:0!important}
+.ftr__grid{grid-template-columns:repeat(3,minmax(0,200px));justify-content:center;gap:24px clamp(32px,6vw,96px);text-align:center}
+.ftr__base{justify-content:center;gap:10px 24px;margin-top:clamp(36px,5vw,56px);text-align:center}
+@media (max-width:860px){.ftr__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.ftr__grid{grid-template-columns:1fr}.ftr .ftr__brand .logo--img img{height:38px}}
+/* never let decorative pieces widen the page on phones */
+body{overflow-x:clip}
+
+/* phones: the header bar also fills the status-bar area above it, so nothing shows through between the bar and the top of the screen */
+@media (max-width:920px){
+  .hdr{padding-top:env(safe-area-inset-top,0px)}
+  .hdr::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:max(env(safe-area-inset-top,0px),120px);background:inherit;-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);pointer-events:none}
+}
+/* phones: a more see-through header, frosted glass over the page */
+@media (max-width:920px){
+  .hdr{background:rgba(244,242,237,.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);border-bottom-color:rgba(17,18,20,.08)}
+  .night-hdr .hdr{background:rgba(11,12,14,.45)}
+  .hdr::before{-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5)}
+}
+/* Dropouts in the nav: a black pill with a glowing orange dot and a small "+1", no wobble */
+.nav .nav__drop{gap:9px;padding:7px 8px 7px 12px;margin:-7px 0;background:var(--ink);color:#fff!important;font-weight:500;letter-spacing:-.01em;border-radius:999px;transform:none;animation:none;box-shadow:none;transition:background .2s,box-shadow .2s}
+.nav .nav__drop:hover{transform:none;background:#23262c;box-shadow:0 0 0 3px rgba(255,138,60,.25)}
+.nav__dot{width:7px;height:7px;border-radius:50%;background:#FF8A3C;box-shadow:0 0 6px #FF8A3C,0 0 14px rgba(255,138,60,.6);animation:navdot 2.4s ease-in-out infinite}
+@keyframes navdot{0%,100%{opacity:1}50%{opacity:.45}}
+.nav__plus{font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.12);color:#FFB27A}
+.night-hdr .nav .nav__drop{background:#fff;color:var(--ink)!important}
+.night-hdr .nav .nav__drop:hover{background:#ECEEF1}
+.night-hdr .nav__plus{background:rgba(17,18,20,.08);color:#C2561A}
+@media (prefers-reduced-motion:reduce){.nav__dot{animation:none}}
+@media (max-width:920px){
+  .nav .nav__drop{font-size:34px;padding:12px 18px 12px 22px;margin:14px 0;gap:14px;box-shadow:none}
+  .nav__dot{width:12px;height:12px}
+  .nav__plus{font-size:13px;padding:5px 10px}
+}
+/* Dropouts in the nav: a glow-in-the-dark minifigure. The figure charges and fades like phosphor; hover = lights off */
+.nav .nav__drop{gap:8px;padding:6px 14px 6px 10px;background:radial-gradient(120% 140% at 18% 50%,rgba(156,255,94,.16),rgba(156,255,94,0) 55%),#0B0D0B;color:#F2F5EE!important;border:1px solid rgba(156,255,94,.35);box-shadow:0 0 14px -4px rgba(156,255,94,.45),inset 0 0 10px rgba(156,255,94,.06)}
+.nav .nav__drop:hover{background:radial-gradient(120% 140% at 18% 50%,rgba(156,255,94,.26),rgba(156,255,94,0) 60%),#050605;border-color:rgba(156,255,94,.7);box-shadow:0 0 22px -2px rgba(156,255,94,.6),inset 0 0 12px rgba(156,255,94,.1)}
+.nav__fig{width:14px;height:18px;fill:#9CFF5E;filter:drop-shadow(0 0 3px rgba(156,255,94,.95)) drop-shadow(0 0 8px rgba(156,255,94,.6));animation:phosphor 3.6s ease-in-out infinite}
+@keyframes phosphor{0%,100%{opacity:1}55%{opacity:.55}}
+.nav__lbl{transition:color .25s,text-shadow .25s}
+.nav .nav__drop:hover .nav__lbl{color:#C9FFB0;text-shadow:0 0 10px rgba(156,255,94,.7)}
+.nav .nav__drop:hover .nav__fig{animation:none;opacity:1;filter:drop-shadow(0 0 4px #9CFF5E) drop-shadow(0 0 12px rgba(156,255,94,.85))}
+.night-hdr .nav .nav__drop{background:radial-gradient(120% 140% at 18% 50%,rgba(156,255,94,.18),rgba(156,255,94,0) 55%),#050605;color:#F2F5EE!important}
+.night-hdr .nav .nav__drop:hover{background:radial-gradient(120% 140% at 18% 50%,rgba(156,255,94,.28),rgba(156,255,94,0) 60%),#000}
+@media (prefers-reduced-motion:reduce){.nav__fig{animation:none}}
+@media (max-width:920px){
+  .nav .nav__drop{gap:14px;padding:12px 24px 12px 18px}
+  .nav__fig{width:24px;height:30px}
+}
+/* real TRAVIS render in the Dropouts button, glowing */
+.nav .nav__drop{padding:4px 14px 4px 9px}
+.nav__fig{width:auto;height:24px;margin:-2px 0}
+@media (max-width:920px){.nav .nav__drop{padding:10px 24px 10px 16px}.nav__fig{width:auto;height:44px;margin:-4px 0}}
+.nav__fig{filter:drop-shadow(0 0 2px rgba(156,255,94,.9)) drop-shadow(0 0 7px rgba(156,255,94,.55))}
+
+/* desktop: Dropouts pill same height and centre line as the other links */
+@media (min-width:921px){
+  .nav ul{align-items:center}
+  .nav .nav__drop{margin:0;padding:5px 13px 5px 9px;line-height:1.2}
+  .nav__fig{height:18px;margin:0}
+}@media (min-width:921px){.nav .nav__drop{padding:5px 12px;gap:7px}}
+@media (max-width:920px){.nav .nav__drop{padding:10px 22px}}
+/* desktop: a slimmer Dropouts pill that sits with the other links: same weight, smaller figure, softer glow */
+@media (min-width:921px){
+  .nav .nav__drop{padding:3px 11px;gap:6px;font-weight:400;line-height:1.3;border-color:rgba(156,255,94,.28);box-shadow:0 0 10px -5px rgba(156,255,94,.5);background:#101210}
+  .nav .nav__drop:hover{background:#0A0B0A;box-shadow:0 0 14px -4px rgba(156,255,94,.6)}
+  .nav__fig{height:15px}
+}@media (min-width:921px){.nav .nav__drop{top:1.5px}}
+/* phone menu: a smaller Dropouts pill */
+@media (max-width:920px){
+  .nav .nav__drop{font-size:20px;font-weight:400;padding:7px 16px;gap:9px;margin:12px 0;top:0;box-shadow:0 0 12px -5px rgba(156,255,94,.5)}
+  .nav__fig{height:24px;margin:0}
+}
