@@ -41,7 +41,7 @@
   }
 
   const reel = $('#reel'), wrap = $('#reelSlides');
-  let slides = [], set = DESKTOP, EDIT = [], LOOP = 1, REW = [];
+  let slides = [], set = DESKTOP, EDIT = [], REW = [];
   let cur = 0;
 
   // a new random order on every visit
@@ -51,7 +51,6 @@
   function mount(next) {
     set = next;
     EDIT = set.edit || autoEdit(set.list.length);
-    LOOP = EDIT.reduce((t, e) => t + e[1], 0);
     const order = EDIT.map((e) => e[0]);
     REW = order.slice().reverse().concat(order.slice().reverse().filter((_, k) => k % 2)).slice(0, 12);
     wrap.innerHTML = set.list.map(([f, alt, w, h, pos, posM], i) => {
@@ -61,7 +60,7 @@
     }).join('');
     slides = [...wrap.children];
     reel.classList.toggle('is-portrait', set === MOBILE);
-    cur = 0; step = 0; tapeMs = 0; rewinding = false; reel.classList.remove('is-rew');
+    cur = 0; step = 0; rewinding = false; reel.classList.remove('is-rew');
     if (stamp) stamp.textContent = '';
     if (playing) run();
   }
@@ -107,11 +106,10 @@
   }
 
   /* playback: at the end of the reel the "tape" rewinds itself and plays again */
-  const state = $('#reelState'), tcEl = $('#reelTc'), tape = $('#reelTape'), btn = $('#reelPlay');
-  let step = 0, timer = null, playing = !U.RM, rewinding = false, tapeMs = 0, hidden = false;
+  const btn = $('#reelPlay');
+  let step = 0, timer = null, playing = !U.RM, rewinding = false, hidden = false;
 
-  const fmt = (ms) => { const f = Math.floor(ms / 40); return `0:${String(Math.floor(f / 1500) % 60).padStart(2, '0')}:${String(Math.floor(f / 25) % 60).padStart(2, '0')}:${String(f % 25).padStart(2, '0')}`; };
-  const setState = (t) => { state.innerHTML = `<i></i>${t}`; reel.dataset.state = t.toLowerCase().replace(/\W+/g, ''); };
+  const setState = (t) => { reel.dataset.state = t.toLowerCase().replace(/\W+/g, ''); };
 
   function run() {
     clearTimeout(timer);
@@ -130,16 +128,10 @@
     const tick = () => {
       if (!playing || hidden) { rewinding = false; reel.classList.remove('is-rew'); return; }
       if (k < seq.length) { show(seq[k++], 'rew'); timer = setTimeout(tick, 70); return; }
-      rewinding = false; reel.classList.remove('is-rew'); tapeMs = 0; setState('▶ PLAY'); run();
+      rewinding = false; reel.classList.remove('is-rew'); setState('▶ PLAY'); run();
     };
     tick();
   }
-  // tape counter + progress
-  setInterval(() => {
-    if (playing && !hidden) tapeMs = rewinding ? Math.max(0, tapeMs - LOOP / 9) : Math.min(LOOP, tapeMs + 100);
-    tcEl.textContent = fmt(tapeMs);
-    tape.style.transform = `scaleX(${(tapeMs / LOOP).toFixed(4)})`;
-  }, 100);
 
   function setPlaying(p) {
     playing = p;

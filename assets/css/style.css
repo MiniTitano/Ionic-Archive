@@ -277,16 +277,8 @@ html:not(.js) .rv{opacity:1;transform:none}
 .hero--reel .h1{text-shadow:0 2px 30px rgba(0,0,0,.25)}
 .btn--paper{background:var(--paper);color:var(--ink)}
 .btn--paper:hover{background:#fff;box-shadow:0 0 0 4px rgba(47,107,255,.22)}
-/* tape transport readout (not interactive) */
-.reel__bar{grid-column:1/-1;display:flex;align-items:center;gap:18px;border-top:1px solid rgba(255,255,255,.45);padding-top:12px;font-size:11px;letter-spacing:.12em;white-space:nowrap}
-.reel__state{display:inline-flex;align-items:center;gap:8px;min-width:76px;color:#fff}
-.reel__state i{width:7px;height:7px;border-radius:50%;background:#58E08A;box-shadow:0 0 8px #58E08A}
-.hero--reel:has(.reel[data-state="rew"]) .reel__state i{background:var(--stamp);box-shadow:0 0 8px var(--stamp)}
-.hero--reel:has(.reel[data-state="pause"]) .reel__state i,.hero--reel:has(.reel[data-state="still"]) .reel__state i{background:rgba(255,255,255,.6);box-shadow:none}
-.reel__tc{color:rgba(255,255,255,.85);font-variant-numeric:tabular-nums}
-.reel__tape{flex:1;height:2px;background:rgba(255,255,255,.25);overflow:hidden}
-.reel__tape i{display:block;height:100%;background:#fff;transform-origin:left;transform:scaleX(0);transition:transform .1s linear}
-.reel__count{color:rgba(255,255,255,.6)}
+/* plain rule under the headline, full width */
+.reel__bar{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.45);padding-top:12px}
 .reel__pause{position:absolute;z-index:5;right:clamp(14px,2.5vw,28px);top:calc(clamp(14px,2.5vw,28px) + 48px);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.75);padding:6px 8px;border:1px solid rgba(255,255,255,.3);background:rgba(11,12,14,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .reel__pause:hover{color:#fff;border-color:#fff}
 /* straight cuts: punch in without the overexposed flash */
@@ -302,7 +294,6 @@ html:not(.js) .rv{opacity:1;transform:none}
   .hero--reel .hero__bottom{padding-top:46vh}
   .reel__slide img{object-position:var(--pos-m,var(--pos,50% 50%))}
   .reel__vf .vf__mode,.reel__vf .vf__bat{display:none}
-  .reel__count{display:none}
   .reel__pause{top:calc(clamp(14px,2.5vw,28px) + 46px)}
 }
 @media (prefers-reduced-motion:reduce){.reel__slide img{animation:none!important}.reel__glitch,.reel__flash{display:none}}
