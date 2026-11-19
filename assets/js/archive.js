@@ -35,7 +35,7 @@
   $('#stats').innerHTML = [
     ['Available', c('available'), 'ok'], ['Reserved', c('reserved'), 'res'], ['In the vault', c('sold'), 'sold'], ['Catalogued', P.length, '']
   ].map(([l, n, k]) => `<div class="st st--${k || 'all'}"><dt class="label">${k ? `<i class="lg lg--${k}"></i>` : ''}${l}</dt><dd>${pad(n)}</dd></div>`).join('') +
-    `<div class="st st--last"><dt class="label">Last entry</dt><dd><a href="product.html?id=${latest.id}"><span class="mono">${latest.id}</span> ${latest.name}</a><span class="mono">${when}</span></dd></div>`;
+    `<div class="st st--last"><dt class="label">Last entry</dt><dd><a href="product.html?id=${latest.id}">${latest.name}</a><span class="mono">${when}</span></dd></div>`;
 
   /* ---------- filter form ---------- */
   const form = $('#fform');
@@ -184,11 +184,12 @@
   if (qs.get('sort') && SORTS[qs.get('sort')]) { state.sort = qs.get('sort'); sort.value = state.sort; }
   sort.addEventListener('change', () => { state.sort = sort.value; render(); });
 
-  /* mobile filter drawer */
+  /* filter drawer (all screen sizes): opens from the Filters button, closes with ✕, Escape or a click outside */
   const panel = $('#filters'), tog = $('#ftoggle');
   const setOpen = (o) => { panel.classList.toggle('open', o); tog.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; if (o) $('#fclose').focus(); else tog.focus(); };
   tog.addEventListener('click', () => setOpen(true));
   $('#fclose').addEventListener('click', () => setOpen(false));
+  document.addEventListener('click', (e) => { if (panel.classList.contains('open') && !panel.contains(e.target) && !tog.contains(e.target)) setOpen(false); });
   $('#fapply').addEventListener('click', () => { setOpen(false); window.scrollTo({ top: $('.atool').offsetTop - 70, behavior: U.RM ? 'auto' : 'smooth' }); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) setOpen(false); });
 

@@ -40,8 +40,7 @@
   function cta() {
     if (sold) return `<button class="btn btn--block" disabled>Sold for ${U.eur(p.price)}</button><a class="btn btn--line btn--block" href="index.html#nl-h">Alert me to similar pieces</a>`;
     if (reserved) return `<button class="btn btn--block" disabled>Reserved · sale in progress</button><button class="btn btn--line btn--block" type="button" data-notify>Alert me if it comes back</button>`;
-    return `<div class="mkt">${shops.map((s, i) => ext(s, i ? 'btn--line' : 'btn--ion')).join('')}</div>
-<p class="fine mkt__note">One of a kind · quantity 1. You'll check out on eBay or Vinted, with their buyer protection. Look for <b class="mono">${p.id}</b> in the listing title.</p>`;
+    return `<div class="mkt">${shops.map((s, i) => ext(s, i ? 'btn--line' : 'btn--ion')).join('')}</div>`;
   }
   const g = D.grades[p.grade];
   const tests = p.tests;
@@ -125,7 +124,6 @@
       <span class="zoom-hint" aria-hidden="true">Tap to zoom</span>
     </div>
     <div class="thumbs" role="tablist" aria-label="Views">${VIEWS.map((v, i) => `<button class="thumb" role="tab" type="button" aria-selected="${i === 0}" data-v="${i}" aria-label="${v.l}">${v.html()}<span>${v.l}</span></button>`).join('')}</div>
-    <p class="label gal-note">${real ? `${VIEWS.length} photos of unit ${p.id} · white balance corrected, nothing retouched` : `Views of unit ${p.id} · 5500 K studio light · no retouching`}</p>
   </div>
 
   <aside class="pdp__info" aria-label="Archive record">
