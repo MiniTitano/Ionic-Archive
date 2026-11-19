@@ -35,10 +35,10 @@
 <a class="card__link" href="product.html?id=${p.id}" aria-label="${p.name}, ${sold ? 'sold for ' + eur(p.price) : STATUS[p.status][0] + ', ' + eur(p.price)}">
 <div class="card__media">
 <div class="shot shot--a${ph}">${view(p, 'a')}</div>
-<div class="shot shot--b${ph}" aria-hidden="true">${view(p, 'b')}</div>
+<div class="shot shot--b${ph}" aria-hidden="true">${view(p, 'b')}</div>${sold ? `<span class="card__sold">Sold for ${eur(p.price)}</span>` : ''}
 </div>
 <h3 class="card__name">${p.name}</h3>
-<p class="card__price">${sold ? `Sold for ${eur(p.price)}` : eur(p.price)}</p>
+${sold ? '' : `<p class="card__price">${eur(p.price)}</p>`}
 </a></article>`;
   }
 

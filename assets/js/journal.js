@@ -75,7 +75,7 @@
      ========================================================= */
   const pile = $('#jrPile');
   let z = 10;
-  const PILE = ON.slice(0, 11);
+  const PILE = ON; // every photo of the roll goes on the table
   pile.innerHTML = PILE.map((p, i) => `<figure class="jr-print" data-i="${i}" tabindex="0" role="button" aria-label="${p.t}, open">
     <img src="${p.sm}" alt="" draggable="false" loading="${i < 5 ? 'eager' : 'lazy'}">
     <figcaption>${p.stamp ? `<i class="jr-dstamp">${p.stamp}</i>` : ''}<span>${p.cam ? p.cam.replace('Sony Cyber-shot ', '') : p.place}</span></figcaption></figure>`).join('');
@@ -90,7 +90,7 @@
       .concat([...document.querySelectorAll('.jr-actions > *')].map((e) => e.getBoundingClientRect()));
     const T = { l: Math.min(...head.map((r) => r.left)) - pr.left - 16, t: Math.min(...head.map((r) => r.top)) - pr.top - 16,
       r: Math.max(...head.map((r) => r.right)) - pr.left + 16, b: Math.max(...head.map((r) => r.bottom)) - pr.top + 16 };
-    const w = Math.min(320, W * 0.2), h = w * 0.95, n = prints.length;
+    const n = prints.length, w = Math.min(380, W * (n > 12 ? 0.235 : 0.25)), h = w * 0.95;
     const cols = Math.max(3, Math.round(Math.sqrt(n * W / H) * 1.25)), rows = Math.max(2, Math.ceil(n * 1.6 / cols));
     const cw = (W - w) / (cols - 1), ch = (H - h - 40) / (rows - 1);
     const hits = (x, y) => x < T.r && x + w > T.l && y < T.b && y + h > T.t;
@@ -107,7 +107,7 @@
   }
   function throwPrints(animate) {
     const W = pile.clientWidth, H = pile.clientHeight, small = W < 700, wide = innerWidth >= 1100;
-    if (wide) {
+    if (!small) {
       scatterWide(W, H).forEach(([x, y, w], i) => {
         const el = prints[i], rot = (Math.random() - 0.5) * 34;
         el.style.width = `${w}px`;

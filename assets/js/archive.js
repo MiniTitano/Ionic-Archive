@@ -97,7 +97,7 @@
     $('#results').innerHTML = shop.length ? block(shop)
       : `<div class="noresult"><h2 class="h3">Nothing on the shelf matches.</h2><p>The archive changes every week. Get an alert when something similar comes in.</p><a class="btn btn--ink" href="index.html#nl-h">Turn on alerts</a></div>`;
     $('#vault').innerHTML = state.sold && vault.length
-      ? `<div class="vault"><div class="vault__head"><span class="label"><i class="lg lg--sold"></i>The vault</span><h2 class="h3">Sold, not forgotten.</h2><p>${res(vault.length)} that found a new home. Their records stay here as a reference, with every test and every note.</p></div>${block(vault)}</div>` : '';
+      ? `<div class="vault"><div class="vault__head"><span class="label"><i class="lg lg--sold"></i>The vault</span><h2 class="h3">Sold, not forgotten.</h2></div>${block(vault)}</div>` : '';
     $('#count').innerHTML = `<b>${pad(shop.length)}</b> on the shelf${state.sold && vault.length ? ` · ${pad(vault.length)} in the vault` : ''}`;
     $('#fapply').textContent = `Show ${res(all.length)}`;
 
