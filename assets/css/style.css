@@ -2381,3 +2381,18 @@ body{overflow-x:clip}
 @media (hover:hover){.card:hover .card__media{box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 20px 36px -20px rgba(17,18,20,.45);transform:translateY(-2px)}}
 /* archive type buttons: smaller on phones */
 @media (max-width:640px){.ttabs{gap:6px}.ttabs button{font-size:13px;padding:7px 11px;gap:6px}.ttabs button .mono{font-size:9.5px}}
+
+/* home pillars 01 + 02: the content fills the card instead of leaving a big empty band */
+.pillar--sel .fan{flex:1;height:auto;min-height:clamp(260px,26vw,420px);margin-top:16px}
+.pillar--sel .fan__card{width:52%}
+.pillar--sel .fan__card .mono{font-size:11px}
+.pillar--test .testlog{flex:1;display:flex;flex-direction:column;justify-content:center;margin:20px 0 22px;font-size:clamp(12.5px,1vw,15px)}
+.pillar--test .testlog li{padding:clamp(12px,1.25vw,18px) 0}
+/* hero: one bigger "Explore the archive" button, on the right */
+.hero--reel .hero__copy{justify-self:end;align-self:end}
+.hero--reel .hero__ctas{justify-content:flex-end}
+.hero--reel .hero__ctas .btn{font-size:clamp(16px,1.25vw,19px);padding:clamp(16px,1.3vw,20px) clamp(26px,2.4vw,38px);min-height:0}
+@media (max-width:860px){.hero--reel .hero__copy{justify-self:stretch}.hero--reel .hero__ctas .btn{flex:1}}/* Selected: the fan of three photos centred in the free space, sized so the outer photos stay inside the card */
+.pillar--sel .fan__card{width:46%;bottom:auto;top:50%;transform:translateY(-50%) translateX(calc(-50% + (var(--i) - 1) * 50%)) rotate(calc((var(--i) - 1) * 7deg))}
+@media (hover:hover){.pillar--sel:hover .fan__card{transform:translateY(-50%) translateX(calc(-50% + (var(--i) - 1) * 58%)) rotate(calc((var(--i) - 1) * 10deg)) translateY(-6px)}}.pillar--sel .fan__card{width:54%;transform:translateY(-50%) translateX(calc(-50% + (var(--i) - 1) * 40%)) rotate(calc((var(--i) - 1) * 7deg))}
+@media (hover:hover){.pillar--sel:hover .fan__card{transform:translateY(-50%) translateX(calc(-50% + (var(--i) - 1) * 46%)) rotate(calc((var(--i) - 1) * 10deg)) translateY(-6px)}}.pillar--sel .fan__card{top:57%}
