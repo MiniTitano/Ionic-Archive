@@ -2252,3 +2252,93 @@ body{overflow-x:clip}
   .nav .nav__drop{font-size:20px;font-weight:400;padding:7px 16px;gap:9px;margin:12px 0;top:0;box-shadow:0 0 12px -5px rgba(156,255,94,.5)}
   .nav__fig{height:24px;margin:0}
 }
+/* product page: the mystery minifigure in the same glow-in-the-dark style as the Dropouts button */
+.mfline,.unbox .unbox__fig{background:radial-gradient(90% 160% at 8% 50%,rgba(156,255,94,.16),rgba(156,255,94,0) 55%),#0B0D0B;color:#F2F5EE;border:1px solid rgba(156,255,94,.32);box-shadow:0 0 18px -8px rgba(156,255,94,.55),inset 0 0 12px rgba(156,255,94,.05)}
+.mfline{border-radius:12px;transition:border-color .25s,box-shadow .25s,background .25s}
+.mfline:hover{background:radial-gradient(90% 160% at 8% 50%,rgba(156,255,94,.26),rgba(156,255,94,0) 60%),#050605;border-color:rgba(156,255,94,.7);box-shadow:0 0 24px -6px rgba(156,255,94,.7)}
+.mfline__fig{width:auto;height:40px;filter:drop-shadow(0 0 2px rgba(156,255,94,.9)) drop-shadow(0 0 7px rgba(156,255,94,.55));animation:phosphor 3.6s ease-in-out infinite}
+.mfline:hover .mfline__fig{animation:none;opacity:1;filter:drop-shadow(0 0 3px #9CFF5E) drop-shadow(0 0 10px rgba(156,255,94,.85))}
+.mfline__t b{color:#F2F5EE;transition:color .25s,text-shadow .25s}
+.mfline:hover .mfline__t b{color:#C9FFB0;text-shadow:0 0 10px rgba(156,255,94,.6)}
+.mfline__t em{color:rgba(242,245,238,.6)}
+.mfline__go{color:#9CFF5E}
+.unbox .unbox__fig{position:relative;overflow:hidden}
+.unbox .unbox__fig .mono{color:#9CFF5E}
+.unbox__figimg{position:absolute;right:14px;bottom:10px;height:56%;width:auto;filter:drop-shadow(0 0 2px rgba(156,255,94,.9)) drop-shadow(0 0 8px rgba(156,255,94,.5));animation:phosphor 3.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.mfline__fig,.unbox__figimg{animation:none}}.unbox__figimg{top:10px;right:12px;bottom:auto;height:46%}
+.unbox .unbox__fig{padding-right:52px}
+
+/* home pillar 03: glow-in-the-dark, same look as the Dropouts button */
+.pillar--fig{background:radial-gradient(70% 55% at 55% 45%,rgba(156,255,94,.14),rgba(156,255,94,0) 70%),#0B0D0B;color:#F2F5EE;border:1px solid rgba(156,255,94,.3);box-shadow:0 0 30px -14px rgba(156,255,94,.55),inset 0 0 22px rgba(156,255,94,.05)}
+.pillar--fig .pillar__n{border-color:rgba(156,255,94,.5);color:#9CFF5E}
+.pillar--fig .pillar__h{color:#F2F5EE}
+.spinbadge{filter:drop-shadow(0 0 8px rgba(156,255,94,.35))}
+.sticker--glow{background:transparent!important;color:#9CFF5E!important;border:1px solid rgba(156,255,94,.5)!important;box-shadow:0 0 10px -4px rgba(156,255,94,.6)!important;transform:none!important}
+.pillar--fig .figstage__blob{background:radial-gradient(closest-side,rgba(156,255,94,.28),rgba(156,255,94,.08) 60%,rgba(156,255,94,0));border-radius:50%;transform:none}
+.pillar--fig .figstage__fig--a{filter:drop-shadow(0 0 12px rgba(156,255,94,.35))}
+.figbtn{background:radial-gradient(120% 160% at 15% 50%,rgba(156,255,94,.18),rgba(156,255,94,0) 60%),#050605;color:#F2F5EE;border:1px solid rgba(156,255,94,.5);border-radius:999px;box-shadow:0 0 16px -6px rgba(156,255,94,.6);transition:border-color .25s,box-shadow .25s,color .25s}
+.figbtn:hover{transform:none;border-color:rgba(156,255,94,.85);color:#C9FFB0;box-shadow:0 0 24px -4px rgba(156,255,94,.75)}
+.figbtn:active{transform:none;box-shadow:0 0 10px -4px rgba(156,255,94,.6)}
+/* home pillar 02 "Tested": light like "Selected", so only the minifigure card is dark */
+.pillar--test{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.pillar--test .label{color:var(--muted)}
+.pillar--test .pillar__n{border-color:var(--ink);color:var(--ink)}
+.testlog{border-top-color:var(--line)}
+.testlog li{color:var(--ink-2);border-bottom-color:var(--line)}
+.testlog li::before{color:var(--ion)}
+.testlog b{color:#1F9D55;font-weight:500}
+/* home pillar 03, polished: phosphor dust, a glowing floor under the figure, a calmer bag, "+1" lit up */
+.pillar--fig::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(156,255,94,.13) 1px,transparent 1.3px);background-size:14px 14px;-webkit-mask-image:radial-gradient(70% 60% at 55% 50%,#000,transparent 80%);mask-image:radial-gradient(70% 60% at 55% 50%,#000,transparent 80%)}
+.pillar--fig>*{position:relative}
+.pillar--fig .spinbadge{position:absolute}
+.pillar--fig .figstage::after{content:"";position:absolute;left:22%;right:8%;bottom:-4%;height:18%;border-radius:50%;background:radial-gradient(closest-side,rgba(156,255,94,.45),rgba(156,255,94,.12) 55%,transparent);filter:blur(6px);z-index:-1}
+.pillar--fig .figstage__box{filter:saturate(.8) brightness(.9) drop-shadow(0 0 10px rgba(156,255,94,.25))}
+.glowtxt--on{animation:none;color:#9CFF5E;text-shadow:0 0 8px rgba(156,255,94,.9),0 0 24px rgba(156,255,94,.55)}
+.pillar--fig .pillar__h{letter-spacing:-.03em}
+.pillar--fig .figstage__fig--a{transition:filter .35s}
+@media (hover:hover){.pillar--fig:hover .figstage__fig--a{filter:drop-shadow(0 0 22px rgba(156,255,94,.6))}.pillar--fig:hover{border-color:rgba(156,255,94,.55);box-shadow:0 0 40px -12px rgba(156,255,94,.7),inset 0 0 26px rgba(156,255,94,.07)}}
+.pillar--fig{transition:border-color .3s,box-shadow .3s}
+/* home pillar 03: only the glowing figure next to the bag (secret one removed), a touch further right */
+.pillar--fig .figstage__fig--a{left:44%}
+@media (min-width:1300px){.pillar--fig .figstage__fig--a{left:42%}}
+
+/* Dropouts "Open a box": no camcorder frame. A quiet dark stage: rounded, soft green floor light, phosphor dust, green flash */
+.stage{border-radius:18px;border:1px solid rgba(156,255,94,.18);background:radial-gradient(45% 30% at 50% 82%,rgba(156,255,94,.12),transparent 70%),radial-gradient(70% 60% at 50% 45%,#15181D 0%,#0C0E10 70%,#08090A 100%);box-shadow:inset 0 0 40px rgba(0,0,0,.6)}
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(156,255,94,.10) 1px,transparent 1.3px);background-size:16px 16px;-webkit-mask-image:radial-gradient(60% 55% at 50% 50%,#000,transparent 80%);mask-image:radial-gradient(60% 55% at 50% 50%,#000,transparent 80%)}
+.stage__flash{background:radial-gradient(closest-side,rgba(220,255,200,.9),rgba(156,255,94,.35) 40%,transparent 72%)}
+.stage .stage__box{filter:drop-shadow(0 24px 30px rgba(0,0,0,.55))}
+.stage__hint{bottom:20px;color:rgba(156,255,94,.7);letter-spacing:.18em}
+
+/* home pillar 03: the glowing figure a little bigger, growing from its feet */
+.pillar--fig .figstage__fig--a{transform:scale(1.15);transform-origin:50% 100%}
+
+/* home pillar 03: sunburst rays (like the Dropouts bag) under the green glow */
+.pillar--fig{background:
+  radial-gradient(45% 36% at 60% 52%,rgba(156,255,94,.22),rgba(156,255,94,0) 70%),
+  radial-gradient(90% 75% at 60% 52%,rgba(11,13,11,0) 35%,#0B0D0B 80%),
+  repeating-conic-gradient(from 0deg at 60% 52%,#16201A 0deg 7deg,#0C0F0C 7deg 14deg)}
+/* home pillar 03: rays only, no dot pattern */
+.pillar--fig::before{display:none}
+
+/* Found tapes, grown up: black tapes with printed labels, no marker font, no candy colours.
+   Each tape keeps only a thin colour line as its "make"; the playing one lights up white with a green channel */
+.itv__shelf{gap:6px}
+.itv__shelf button{height:48px;padding:0 16px 0 0;gap:16px;color:#E8E9EC;border-radius:4px;
+  background:linear-gradient(90deg,#0E0F11 0 36px,var(--s2) 36px 38px,#1A1C20 38px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 6px 14px -10px #000;border:1px solid #23262B}
+.itv__shelf button:hover{transform:translateX(-6px);border-color:#3A3F47}
+.itv__shelf button[aria-pressed="true"]{transform:translateX(-12px);filter:none;background:linear-gradient(90deg,#0E0F11 0 36px,#fff 36px 38px,#24272C 38px);border-color:#4A4F58;box-shadow:0 10px 24px -12px #000}
+.itvsec .itv__shelf button[aria-pressed="true"]{filter:none}
+.sp__brand{color:#7D828C;opacity:1;font-size:6.5px;letter-spacing:.14em}
+.sp__label{font-family:var(--f-sans,Geist),sans-serif;font-size:15px;font-weight:500;letter-spacing:-.01em;padding-left:2px}
+.sp__ch{color:#7D828C;letter-spacing:.14em}
+.itv__shelf button[aria-pressed="true"] .sp__ch{color:#7CFF6B}
+/* cassette: plain printed paper label, straight, small mono line under the title */
+.itv__casslabel{background:#ECE9E1!important;font-family:var(--f-sans,Geist),sans-serif;font-weight:500;font-size:clamp(16px,1.5vw,22px);letter-spacing:-.02em;color:#141519;transform:none;border-radius:2px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.06)}
+.itv__casslabel::after{content:"";position:absolute;left:5%;right:5%;bottom:14%;height:1px;background:repeating-linear-gradient(90deg,#141519 0 2px,transparent 2px 5px);opacity:.25}
+/* deck buttons: flat, monochrome; play is white */
+.itv__deck button{background:#17191C;border:1px solid #2A2D33;border-radius:999px;box-shadow:none;padding:10px 16px;font-size:11px;letter-spacing:.14em}
+.itv__deck button:active{transform:scale(.97);box-shadow:none}
+.itv__deck .is-main{background:#fff!important;color:var(--ink);border-color:#fff}
+.itv__deck [data-a="snd"][aria-pressed="true"]{border-color:#7CFF6B;color:#7CFF6B}
+.itv__scrub input{accent-color:#141519}

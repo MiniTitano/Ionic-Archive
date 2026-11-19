@@ -169,8 +169,10 @@
   const F = D.figures;
   $('#pillarFig').innerHTML = `<div class="figstage__blob"></div>
 <div class="figstage__box">${A.box()}</div>
-<div class="figstage__fig figstage__fig--a" data-fig3d="${F[1].model}" data-bg="#2F6BFF" data-accent="${F[1].rim}" data-start="-0.9" data-spin="0.6" title="Drag to spin"></div>
-<div class="figstage__fig figstage__fig--q" data-fig3d="${F[5].model}" data-mode="sil" data-accent="#FFE14D" data-start="0.4" data-spin="-0.5"></div>`;
+<div class="figstage__fig figstage__fig--a" data-fig3d="${F[1].model}" data-bg="#2F6BFF" data-accent="${F[1].rim}" data-start="-0.9" data-spin="0.6" title="Drag to spin"></div>`;
+
+  // the figure in the pillar shows its glow-in-the-dark edition (fig3d.js loads after this file)
+  document.addEventListener('DOMContentLoaded', () => { const el = document.querySelector('#pillarFig .figstage__fig--a'); if (el && window.Fig3D) window.Fig3D.set(el, el.dataset.fig3d, 'white', { glow: true }); });
 
   /* new arrivals */
   const fresh = D.products.filter((p) => p.status !== 'sold' && p.type !== 'accessories').sort((a, b) => b.added.localeCompare(a.added)).slice(0, 4);

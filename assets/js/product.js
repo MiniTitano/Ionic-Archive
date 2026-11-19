@@ -141,7 +141,7 @@
     <p class="price${sold ? ' sold-price' : ''}">${sold ? `<span class="lbl">Sold for</span><s>${U.eur(p.price)}</s>` : U.eur(p.price)}</p>
     ${sold ? `<p class="fine">This piece found a new home. Its record, photos and tests stay here for reference.</p>` : '<p class="fine">Listed price · shipping and the final total are shown on eBay or Vinted</p>'}
     <div class="buy" id="buy">${cta()}</div>
-    ${sold ? '' : `<a class="mfline" href="dropouts.html"><span class="mfline__k mono">+1</span><span class="mfline__t"><b>Mystery Dropout minifigure included</b><em>One of six collectible figures, sealed in the parcel.</em></span><span class="mfline__go" aria-hidden="true">→</span></a>`}
+    ${sold ? '' : `<a class="mfline" href="dropouts.html"><img class="mfline__fig" src="assets/img/brand/travis-glow.png" width="170" height="272" alt="" aria-hidden="true"><span class="mfline__t"><b>Mystery Dropout minifigure included</b></span><span class="mfline__go" aria-hidden="true">→</span></a>`}
     <ul class="ship">
       <li>${A.icon('shield')}<span><b>Buyer protection</b> · you pay on eBay or Vinted, never on this site.</span></li>
       <li>${A.icon('card')}<span><b>Same unit, same record</b> · the listing shows code ${p.id} and these photos.</span></li>
@@ -190,7 +190,7 @@
   <section class="psec rv" id="rec-s4" aria-labelledby="s4-h"><div class="psec__h"><span class="mono">04</span><h2 id="s4-h">In the box</h2><p class="fine" style="margin-top:8px">Everything that ships with this unit.</p></div>
     <ol class="unbox">${p.box.map((b, i) => `<li style="--i:${i}"><span class="mono">${pad(i + 1)}</span>${b}</li>`).join('')}
       <li style="--i:${p.box.length}" class="unbox__doc"><span class="mono">+</span>Printed test report and archive record</li>
-      ${sold ? '' : `<li style="--i:${p.box.length + 1}" class="unbox__doc unbox__fig"><span class="mono">+1</span>Mystery Dropout minifigure</li>`}
+      ${sold ? '' : `<li style="--i:${p.box.length + 1}" class="unbox__doc unbox__fig"><span class="mono">+1</span>Mystery Dropout minifigure<img class="unbox__figimg" src="assets/img/brand/travis-glow.png" width="170" height="272" alt="" aria-hidden="true"></li>`}
     </ol></section>
 
   <section class="psec rv" id="rec-s5" aria-labelledby="s5-h"><div class="psec__h"><span class="mono">05</span><h2 id="s5-h">Specifications</h2><p class="fine" style="margin-top:8px">Tap <b class="gl-dot">?</b> for what a spec means in practice.</p></div>

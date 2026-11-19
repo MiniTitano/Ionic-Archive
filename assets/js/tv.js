@@ -50,7 +50,6 @@
       <button type="button" data-a="ff" aria-label="Forward 10 seconds">▶▶</button>
       <button type="button" data-a="next" aria-label="Next channel">CH ▲</button>
       <button type="button" data-a="snd" aria-pressed="false" id="itvSnd" aria-label="Sound">🔇 SOUND</button>
-      <button type="button" data-a="full" aria-label="Full screen">⛶</button>
     </div>
   </div>
 

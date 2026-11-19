@@ -73,7 +73,7 @@
       window.Fig3D.set(revealView, f.model, 'white', Object.assign(opts(f), { glow }));
       stage.classList.toggle('is-glow', glow);
       stage.style.setProperty('--acc', f.rim);
-      $('#revealText').innerHTML = `<div class="rv-chips">${chip(f.tier)}${glow ? '<span class="chip chip--glow">Glow chase</span>' : ''}</div><h3>${f.name}</h3><p class="label" style="color:var(--night-muted)">${f.num} / ${pad(N)} · ${f.role}</p><p class="fine" style="color:var(--night-muted)">Yours comes in a random colour.</p>
+      $('#revealText').innerHTML = `<div class="rv-chips">${chip(f.tier)}${glow ? '<span class="chip chip--glow">Glow chase</span>' : ''}</div><h3>${f.name}</h3><p class="label" style="color:var(--night-muted)">${f.num} / ${pad(N)}</p><p class="fine" style="color:var(--night-muted)">Yours comes in a random colour.</p>
 <button class="btn btn--line" type="button" id="again" style="margin-top:6px;min-height:42px">Open another box</button>`;
       stage.classList.add('is-revealed');
       $('#openBtn').innerHTML = 'Open another box <span class="arr">→</span>';
@@ -92,7 +92,7 @@
   const KEY = 'ia-collection-s01';
   let have = new Set(U.store.get(KEY, []));
   const cl = $('#checklist');
-  cl.innerHTML = F.map((f) => `<label><input class="chk" type="checkbox" value="${f.num}"${have.has(f.num) ? ' checked' : ''}><span class="mono">${f.num}</span><span class="nm">${secret(f) ? `<b class="ionic-glow">${f.name}</b> — Classified` : `${f.name} — ${f.role}`}</span>${chip(f.tier)}</label>`).join('');
+  cl.innerHTML = F.map((f) => `<label><input class="chk" type="checkbox" value="${f.num}"${have.has(f.num) ? ' checked' : ''}><span class="mono">${f.num}</span><span class="nm">${secret(f) ? `<b class="ionic-glow">${f.name}</b>` : f.name}</span>${chip(f.tier)}</label>`).join('');
   function prog() {
     const n = have.size;
     $('#pNum').textContent = `${n}/${N}`;

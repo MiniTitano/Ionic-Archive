@@ -296,12 +296,12 @@
       lore: 'Beanie on, shirt off, camcorder already rolling. Shoots first, gets dressed later.' },
     { num: '02', model: 'fig-02', name: 'KYLE', role: 'Cap and tank top', tier: 'common', accent: '#2F6BFF', rim: '#9FE7FF',
       lore: 'Cap low, tank top, camera at the hip. Never misses a line at the skatepark.' },
-    { num: '03', model: 'fig-05', name: 'TRAVIS', role: 'Hood up, REC on', tier: 'mythic', accent: '#FF6FB5', rim: '#FFFFFF',
-      lore: 'Hood up, hands steady. Shows up at every gig and never ends up in the shot.' },
+    { num: '03', model: 'fig-04', name: 'MEGAN', role: 'Beanie girl', tier: 'uncommon', accent: '#1C1F33', rim: '#8A6BFF',
+      lore: 'Knit beanie pulled low, camera always on. Films the people who are filming.' },
     { num: '04', model: 'fig-03', name: 'BRITTANY', role: 'Swimsuit season', tier: 'rare', accent: '#22B5E3', rim: '#FF8AD0',
       lore: 'Swimsuit on, camcorder never far from the water. Every summer of 2004, on tape.' },
-    { num: '05', model: 'fig-04', name: 'MEGAN', role: 'Beanie girl', tier: 'uncommon', accent: '#1C1F33', rim: '#8A6BFF',
-      lore: 'Knit beanie pulled low, camera always on. Films the people who are filming.' },
+    { num: '05', model: 'fig-05', name: 'TRAVIS', role: 'Hood up, REC on', tier: 'mythic', accent: '#FF6FB5', rim: '#FFFFFF',
+      lore: 'Hood up, hands steady. Shows up at every gig and never ends up in the shot.' },
     { num: '06', model: 'fig-06', name: 'IONIC', role: 'The original Dropout', tier: 'secret', accent: '#FF8A3C', rim: '#FF8A3C',
       lore: 'The first figure we ever printed. Puffer jacket, camcorder, the archive\'s name. Nobody knows which bag it\'s in.' }
   ];
@@ -320,7 +320,7 @@
   // Put the real shop / wardrobe URLs here, and give each product its own listing
   // links, e.g. links: { ebay: 'https://www.ebay.it/itm/…', vinted: 'https://www.vinted.it/items/…' }.
   // A product with no links falls back to these shop pages.
-  const shops = { ebay: 'https://www.ebay.com/', vinted: 'https://www.vinted.com/' };
+  const shops = { ebay: 'https://www.ebay.it/usr/ionic_archive', vinted: 'https://www.vinted.com/' };
 
   window.IA = { products, grades, tiers, figures, shots, glowOdds, shops };
 })();
