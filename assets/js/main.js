@@ -65,7 +65,7 @@ ${LOGO('Ionic Archive, home')}
   const main = $('#main');
   main.insertAdjacentHTML('afterend', `<footer class="ftr"><div class="wrap">
 <div class="ftr__brand">${LOGO('Ionic Archive')}
-<p>Camcorders and digital cameras, 1990–2012.</p>
+<p>Camcorders and digital cameras.</p>
 <p class="ftr__shops">${D.shops ? `<a href="${D.shops.ebay}" target="_blank" rel="noopener">eBay shop ↗</a><a href="${D.shops.vinted}" target="_blank" rel="noopener">Vinted wardrobe ↗</a>` : ''}</p></div>
 <div class="ftr__grid">
 <div><h4>Archive</h4><ul><li><a href="archive.html?type=camcorders">Camcorders</a></li><li><a href="archive.html?type=compacts">Digital compacts</a></li><li><a href="archive.html?type=accessories">Tapes &amp; accessories</a></li><li><a href="archive.html">Archived pieces</a></li></ul></div>
