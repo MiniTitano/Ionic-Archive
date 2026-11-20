@@ -2409,17 +2409,17 @@ body{overflow-x:clip}
 }
 /* hero link: a slow breath on the arrow, a ring that drifts out and a small nudge, so it invites without shouting */
 .hgo__arr{position:relative}
-.hgo__arr::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(255,255,255,.55);pointer-events:none;animation:hgoRing 3.2s cubic-bezier(.2,.7,.3,1) infinite}
-@keyframes hgoRing{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.32);opacity:0}}
+.hgo__arr::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);pointer-events:none;animation:hgoRing 3.2s cubic-bezier(.2,.7,.3,1) infinite}
+@keyframes hgoRing{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(1.45);opacity:0}}
 .hgo__arr span{animation:hgoNudge 3.2s var(--ease) infinite}
-@keyframes hgoNudge{0%,55%,100%{transform:none}20%{transform:translateX(3px)}}
+@keyframes hgoNudge{0%,55%,100%{transform:none}20%{transform:translateX(5px)}}
 .hgo:hover .hgo__arr::after,.hgo:focus-visible .hgo__arr::after{animation:none;opacity:0}
 .hgo:hover .hgo__arr span,.hgo:focus-visible .hgo__arr span{animation:none}
 @media (prefers-reduced-motion:reduce){.hgo__arr::after{animation:none;opacity:0}.hgo__arr span{animation:none}}/* hero link: the words send out a faint outline wave, in step with the ring on the arrow */
 .hgo__t{position:relative}
-.hgo__t::before,.hgo__t::after{content:attr(data-t);position:absolute;inset:0;padding-bottom:inherit;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.7);text-shadow:none;pointer-events:none;
+.hgo__t::before,.hgo__t::after{content:attr(data-t);position:absolute;inset:0;padding-bottom:inherit;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.9);text-shadow:none;pointer-events:none;
   transform-origin:50% 55%;opacity:0;animation:hgoWave 3.2s cubic-bezier(.2,.7,.3,1) infinite}
-.hgo__t::after{animation-delay:.45s;-webkit-text-stroke-color:rgba(255,255,255,.45)}
-@keyframes hgoWave{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.045);opacity:0}}
+.hgo__t::after{animation-delay:.45s;-webkit-text-stroke-color:rgba(255,255,255,.6)}
+@keyframes hgoWave{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.07);opacity:0}}
 .hgo:hover .hgo__t::before,.hgo:hover .hgo__t::after,.hgo:focus-visible .hgo__t::before,.hgo:focus-visible .hgo__t::after{animation:none;opacity:0}
 @media (prefers-reduced-motion:reduce){.hgo__t::before,.hgo__t::after{animation:none;opacity:0}}
