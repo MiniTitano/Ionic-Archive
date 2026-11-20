@@ -152,6 +152,20 @@
   const onShape = () => { const s = pick(); if (s !== set) { clearTimeout(timer); mount(s); } };
   if (portrait.addEventListener) portrait.addEventListener('change', onShape); else portrait.addListener(onShape);
 
+  /* hero link: the arrow leans towards the pointer */
+  (() => {
+    const go = $('#heroGo'), arr = $('#hgoArr');
+    if (!go) return;
+    if (!U.RM && window.matchMedia('(hover: hover)').matches) {
+      go.addEventListener('pointermove', (e) => {
+        const r = arr.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        const d = Math.hypot(dx, dy) || 1, m = Math.min(14, d / 12);
+        arr.style.transform = `translate(${(dx / d * m).toFixed(1)}px,${(dy / d * m).toFixed(1)}px)`;
+      });
+      go.addEventListener('pointerleave', () => { arr.style.transform = ''; });
+    }
+  })();
+
   /* the deal: three pillars */
   // three pieces on sale right now, picked at random on every visit (real photos first)
   // the three most expensive pieces on sale right now, priciest first
