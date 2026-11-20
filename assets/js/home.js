@@ -198,6 +198,48 @@
     upd();
   })();
 
+  /* Tested: the check list drifts on its own until someone touches it; tapping a check runs it again */
+  (() => {
+    const log = $('#testlog');
+    if (!log) return;
+    const rows = [...log.children];
+    const run = (li) => {
+      if (li.classList.contains('is-run')) return;
+      const b = li.querySelector('b'), res = b.textContent;
+      li.classList.remove('is-ok'); li.classList.add('is-run'); b.textContent = '···';
+      setTimeout(() => { li.classList.remove('is-run'); b.textContent = res; void li.offsetWidth; li.classList.add('is-ok'); }, U.RM ? 400 : 1100);
+    };
+    rows.forEach((li) => {
+      li.tabIndex = 0; li.setAttribute('role', 'button');
+      li.setAttribute('aria-label', `Run the ${li.querySelector('span').textContent.toLowerCase()} check again`);
+      li.addEventListener('click', () => run(li));
+      li.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); run(li); } });
+    });
+    if (U.RM) return;
+    // slow drift: about 16 px a second, a pause at the end, then back to the top
+    let pos = 0, last = 0, hold = 0, visible = false, raf = 0;
+    const pause = (ms) => { hold = performance.now() + ms; pos = log.scrollTop; };
+    const tick = (t) => {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      const dt = last ? Math.min(64, t - last) : 16; last = t;
+      if (t > hold) {
+        const max = log.scrollHeight - log.clientHeight;
+        if (max > 0) {
+          if (Math.abs(log.scrollTop - pos) > 2) pos = log.scrollTop; // someone scrolled it: carry on from there
+          pos += dt * 0.016;
+          if (pos >= max) { pos = max; log.scrollTop = pos; hold = t + 1800; setTimeout(() => { log.scrollTo({ top: 0, behavior: 'smooth' }); pos = 0; hold = performance.now() + 1600; }, 1500); }
+          else log.scrollTop = pos;
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    const go = () => { if (!raf) { last = 0; raf = requestAnimationFrame(tick); } };
+    ['pointerenter', 'pointerdown', 'touchstart', 'wheel', 'focusin'].forEach((ev) => log.addEventListener(ev, () => pause(4000), { passive: true }));
+    log.addEventListener('pointermove', () => pause(4000), { passive: true });
+    log.addEventListener('scroll', () => { if (performance.now() < hold) pos = log.scrollTop; }, { passive: true });
+    new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) { pause(1200); go(); } }, { threshold: 0.3 }).observe(log);
+  })();
   /* new arrivals */
   const fresh = D.products.filter((p) => p.status !== 'sold' && p.type !== 'accessories').sort((a, b) => b.added.localeCompare(a.added)).slice(0, 4);
   $('#arrivals').innerHTML = fresh.map((p) => `<div class="rv">${U.card(p)}</div>`).join('');
