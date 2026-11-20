@@ -248,13 +248,14 @@
   const cnt = (t) => D.products.filter((p) => p.type === t && p.status === 'available').length;
   // risograph-poster cards: a real archive photo printed in one ink on coloured paper, slightly off-register
   const CATS = [
-    ['camcorders', 'pink', 'Camcorders', 'Tape, disc, card. The soft image of a 2000s summer holiday.', 'assets/img/ia-0056/front.jpg', 'MiniDV · Digital8 · Hi8'],
-    ['accessories', 'yellow', 'Tapes & accessories', 'Decks, Video Walkmans, tapes and the kit that keeps them running.', 'assets/img/ia-0057/closed.jpg', 'Decks · tapes · chargers'],
-    ['compacts', 'blue', 'Digital compacts', 'Direct flash, dense colour, the date in the corner.', 'assets/img/ia-0044/side-open.jpg', 'CCD · 1999—2008']
+    // ink layers made by tools/riso-ink.ps1 from ia-0056/front, ia-0057/closed and ia-0044/side-open (black ink on transparent, no blend mode needed)
+    ['camcorders', 'pink', 'Camcorders', 'Tape, disc, card. The soft image of a 2000s summer holiday.', 'assets/img/riso/camcorders', 'MiniDV · Digital8 · Hi8'],
+    ['accessories', 'yellow', 'Tapes & accessories', 'Decks, Video Walkmans, tapes and the kit that keeps them running.', 'assets/img/riso/accessories', 'Decks · tapes · chargers'],
+    ['compacts', 'blue', 'Digital compacts', 'Direct flash, dense colour, the date in the corner.', 'assets/img/riso/compacts', 'CCD · 1999—2008']
   ];
   $('#cats').innerHTML = CATS.map(([t, c, name, txt, img, tag], i) => `<a class="cat cat--${c} rv" href="archive.html?type=${t}">
 <div class="cat__top label"><span>0${i + 1} / ${t.toUpperCase()}</span><span>${cnt(t) ? `${cnt(t)} available` : 'In the vault'}</span></div>
-<div class="cat__riso" aria-hidden="true"><img class="r1" src="${img}" alt="" loading="lazy"><img class="r2" src="${img}" alt="" loading="lazy"><i class="dots"></i></div>
+<div class="cat__riso" aria-hidden="true"><img class="r1" src="${img}-r1.png" alt="" loading="lazy"><img class="r2" src="${img}-r2.png" alt="" loading="lazy"><i class="dots"></i></div>
 <span class="cat__big" aria-hidden="true">0${i + 1}</span>
 <span class="cat__tag mono" aria-hidden="true">${tag}</span>
 <div class="cat__txt"><h3>${name}&nbsp;<span class="arr">→</span></h3><p>${txt}</p></div></a>`).join('');

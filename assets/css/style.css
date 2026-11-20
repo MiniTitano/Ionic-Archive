@@ -2453,3 +2453,7 @@ body{overflow-x:clip}
 @keyframes tlOk{0%{background:rgba(31,157,85,.16)}100%{background:transparent}}
 @media (max-width:860px){.pillar--test .testlog{flex:none;height:300px;min-height:0}}
 @media (prefers-reduced-motion:reduce){.pillar--test .testlog li.is-run::after{transition:none}.pillar--test .testlog li.is-run::before{animation:none}}
+/* category cards: the photos are pre-made ink layers (black on transparent), so no filter or blend mode is needed
+   and Safari on iPhone shows no white rectangle; the result matches the old multiply look */
+.cat .cat__riso,.cat .cat__riso img{mix-blend-mode:normal}
+.cat .cat__riso .r1,.cat .cat__riso .r2{filter:none!important}
