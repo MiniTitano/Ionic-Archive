@@ -17,8 +17,7 @@
       ['hero-19', 'A Sony DVCAM camcorder carried at hip height against a red wall', 2000, 1333, '45% 55%', '40% 60%'],
       ['hero-20', 'Checking a Sony DVCAM camcorder, seated in a chair', 2000, 1333, '50% 45%', '45% 45%'],
       ['hero-21', 'Holding a Canon XM2 camcorder, shot from below between buildings', 2000, 1333, '50% 40%', '45% 40%'],
-      ['hero-22', 'Two friends on the grass, one filming with a Sony Digital8 Handycam', 2000, 1333, '50% 40%', '50% 40%'],
-      ['hero-23', 'Two hands holding a red Ferrari Olympus compact in front of Place des Vosges', 2000, 1333, '58% 45%', '58% 45%']
+      ['hero-22', 'Two friends on the grass, one filming with a Sony Digital8 Handycam', 2000, 1333, '50% 40%', '50% 40%']
     ]
   };
   // phones in portrait get their own vertical photos
