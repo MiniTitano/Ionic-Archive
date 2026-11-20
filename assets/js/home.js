@@ -180,6 +180,25 @@
   // the figure in the pillar shows its glow-in-the-dark edition (fig3d.js loads after this file)
   document.addEventListener('DOMContentLoaded', () => { const el = document.querySelector('#pillarFig .figstage__fig--a'); if (el && window.Fig3D) window.Fig3D.set(el, el.dataset.fig3d, 'white', { glow: true }); });
 
+  /* the three "What we offer" cards follow the scroll: --s runs from +1 (entering below) through 0 (centred) to -1 (leaving above) */
+  (() => {
+    const cards = [...document.querySelectorAll('.pillars .pillar')];
+    if (U.RM || !cards.length) return;
+    let raf = 0;
+    const upd = () => {
+      raf = 0; const vh = window.innerHeight;
+      cards.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -50 || r.top > vh + 50) return;
+        const s = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2)));
+        el.style.setProperty('--s', s.toFixed(3)); el.style.setProperty('--o', (1 - s * s).toFixed(3));
+      });
+    };
+    const req = () => { if (!raf) raf = requestAnimationFrame(upd); };
+    window.addEventListener('scroll', req, { passive: true }); window.addEventListener('resize', req);
+    upd();
+  })();
+
   /* new arrivals */
   const fresh = D.products.filter((p) => p.status !== 'sold' && p.type !== 'accessories').sort((a, b) => b.added.localeCompare(a.added)).slice(0, 4);
   $('#arrivals').innerHTML = fresh.map((p) => `<div class="rv">${U.card(p)}</div>`).join('');

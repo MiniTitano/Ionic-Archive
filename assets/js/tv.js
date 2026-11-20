@@ -64,7 +64,6 @@
     <div class="itv__scrub"><input type="range" id="itvSeek" min="0" max="1000" value="0" aria-label="Tape position"><span class="mono" id="itvLen">0:00</span></div>
     <ol class="itv__shelf" id="itvShelf">${TAPES.map((t, i) => `<li><button type="button" data-i="${i}" style="--c:${t.col};--s1:${t.stripe[0]};--s2:${t.stripe[1]}" aria-pressed="false">
       <span class="sp__brand mono">IA E-180</span><span class="sp__label">${t.label}</span><span class="sp__ch mono">CH ${pad(i + 1)}</span></button></li>`).join('')}</ol>
-    <p class="itv__note mono">Arrows flip channels · Space plays · M for sound</p>
   </div>
 </div>`;
 

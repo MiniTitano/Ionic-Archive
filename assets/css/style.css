@@ -300,7 +300,7 @@ html:not(.js) .rv{opacity:1;transform:none}
 
 /* ---------- the deal: three core pillars ---------- */
 .pillars{padding:clamp(56px,8vw,112px) 0 clamp(40px,6vw,80px)}
-.pillars__head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(24px,3vw,40px)}
+.pillars__head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,72px)}
 .pillars__head .kicker{margin-bottom:12px}
 .pillars__grid{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:14px}
 .pillar{position:relative;display:flex;flex-direction:column;padding:clamp(20px,2.4vw,32px);min-height:clamp(480px,46vw,600px);overflow:hidden;border-radius:4px}
@@ -2423,3 +2423,15 @@ body{overflow-x:clip}
 @keyframes hgoWave{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.07);opacity:0}}
 .hgo:hover .hgo__t::before,.hgo:hover .hgo__t::after,.hgo:focus-visible .hgo__t::before,.hgo:focus-visible .hgo__t::after{animation:none;opacity:0}
 @media (prefers-reduced-motion:reduce){.hgo__t::before,.hgo__t::after{animation:none;opacity:0}}
+/* "What we offer": the three cards move with the scroll (--s: +1 entering from below, 0 centred, -1 leaving at the top; --o: 1 when centred) */
+.pillar--sel .fan__card{transform:translateY(calc(-50% + var(--s,0) * (var(--i) + 1) * 14px)) translateX(calc(-50% + (var(--i) - 1) * (20% + var(--o,1) * 21%))) rotate(calc((var(--i) - 1) * (2deg + var(--o,1) * 8deg)));transition:transform .3s var(--ease)}
+.pillar--test .testlog li{translate:calc(var(--s,0) * var(--k,1) * 9px) 0;transition:opacity .35s,transform .35s var(--ease),translate .3s var(--ease)}
+.pillar--test .testlog li:nth-child(2){--k:2}.pillar--test .testlog li:nth-child(3){--k:3}.pillar--test .testlog li:nth-child(4){--k:4}.pillar--test .testlog li:nth-child(5){--k:5}.pillar--test .testlog li:nth-child(6){--k:6}
+.pillar--test .testlog li b{display:inline-block;scale:calc(.9 + var(--o,1) * .1);transition:scale .3s var(--ease)}
+.pillar--fig .figstage__fig--a{translate:0 calc(var(--s,0) * 26px);transition:filter .35s,translate .3s var(--ease)}
+.pillar--fig .figstage__box{rotate:calc(var(--s,0) * -8deg);translate:calc(var(--s,0) * -12px) calc(var(--s,0) * 14px);transition:rotate .3s var(--ease),translate .3s var(--ease)}
+.pillar--fig .figstage__blob{scale:calc(.9 + var(--o,1) * .14);transition:scale .3s var(--ease)}
+.pillar--fig .spinbadge{rotate:calc(var(--s,0) * 140deg);transition:rotate .3s var(--ease)}
+@media (prefers-reduced-motion:reduce){.pillars .pillar{--s:0!important;--o:1!important}}/* category cards: the paper grain is plain grey, so a normal overlay looks the same as multiply on the white card,
+   and Safari (iPhone) then lays it over the photo too, instead of leaving the photo's white as a brighter rectangle */
+.cat::before{mix-blend-mode:normal}
